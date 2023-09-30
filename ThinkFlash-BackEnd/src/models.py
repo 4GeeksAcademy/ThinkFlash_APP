@@ -94,7 +94,6 @@ class Card(db.Model):
     fake_descriptions= db.relationship('Fake_descriptions', backref= db.backref('cards', lazy=True))
 
 
-
     def __repr__(self):
             return '<Deck %r>' % self.id
 
@@ -108,9 +107,6 @@ class Card(db.Model):
         }
     
 
-    
-
-    
 class Fake_concepts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fake_concept = db.Column(db.String(250), unique=False, nullable=False)
@@ -140,3 +136,5 @@ class Fake_descriptions(db.Model):
             "fake_description": self.fake_description,
             "card_id": self.card_id
         }
+
+
