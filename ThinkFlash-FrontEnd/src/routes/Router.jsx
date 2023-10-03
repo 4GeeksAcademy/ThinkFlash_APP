@@ -8,12 +8,14 @@ import DashboardPage from '../pages/DashboardPage';
 const Router = () => {
     return (
         <BrowserRouter basename=''>
-            <Navbar/>
+            <Navbar
+            usernameLink="/"
+            />
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
-                <Route path="/:username<" element={<DashboardPage />} />
+                <Route path="/:username" element={<DashboardPage username="exampleName" />} />
             </Routes>
         </BrowserRouter>
     );
