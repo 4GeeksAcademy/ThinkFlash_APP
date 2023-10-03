@@ -1,4 +1,4 @@
-export default function generalCard({ children }) {
+export default function GeneralCard({ children }) {
     return (
         <div className="card mb-3" style="max-width: 540px;">
             <div className="row g-0">

@@ -1,4 +1,4 @@
-export default function containerDiv({ children, height, title }) {
+export default function ContainerDiv({ children, height, title }) {
     return (
         <div className={`vh-${height} w-100`}>
             <div className="card">
