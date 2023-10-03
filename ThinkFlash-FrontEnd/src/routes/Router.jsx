@@ -1,8 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+import HomePage from '../pages/HomePage';
+import LoginPage from '../pages/LoginPage';
+import SignupPage from '../pages/SingupPage';
+import DashboardPage from '../pages/DashboardPage';
 
 const Router = () => {
     return (
         <BrowserRouter basename=''>
+            <Navbar/>
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LoginPage />} />
