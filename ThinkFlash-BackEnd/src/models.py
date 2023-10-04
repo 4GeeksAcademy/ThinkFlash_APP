@@ -5,24 +5,25 @@ db = SQLAlchemy()
 
 user_sponsor = db.Table('user_sponsor',
     db.Column('id', db.Integer, primary_key=True),
-    db.Column('user_id', db.Integer, db.ForeingKey('User.id')),
-    db.Column('sponsor_id', db.Integer, db.ForeingKey('Sponsor.id'))
+    db.Column('user_id', db.Integer, db.ForeignKey('User.id')),
+    db.Column('sponsor_id', db.Integer, db.ForeignKey('Sponsor.id'))
 )
 user_deck = db.Table('user_deck',
     db.Column('id', db.Integer, primary_key=True),
-    db.Column('user_id', db.Integer, db.ForeingKey('User.id')),
-    db.Column('deck_id', db.Integer, db.ForeingKey('Deck.id'))
+    db.Column('user_id', db.Integer, db.ForeignKey('User.id')),
+
+    db.Column('deck_id', db.Integer, db.ForeignKey('Deck.id'))
 )
 
 card_deck = db.Table('card_deck',
     db.Column('id', db.Integer, primary_key=True),
-    db.Column('card_id', db.Integer, db.ForeingKey('Card.id')),
-    db.Column('deck_id', db.Integer, db.ForeingKey('Deck.id'))
+    db.Column('card_id', db.Integer, db.ForeignKey('Card.id')),
+    db.Column('deck_id', db.Integer, db.ForeignKey('Deck.id'))
 )
 students = db.Table('students',
     db.Column('id', db.Integer, primary_key=True),
-    db.Column('student_id', db.Integer, db.ForeingKey('User.id')),
-    db.Column('academy_id', db.Integer, db.ForeingKey('Sponsor.id'))
+    db.Column('student_id', db.Integer, db.ForeignKey('User.id')),
+    db.Column('academy_id', db.Integer, db.ForeignKey('Sponsor.id'))
 )
 
 

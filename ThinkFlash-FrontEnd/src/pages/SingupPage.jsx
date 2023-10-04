@@ -5,7 +5,7 @@ export default function SignupPage () {
     const [user, setUser] = useState({})
     const sendUserInfo = async (e)=>{
       e.preventDefault()
-       const response = await fetch("URL", {
+       const response = await fetch("http://localhost:5173/signup", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(user)
