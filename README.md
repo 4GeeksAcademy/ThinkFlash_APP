@@ -6,4 +6,6 @@ También hay que tener instalado la librería de ReactRouter -> $ npm install re
 Para iniciar la parte del Back, debes  lanzar desde la carpeta correspondiente(ThinkFlash-BackEnd): 
 · $ source env/bin/activate (entrar en el entorno virtual)
 · $ pip install flask (instalar flask)
+· $ pip install -U Flask-SQLAlchemy
 · $ python src/app.py (lanzamos el servidor)
+
