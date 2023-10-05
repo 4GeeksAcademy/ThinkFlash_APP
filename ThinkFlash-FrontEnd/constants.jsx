@@ -1,0 +1,1 @@
+export const DataBaseURL = "https://thinkflash-pruebas-default-rtdb.europe-west1.firebasedatabase.app/"
