@@ -5,12 +5,13 @@ from models import db
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project.sqlite'
-db.init_app(app)
 
 with app.app_context():
     db.create_all()
 
-migrate = Migrate(app, db)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS']
+MIGRATE = Migrate(app, db, compare_type=True)
+db.init_app(app)
 
 app.register_blueprint(users)
 
