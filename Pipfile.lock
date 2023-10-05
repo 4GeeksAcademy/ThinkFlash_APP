@@ -1,12 +1,12 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "67619078c7da29842b910674201706c955811de80119d1f535c3e18e50679b66"
+            "sha256": "08482d090f9047238434f2041be3ed68376f90c4e3baa29edc9bf06beeaa3bcc"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_full_version": "3.11.5",
-            "python_version": "3.11"
+            "python_full_version": "3.10.8",
+            "python_version": "3.10"
         },
         "sources": [
             {
@@ -41,14 +41,6 @@
             "markers": "python_version >= '3.7'",
             "version": "==8.1.7"
         },
-        "colorama": {
-            "hashes": [
-                "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44",
-                "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"
-            ],
-            "markers": "platform_system == 'Windows'",
-            "version": "==0.4.6"
-        },
         "flask": {
             "hashes": [
                 "sha256:21128f47e4e3b9d597a3e8521a329bf56909b690fcc3fa3e477725aa81367638",
@@ -57,15 +49,6 @@
             "index": "pypi",
             "markers": "python_version >= '3.8'",
             "version": "==3.0.0"
-        },
-        "flask-jwt-extended": {
-            "hashes": [
-                "sha256:061ef3d25ed5743babe4964ab38f36d870e6d2fd8a126bab5d77ddef8a01932b",
-                "sha256:eaec42af107dcb919785a4b3766c09ffba9f286b92a8d58603933f28fd4db6a3"
-            ],
-            "index": "pypi",
-            "markers": "python_version >= '3.7' and python_version < '4'",
-            "version": "==4.5.3"
         },
         "flask-migrate": {
             "hashes": [
@@ -242,14 +225,6 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==2.1.3"
-        },
-        "pyjwt": {
-            "hashes": [
-                "sha256:57e28d156e3d5c10088e0c68abb90bfac3df82b40a71bd0daa20c65ccd5c23de",
-                "sha256:59127c392cc44c2da5bb3192169a91f429924e17aff6534d70fdc02ab3e04320"
-            ],
-            "markers": "python_version >= '3.7'",
-            "version": "==2.8.0"
         },
         "sqlalchemy": {
             "hashes": [

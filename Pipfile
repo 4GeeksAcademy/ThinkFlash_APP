@@ -12,8 +12,5 @@ flask-migrate = "*"
 [dev-packages]
 
 [requires]
-python_version = "3.11"
-python_full_version = "3.11.5"
-
-[scripts]
-start = "python ./ThinkFlash_APP/ThinkFlash-BackEnd/src/app.py"
+python_version = "3.10"
+python_full_version = "3.10.8"
