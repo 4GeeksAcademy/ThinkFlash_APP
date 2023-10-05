@@ -17,7 +17,7 @@ export default function navBar ({})
         </nav>
             <div className="collapse" id="navbarToggleExternalContent2">
                 <ul className="bg-light shadow-3 py-2 px-3">
-                    <li className="btn btn-link btn-block m-0 p-2 text-start text-dark">home</li>
+                    <li className="btn btn-link btn-block m-0 p-2 text-start text-dark">Home</li>
                     <li className="btn btn-link btn-block m-0 p-2 text-start text-dark">Features</li>
                     <li className="btn btn-link btn-block m-0 p-2 text-start text-dark">Pricing</li>
                 </ul>
