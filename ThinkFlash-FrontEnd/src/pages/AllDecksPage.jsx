@@ -1,5 +1,3 @@
-import ContainerDiv from "../components/ContainerDiv"
-import GeneralCard from "../components/GeneralCard"
 export default function AllDecksPage() {
     return (
         <>
