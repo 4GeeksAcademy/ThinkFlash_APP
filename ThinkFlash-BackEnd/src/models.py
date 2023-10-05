@@ -34,7 +34,7 @@ class User(db.Model):
     username = db.Column(db.String(250), unique=True, nullable=False)
     password = db.Column(db.String(250), nullable=False)
     avatar = db.Column(db.String(250), nullable = True)
-    user_decks= db.relationship('Deck', secondary=user_deck, lazy='subquery', backref= db.backref('users', lazy=True))
+    user_decks= db.relationship('Deck', secondary='user_deck', lazy='subquery', backref= db.backref('users', lazy=True))
     user_sponsor= db.relationship('Sponsor', secondary='students', lazy='subquery', backref= db.backref('users', lazy=True))
 
     def __repr__(self):
@@ -71,7 +71,7 @@ class Deck(db.Model):
     specialize = db.Column(db.String(120), unique=True, nullable=False)
     area = db.Column(db.String(120), unique=True, nullable=False)
     sponsor_id = db.Column(db.Integer, db.ForeignKey('sponsor.id'), nullable = True)
-    cards= db.relationship('Card', secondary=card_deck, lazy='subquery', backref= db.backref('decks', lazy=True))
+    cards= db.relationship('Card', secondary='card_deck', lazy='subquery', backref= db.backref('decks', lazy=True))
    
     def __repr__(self):
             return '<Deck %r>' % self.id
