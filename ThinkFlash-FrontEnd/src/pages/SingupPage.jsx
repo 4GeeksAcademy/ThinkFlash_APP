@@ -5,7 +5,7 @@ export default function SignupPage () {
     const [user, setUser] = useState({})
     const sendUserInfo = async (e)=>{
       e.preventDefault()
-       const response = await fetch("http://localhost:5173/signup", {
+       const response = await fetch("https://automatic-spoon-xjx4xprw5pgf5r7-6969.app.github.dev/signin", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(user)
