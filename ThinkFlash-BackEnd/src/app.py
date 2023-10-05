@@ -1,10 +1,11 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 from routes.users import users
 from flask_migrate import Migrate
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ThinkFlash-BackEnd/testDataBase.db'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
