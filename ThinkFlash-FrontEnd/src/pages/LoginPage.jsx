@@ -22,7 +22,7 @@ export default function LoginPage () {
       };
   
       fetch(
-        "http://127.0.0.1:6969/login",
+        "https://automatic-spoon-xjx4xprw5pgf5r7-6969.app.github.dev/signup",
         options
       )
         .then((response) => {
