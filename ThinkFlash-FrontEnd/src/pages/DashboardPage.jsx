@@ -3,10 +3,14 @@ import GeneralCard from "../components/GeneralCard/GeneralCard"
 import getDecks from "../services/decks/getDecks"
 
 import { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
 
-export default function DashboardPage({ username }) {
+export default function DashboardPage() {
   const [deckList, setDeckList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const params = useParams()
+
+  console.log(params)
 
   useEffect(() => {
     getDecks()

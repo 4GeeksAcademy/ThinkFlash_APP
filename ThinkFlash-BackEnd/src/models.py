@@ -3,27 +3,28 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
-user_sponsor = db.Table('user_sponsor',
-    db.Column('id', db.Integer, primary_key=True),
-    db.Column('user_id', db.Integer, db.ForeignKey('User.id')),
-    db.Column('sponsor_id', db.Integer, db.ForeignKey('Sponsor.id'))
-)
+# user_sponsor = db.Table('user_sponsor',
+#     db.Column('id', db.Integer, primary_key=True),
+#     db.Column('user_id', db.Integer, db.ForeignKey('User.id')),
+#     db.Column('sponsor_id', db.Integer, db.ForeignKey('Sponsor.id'))
+# )
+# students = db.Table('students',
+#     db.Column('id', db.Integer, primary_key=True),
+#     db.Column('student_id', db.Integer, db.ForeignKey('User.id')),
+#     db.Column('academy_id', db.Integer, db.ForeignKey('Sponsor.id'))
+# )
+
+
 user_deck = db.Table('user_deck',
     db.Column('id', db.Integer, primary_key=True),
-    db.Column('user_id', db.Integer, db.ForeignKey('User.id')),
-
-    db.Column('deck_id', db.Integer, db.ForeignKey('Deck.id'))
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('deck_id', db.Integer, db.ForeignKey('deck.id'))
 )
 
 card_deck = db.Table('card_deck',
     db.Column('id', db.Integer, primary_key=True),
-    db.Column('card_id', db.Integer, db.ForeignKey('Card.id')),
-    db.Column('deck_id', db.Integer, db.ForeignKey('Deck.id'))
-)
-students = db.Table('students',
-    db.Column('id', db.Integer, primary_key=True),
-    db.Column('student_id', db.Integer, db.ForeignKey('User.id')),
-    db.Column('academy_id', db.Integer, db.ForeignKey('Sponsor.id'))
+    db.Column('card_id', db.Integer, db.ForeignKey('card.id')),
+    db.Column('deck_id', db.Integer, db.ForeignKey('deck.id'))
 )
 
 
@@ -34,7 +35,7 @@ class User(db.Model):
     password = db.Column(db.String(250), nullable=False)
     avatar = db.Column(db.String(250), nullable = True)
     user_decks= db.relationship('Deck', secondary=user_deck, lazy='subquery', backref= db.backref('users', lazy=True))
-    user_sponsor= db.relationship('Sponsor', secondary=user_sponsor, lazy='subquery', backref= db.backref('users', lazy=True))
+    user_sponsor= db.relationship('Sponsor', secondary='students', lazy='subquery', backref= db.backref('users', lazy=True))
 
     def __repr__(self):
         return '<User %r>' % self.username
@@ -45,14 +46,13 @@ class User(db.Model):
             "email": self.email,
             "username": self.username,
             "avatar": self.avatar,
-            # do not serialize the password, its a security breach
         }
     
 class Sponsor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), unique=True, nullable=False)
     logo = db.Column(db.String(250), unique=False, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('User.id'), nullable=False,)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False,)
 
     def __repr__(self):
             return '<Sponsor %r>' % self.name
@@ -70,7 +70,7 @@ class Deck(db.Model):
     theme = db.Column(db.String(120), unique=True, nullable=False)
     specialize = db.Column(db.String(120), unique=True, nullable=False)
     area = db.Column(db.String(120), unique=True, nullable=False)
-    sponsor_id = db.Column(db.Integer, db.ForeignKey('Sponsor.id'), nullable = True)
+    sponsor_id = db.Column(db.Integer, db.ForeignKey('sponsor.id'), nullable = True)
     cards= db.relationship('Card', secondary=card_deck, lazy='subquery', backref= db.backref('decks', lazy=True))
    
     def __repr__(self):
@@ -118,7 +118,7 @@ class Fake_concepts(db.Model):
     card_id = db.Column(db.Integer, db.ForeignKey('card.id'), nullable = False)
 
     def __repr__(self):
-            return '<Deck %r>' % self.id
+            return '<Fake_concepts %r>' % self.id
 
     def serialize(self):
         return {

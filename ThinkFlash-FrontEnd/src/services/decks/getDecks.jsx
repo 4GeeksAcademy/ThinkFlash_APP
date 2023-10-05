@@ -4,7 +4,6 @@ export default function getDecks() {
     return fetch(`${DataBaseURL}decks.json`)
       .then((res) => {
         if (!res.ok) {
-          console.log("No funciona fetch")
           throw Error();
         }
         return res.json();
