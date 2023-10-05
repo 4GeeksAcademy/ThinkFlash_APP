@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 from routes.users import users
 from flask_migrate import Migrate
 
