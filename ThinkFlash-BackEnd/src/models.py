@@ -3,16 +3,16 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
-# user_sponsor = db.Table('user_sponsor',
-#     db.Column('id', db.Integer, primary_key=True),
-#     db.Column('user_id', db.Integer, db.ForeignKey('User.id')),
-#     db.Column('sponsor_id', db.Integer, db.ForeignKey('Sponsor.id'))
-# )
-# students = db.Table('students',
-#     db.Column('id', db.Integer, primary_key=True),
-#     db.Column('student_id', db.Integer, db.ForeignKey('User.id')),
-#     db.Column('academy_id', db.Integer, db.ForeignKey('Sponsor.id'))
-# )
+user_sponsor = db.Table('user_sponsor',
+    db.Column('id', db.Integer, primary_key=True),
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('sponsor_id', db.Integer, db.ForeignKey('sponsor.id'))
+)
+students = db.Table('students',
+    db.Column('id', db.Integer, primary_key=True),
+    db.Column('student_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('academy_id', db.Integer, db.ForeignKey('sponsor.id'))
+)
 
 
 user_deck = db.Table('user_deck',
