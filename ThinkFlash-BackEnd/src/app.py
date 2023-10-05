@@ -10,7 +10,6 @@ migrate = Migrate(app, db)
 
 app.register_blueprint(users)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 
 
 @app.route('/')
