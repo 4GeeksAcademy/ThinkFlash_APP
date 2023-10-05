@@ -33,7 +33,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     username = db.Column(db.String(250), unique=True, nullable=False)
     password = db.Column(db.String(250), nullable=False)
-    avatar = db.Column(db.String(250), nullable = True)
+    avatar = db.Column(db.String(500), nullable = True)
     user_decks= db.relationship('Deck', secondary='user_deck', lazy='subquery', backref= db.backref('users', lazy=True))
     user_sponsor= db.relationship('Sponsor', secondary='students', lazy='subquery', backref= db.backref('users', lazy=True))
 
