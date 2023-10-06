@@ -11,7 +11,7 @@ def signup():
     result = users_controllers.create_user_and_token(data)
     return result
    
-@users.route('/login', methods=['POST'])
+@users.route('/login', methods=['POST', 'GET'])
 def login():
    data = request.get_json(force=True)
    result = users_controllers.login_user(data)
