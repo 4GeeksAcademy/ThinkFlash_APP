@@ -57,7 +57,7 @@ export default function DashboardPage() {
       <ContainerDiv title="My Decks" height="50" link="/alldecks">
         {deckList.map((deck, index) => 
           (
-            <GeneralCard key={index} title={deck.specialize} col="6">
+            <GeneralCard key={index} title={deck.specialize} col="5">
               {deck.theme}
             </GeneralCard>
           ))
