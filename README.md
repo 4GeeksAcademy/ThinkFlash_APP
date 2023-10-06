@@ -7,7 +7,8 @@ $ npm install react-router-dom localforage match-sorter sort-by
 
 Para iniciar la parte del Back, debes  lanzar:
 · $ pipenv install (para actualizar todos los paquetes del Pipfile)
-. $ pipenv run python ThinkFlash-BackEnd/src/app.py
+· $ pipenv install flask
+. $ pipenv run start (para lanzar el backend, ver Pipfile scripts)
 . $ para crear el admin y gestionar la base:
     .Instalamos extension: Database Client
     .SQLite DB Path: /workspaces/ThinkFlash_APP/instance/poject.sqlite
