@@ -1,6 +1,6 @@
 export default function GeneralCard({ children, title, col }) {
     return (
-        <div className={`ms-2 col-${col}`}>
+        <div className={`ms-2 ${col}`}>
             <div className="h-100">
                 
                     <div className="card h-75">

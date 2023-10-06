@@ -5,7 +5,7 @@ export default function Navbar({usernameLink}) {
         <div className="navbar bg-primary navbar-expand-lg" data-bs-theme="dark" >
         <div className="container">
         <Link to={usernameLink} className="navbar-brand ps-3">
-            <img src='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png' alt="Logo" width="auto" height="100px"/>
+            <img src='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png' alt="Logo" width="auto" height="80px"/>
         </Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
                 <span className="navbar-toggler-icon"></span>

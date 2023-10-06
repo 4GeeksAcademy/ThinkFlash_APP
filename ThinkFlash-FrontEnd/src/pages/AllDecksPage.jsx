@@ -16,7 +16,6 @@ export default function AllDecksPage() {
                         Activate
                     </button>
                     </div>
-
                 </div>
             </div>
         </div>
