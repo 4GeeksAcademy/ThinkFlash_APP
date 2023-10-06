@@ -4,11 +4,16 @@ from flask_sqlalchemy import SQLAlchemy
 from routes.users import users
 from flask_migrate import Migrate
 from models import db
+from flask_migrate import Migrate
 from flask_cors import CORS 
 from flask_jwt_extended import JWTManager
+from dotenv import load_dotenv
+
+load_dotenv() 
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project.sqlite'
+CORS(users)
 
 db.init_app(app)
 with app.app_context():
@@ -24,7 +29,7 @@ CORS(app)
 
 app.register_blueprint(users)
 
-CORS(app)
+
 
 @app.route('/')
 def index():
