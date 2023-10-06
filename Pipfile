@@ -9,11 +9,16 @@ flask-sqlalchemy = "*"
 flask-jwt-extended = "*"
 flask-migrate = "*"
 flask-cors = "*"
-pip = "*"
-install = "*"
 python-dotenv = "*"
+migrate = "*"
+
 
 [dev-packages]
 
 [requires]
 python_version = "3.10"
+
+[scripts]
+start = "python /workspaces/ThinkFlash_APP/ThinkFlash-BackEnd/src/app.py"
+migrate = "flask db migrate"
+upgrade = "flask db upgrade"

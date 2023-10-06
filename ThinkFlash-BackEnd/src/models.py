@@ -36,6 +36,7 @@ class User(db.Model):
     avatar = db.Column(db.String(500), nullable = True)
     user_decks= db.relationship('Deck', secondary='user_deck', lazy='subquery', backref= db.backref('users', lazy=True))
     user_sponsor= db.relationship('Sponsor', secondary='students', lazy='subquery', backref= db.backref('users', lazy=True))
+    cards_score = db.relationship('Score_per_Card', backref='user', lazy=True)
 
     def __repr__(self):
         return '<User %r>' % self.username
@@ -72,7 +73,8 @@ class Deck(db.Model):
     area = db.Column(db.String(120), unique=True, nullable=False)
     sponsor_id = db.Column(db.Integer, db.ForeignKey('sponsor.id'), nullable = True)
     cards= db.relationship('Card', secondary='card_deck', lazy='subquery', backref= db.backref('decks', lazy=True))
-   
+    deck_score = db.relationship('Score_per_Card', backref='deck', lazy=True)
+
     def __repr__(self):
             return '<Deck %r>' % self.id
 
@@ -93,8 +95,7 @@ class Card(db.Model):
     deck_id = db.Column(db.Integer, db.ForeignKey('deck.id'), nullable = False)
     fake_concepts= db.relationship('Fake_concepts', backref= db.backref('cards', lazy=True))
     fake_descriptions= db.relationship('Fake_descriptions', backref= db.backref('cards', lazy=True))
-
-
+    users_score = db.relationship('Score_per_Card', backref='card', lazy=True)
 
     def __repr__(self):
             return '<Deck %r>' % self.id
@@ -109,9 +110,6 @@ class Card(db.Model):
         }
     
 
-    
-
-    
 class Fake_concepts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fake_concept = db.Column(db.String(250), unique=False, nullable=False)
@@ -141,3 +139,13 @@ class Fake_descriptions(db.Model):
             "fake_description": self.fake_description,
             "card_id": self.card_id
         }
+
+class Score_per_Card(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    card_id = db.Column(db.Integer, db.ForeignKey('card.id'), nullable=False)
+    deck_id = db.Column(db.Integer, db.ForeignKey('deck.id'), nullable=False)
+    score = db.Column(db.Integer, unique=False, nullable=False)
+
+
+

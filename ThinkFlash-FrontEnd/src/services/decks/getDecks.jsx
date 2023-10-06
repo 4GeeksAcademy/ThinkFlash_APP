@@ -1,7 +1,7 @@
 import { DataBaseURL } from "../../../constants";
 
 export default function getDecks() {
-    return fetch(`${DataBaseURL}decks.json`)
+    return fetch(`${DataBaseURL}`)
       .then((res) => {
         if (!res.ok) {
           throw Error();

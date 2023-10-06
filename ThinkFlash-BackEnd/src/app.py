@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 from routes.users import users
 from flask_migrate import Migrate
 from models import db
-from config import Config
 from flask_migrate import Migrate
 from flask_cors import CORS 
 from flask_jwt_extended import JWTManager
@@ -26,6 +25,8 @@ jwt = JWTManager(app)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']
 MIGRATE = Migrate(app, db, compare_type=True)
 
+CORS(app)
+
 app.register_blueprint(users)
 
 
@@ -33,8 +34,6 @@ app.register_blueprint(users)
 @app.route('/')
 def index():
     return "Hola Guapeton!"
-
-
 
 if __name__ == '__main__':
     app.run(debug=True, port=6969)

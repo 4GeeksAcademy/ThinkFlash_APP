@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "94568e3c955de870c578bbea8eeb186f556864e5a0adc6860c4ddc7185a717bf"
+            "sha256": "6b29905f72eb5229a88ae4b2931298c0ff27b160a16735019c0e6b29368090dd"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -152,15 +152,6 @@
             "markers": "platform_machine == 'aarch64' or (platform_machine == 'ppc64le' or (platform_machine == 'x86_64' or (platform_machine == 'amd64' or (platform_machine == 'AMD64' or (platform_machine == 'win32' or platform_machine == 'WIN32')))))",
             "version": "==3.0.0"
         },
-        "install": {
-            "hashes": [
-                "sha256:0d3fadf4aa62c95efe8d34757c8507eb46177f86c016c21c6551eafc6a53d5a9",
-                "sha256:e67c8a0be5ccf8cb4ffa17d090f3a61b6e820e6a7e21cd1d2c0f7bc59b18e647"
-            ],
-            "index": "pypi",
-            "markers": "python_version >= '2.7'",
-            "version": "==1.3.5"
-        },
         "itsdangerous": {
             "hashes": [
                 "sha256:2c2349112351b88699d8d4b6b075022c0808887cb7ad10069318a8b0bc88db44",
@@ -251,14 +242,12 @@
             "markers": "python_version >= '3.7'",
             "version": "==2.1.3"
         },
-        "pip": {
+        "migrate": {
             "hashes": [
-                "sha256:7ccf472345f20d35bdc9d1841ff5f313260c2c33fe417f48c30ac46cccabf5be",
-                "sha256:fb0bd5435b3200c602b5bf61d2d43c2f13c02e29c1707567ae7fbc514eb9faf2"
+                "sha256:5cca9d963f75b65b97e3e13456cbeecb7012610b1d515ce254daeb5be9d4b7e7"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.7'",
-            "version": "==23.2.1"
+            "version": "==0.3.8"
         },
         "pyjwt": {
             "hashes": [
