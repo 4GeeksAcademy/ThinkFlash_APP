@@ -1,65 +1,81 @@
 import ContainerDiv from "../components/ContainerDiv"
 import GeneralCard from "../components/GeneralCard/GeneralCard"
 import getDecks from "../services/decks/getDecks"
+import { allDecksData } from "../../constants"
 
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 
+
+
 export default function DashboardPage() {
   const [deckList, setDeckList] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  //const [isLoading, setIsLoading] = useState(true);
   const params = useParams()
 
-  console.log(params)
+  const getDecksData = () => { // Esa funcion se cambiará por la función getDecks del hook comentado.
+    const data = allDecksData
+    console.log(data)
+    return data
+  }
 
-  useEffect(() => {
-    getDecks()
-      .then((res) => {
-        console.log("fuera del if", res);
-        if (res == null) {
-          setDeckList([]);
-        } else {
-          try {
-            setDeckList(res);
-          } catch {
-            console.log("No ha cambiado el estado");
-          }
-        }
-        console.log("dentro del if", deckList);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log("Error al obtener datos", err);
-        setIsLoading(false);
-      });
-  }, []);
+  useEffect(() => { // Este hook se cambiará por el comentado.
+    const data = getDecksData()
+    setDeckList(data)
+  }, [])
+
+  const getDecksAreas = () => {
+    const Areas = [...new Set(deckList.map(objeto => objeto.area))];
+    return Areas;
+  }
+
+  // useEffect(() => {
+  //   getDecks()
+  //     .then((res) => {
+  //       console.log("fuera del if", res);
+  //       if (res == null) {
+  //         setDeckList([]);
+  //       } else {
+  //         try {
+  //           setDeckList(res);
+  //         } catch {
+  //           console.log("No ha cambiado el estado");
+  //         }
+  //       }
+  //       console.log("dentro del if", deckList);
+  //       setIsLoading(false);
+  //     })
+  //     .catch((err) => {
+  //       console.log("Error al obtener datos", err);
+  //       setIsLoading(false);
+  //     });
+  // }, []);
 
 
   return (
     <div className="h-75">
-      <ContainerDiv
-        title="My Decks"
-        height="50"
-        link={`/${username}/mydecks`}
-      >
-        This is my decks
+      <ContainerDiv title="My Decks" height="50" link="/alldecks">
+        {deckList.map((deck, index) => 
+          (
+            <GeneralCard key={index} title={deck.specialize} col="5">
+              {deck.theme}
+            </GeneralCard>
+          ))
+      }
       </ContainerDiv>
-      <ContainerDiv
-        title="My Decks"
-        height="50"
-        link={`/alldecks`}
-      >
-        {deckList.length === 0 ? <div>No decks</div> :
-
-          deckList.map((deck) => {
-            return (
-              <GeneralCard title={deck.specialize}>
-                {deck.theme}
-              </GeneralCard>
-            );
-          })
-        }
+      <ContainerDiv title="All Decks" height="50" link="/alldecks">
+        {
+        deckList.length === 0 ? (
+          <div>No decks</div>
+        ) : (
+          
+          getDecksAreas().map((area, index) => (
+            <GeneralCard key={index} title={area} col="3">
+              {area}
+            </GeneralCard>
+          ))
+        )}
       </ContainerDiv>
     </div>
-  )
+  );
 }

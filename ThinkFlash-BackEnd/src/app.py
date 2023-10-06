@@ -21,6 +21,8 @@ jwt = JWTManager(app)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']
 MIGRATE = Migrate(app, db, compare_type=True)
 
+CORS(app)
+
 app.register_blueprint(users)
 
 CORS(app)
