@@ -12,7 +12,6 @@ flask-cors = "*"
 python-dotenv = "*"
 migrate = "*"
 
-
 [dev-packages]
 
 [requires]

@@ -10,7 +10,7 @@ const Router = () => {
     return (
         <BrowserRouter basename=''>
             <Navbar
-            usernameLink="/"
+            usernameLink={`/${username}`}
             />
             <Routes>
                 <Route path="/" element={<HomePage />} />
