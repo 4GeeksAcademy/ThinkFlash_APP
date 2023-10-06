@@ -24,7 +24,9 @@ export default function Navbar({usernameLink}) {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <a href="#" className="nav-link">Config</a>
+                        <Link to={'/testUser'} className="nav-link">
+                            Test User
+                        </Link>
                     </li>
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">User</a>
