@@ -9,6 +9,9 @@ flask-sqlalchemy = "*"
 flask-jwt-extended = "*"
 flask-migrate = "*"
 flask-cors = "*"
+pip = "*"
+install = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

@@ -55,15 +55,6 @@ export default function LoginPage () {
                     onChange={(e) => serUsername(e.target.value)}
                   />
                 </div>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
                
                 <div className="form-group">
                   <input
