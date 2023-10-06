@@ -140,7 +140,7 @@ class Fake_descriptions(db.Model):
             "card_id": self.card_id
         }
 
-class Score_per_card(db.Model):
+class Score_per_Card(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     card_id = db.Column(db.Integer, db.ForeignKey('card.id'), nullable=False)
