@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 from routes.users import users
 from flask_migrate import Migrate
 from models import db
-from flask_migrate import Migrate
 from flask_cors import CORS 
 from flask_jwt_extended import JWTManager
 
