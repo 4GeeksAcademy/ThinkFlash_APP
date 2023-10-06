@@ -14,7 +14,7 @@ def signin():
     elif request.method == 'GET':
         return "Hola desde la página de registro"
    
-@users.route('/login')
+@users.route('/login', methods=['POST', 'GET'])
 def login():
    data = request.get_json()
    result = users_controllers.login_user(data)

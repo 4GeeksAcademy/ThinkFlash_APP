@@ -3,10 +3,10 @@ import {useState} from "react";
 export default function LoginPage () {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [username, serUsername] = useState("");
-
+    const [username, setUsername] = useState("");
+    const [token, setToken] = useState(sessionStorage.getItem("token"));
   
-    const token = sessionStorage.getItem("token");
+   
   
     const handleClick = () => {
       const options = {
@@ -16,13 +16,12 @@ export default function LoginPage () {
         },
         body: JSON.stringify({
           username: username,  
-          email: email,
           password: password
         }),
       };
   
       fetch(
-        "https://automatic-spoon-xjx4xprw5pgf5r7-6969.app.github.dev/signup",
+        "https://automatic-spoon-xjx4xprw5pgf5r7-6969.app.github.dev/login",
         options
       )
         .then((response) => {
@@ -30,7 +29,8 @@ export default function LoginPage () {
           else alert("There has ben an error, first then in loginfetch");
         })
         .then((data) => {
-          sessionStorage.setItem("token", data.access_token);
+          setToken(data.token);
+          sessionStorage.setItem("token", data.token)
         })
         .catch((error) => {
           console.log("there is an error fetching login", error);
@@ -39,7 +39,7 @@ export default function LoginPage () {
     return(
         <div className="text-center mt-5">
       <h1>Login</h1>
-      {token && token != "" && token != undefined ? (
+      {token ? (
         "You are logged in with this token: " + token
       ) : (
         <div className="container mt-5">
@@ -52,7 +52,7 @@ export default function LoginPage () {
                     className="form-control"
                     placeholder="Username"
                     value={username}
-                    onChange={(e) => serUsername(e.target.value)}
+                    onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
                
