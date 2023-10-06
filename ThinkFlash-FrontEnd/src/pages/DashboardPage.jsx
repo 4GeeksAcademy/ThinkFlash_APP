@@ -15,7 +15,6 @@ export default function DashboardPage() {
 
   const getDecksData = () => { // Esa funcion se cambiará por la función getDecks del hook comentado.
     const data = allDecksData
-    console.log(data)
     return data
   }
 
@@ -57,7 +56,7 @@ export default function DashboardPage() {
       <ContainerDiv title="My Decks" height="50" link="/alldecks">
         {deckList.map((deck, index) => 
           (
-            <GeneralCard key={index} title={deck.specialize} col="5">
+            <GeneralCard key={index} title={deck.specialize} col="col-md-5 col-lg-2">
               {deck.theme}
             </GeneralCard>
           ))
@@ -70,7 +69,7 @@ export default function DashboardPage() {
         ) : (
           
           getDecksAreas().map((area, index) => (
-            <GeneralCard key={index} title={area} col="3">
+            <GeneralCard key={index} title={area} col="col-md-3 col-lg-1">
               {area}
             </GeneralCard>
           ))

@@ -17,7 +17,7 @@ const Router = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
                 <Route path="/:username" element={<DashboardPage />} />
-                <Route path="/allDecks" element={<AllDecksPage />} />
+                <Route path="/alldecks" element={<AllDecksPage />} />
             </Routes>
         </BrowserRouter>
     );

@@ -1,4 +1,5 @@
 import {useState} from "react";
+const apiUrl = process.env.API_URL
 
 export default function LoginPage () {
     const [email, setEmail] = useState("");
@@ -21,7 +22,7 @@ export default function LoginPage () {
       };
   
       fetch(
-        "https://automatic-spoon-xjx4xprw5pgf5r7-6969.app.github.dev/login",
+        `${apiUrl}/login`,
         options
       )
         .then((response) => {

@@ -2,9 +2,11 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from routes.users import users
+from routes.decks import decks
 from flask_migrate import Migrate
 from models import db
 from flask_migrate import Migrate
+from models import db, User, Deck, Card
 from flask_cors import CORS 
 from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
@@ -19,7 +21,8 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-app.config["JWT_SECRET_KEY"] = os.getenv('JWT_SECRET')  # Change this!
+# app.config["JWT_SECRET_KEY"] = os.getenv('JWT_SECRET')
+app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
 jwt = JWTManager(app)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']
@@ -28,6 +31,7 @@ MIGRATE = Migrate(app, db, compare_type=True)
 CORS(app)
 
 app.register_blueprint(users)
+app.register_blueprint(decks)
 
 
 

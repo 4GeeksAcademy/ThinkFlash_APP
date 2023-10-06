@@ -7,6 +7,7 @@ from flask_jwt_extended import create_access_token, get_jwt_identity, get_jwt_id
 def create_user_and_token(data):
     data = request.get_json()
     
+    # data = request.get_json(force=True)
     email = data.get('email')
     username = data.get('username')
     password = data.get('password')
@@ -27,7 +28,8 @@ def create_user_and_token(data):
     return jsonify({"message": "Usuario creado exitosamente", "access_token": access_token, "user_id": new_user.id}), 201
 
 def login_user(data):
-    data = request.get_json()
+    # data = request.get_json(force=True)
+    email = data.get('email')
     password = data.get('password')
     username = data.get('username')
 
