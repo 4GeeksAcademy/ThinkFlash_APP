@@ -1,10 +1,11 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
 export default function Navbar({ usernameLink }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div className="container d-flex justify-content-between align-items-center">
-        <Link to={usernameLink} className="navbar-brand ps-0">
+      <div className="container">
+        <Link to={usernameLink} className="navbar-brand">
           <img
             src="https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png"
             alt="Logo"
@@ -12,8 +13,19 @@ export default function Navbar({ usernameLink }) {
             height="100"
           />
         </Link>
-        <div className="d-flex">
-          <ul className="navbar-nav ml-auto me-2">
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ml-auto">
             <li className="nav-item">
               <Link to={'/'} className="nav-link">
                 Home
@@ -30,9 +42,8 @@ export default function Navbar({ usernameLink }) {
               </Link>
             </li>
           </ul>
-
-          </div>
         </div>
+      </div>
     </nav>
   );
 }

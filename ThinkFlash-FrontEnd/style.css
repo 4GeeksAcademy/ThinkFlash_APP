@@ -1,3 +1,14 @@
 .fs-7 {
     font-size: 0.7rem;
 }
+
+.decks-container {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap; /* Prevent decks from wrapping to new lines */
+  }
+  
+  .deck {
+    flex: 0 0 auto;
+    margin-right: 20px; /* Adjust as needed for spacing between decks */
+  }

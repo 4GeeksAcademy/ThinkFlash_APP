@@ -1,19 +1,20 @@
 # ThinkFlash_APP
 
-Para iniciar la parte del Front en desarrollo, debes tener instalado npm ($npm install) y lanzar : $npm run dev (Todo esto desde la carpeta correspondiente: ThinkFlash-FrontEnd).
+To start the Frontend development, you must have npm installed (```$ npm install```) and run: ```$ npm run dev``` (All of this should be done from the corresponding folder: ThinkFlash-FrontEnd).
 
-· También hay que tener instalado la librería de ReactRouter -> 
-$ npm install react-router-dom localforage match-sorter sort-by
+Also, make sure to install the ReactRouter library: ```$ npm install react-router-dom```
 
-Para iniciar la parte del Back, debes  lanzar:
-· $ pipenv install (para actualizar todos los paquetes del Pipfile)
-· $ pipenv install flask
-. $ pipenv run start (para lanzar el backend, ver Pipfile scripts)
-. Para crear el admin y gestionar la base:
-    .Instalamos VSCODE extension: Database Client
-    .Abrir la extension, elegir SQLite y en SQLite DB Path indicar: /workspaces/ThinkFlash_APP/ThinkFlash-BackEnd/src/instance/project.sqlite
-. $ pipenv install flask-migrate
-. $ cd /workspaces/ThinkFlash_APP/ThinkFlash-BackEnd/src (ir a la carpeta donde este contenido app.py)
-. $ pipenv run flask db init (crea la carpeta instance dentro de src donde esta el archivo con la base de datos project.sqlite y la carpeta migrations)
-. $ pipenv run migrate (para migrar, ver mas en Pipfile [scripts], tambien es posible $ pipenv run flask migrate -m "message, si es necesario añadir un comentario)
-. $ pipenv run upgrade (para hacer las modificaciones efectivas, ver mas en Pipfile [scripts])
+To start the Backend, follow these steps:
+
+1. Install/update all packages specified in Pipfile: ```$ pipenv install```
+2. Install Flask: ```$ pipenv install flask```
+3. Launch the backend: ```$ pipenv run start``` (Check Pipfile [scripts] for details).
+4. To create the admin and manage the database:
+    1. Install the VSCode extension: "Database Client"
+    2. Open the extension, choose SQLite, and set the SQLite DB Path to: /workspaces/ThinkFlash_APP/ThinkFlash-BackEnd/src/instance/project.sqlite
+5. Install Flask-Migrate: ```$ pipenv install flask-migrate```
+6. Navigate to the folder containing **app.py** : 
+   ```$ cd /workspaces/ThinkFlash_APP/ThinkFlash-BackEnd/src```
+7. Initialize the database: ```$ pipenv run flask db init``` (This creates the 'instance' folder inside 'src', where the 'project.sqlite' database file and 'migrations' folder are located).
+8. Run migrations: ```$ pipenv run migrate``` (see Pipfile [scripts] for more details, you can add a message as a comment if needed, e.g., ```$ pipenv run flask migrate -m "message"```).
+9. Apply migrations: ```$ pipenv run upgrade``` (This makes the modifications effective, see Pipfile [scripts] for more details).
