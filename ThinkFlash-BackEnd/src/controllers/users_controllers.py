@@ -4,8 +4,8 @@ from utils import APIException
 from flask_jwt_extended import create_access_token, get_jwt_identity, get_jwt_identity
 
 
-def create_user_and_token():
-    data = request.get_json()
+def create_user_and_token(data):
+    # data = request.get_json(force=True)
     email = data.get('email')
     username = data.get('username')
     password = data.get('password')
@@ -24,8 +24,8 @@ def create_user_and_token():
 
     return jsonify({"message": "Usuario creado exitosamente", "access_token": access_token, "user_id": new_user.id}), 201
 
-def login_user():
-    data = request.get_json()
+def login_user(data):
+    # data = request.get_json(force=True)
     email = data.get('email')
     password = data.get('password')
     username = data.get('username')
@@ -33,5 +33,5 @@ def login_user():
     user = User.query.filter_by(username=username).first()
     if not user or user.password != password:
         raise APIException('Invalid username or password', status_code=401)
-    access_token = create_access_token(indentity= user.id)
+    access_token = create_access_token(identity= user.id)
     return jsonify({ "token": access_token, "user_id": user.id, "username": username})

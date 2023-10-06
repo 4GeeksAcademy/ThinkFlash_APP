@@ -15,7 +15,8 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-app.config["JWT_SECRET_KEY"] = os.getenv('JWT_SECRET')  # Change this!
+# app.config["JWT_SECRET_KEY"] = os.getenv('JWT_SECRET')
+app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
 jwt = JWTManager(app)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']

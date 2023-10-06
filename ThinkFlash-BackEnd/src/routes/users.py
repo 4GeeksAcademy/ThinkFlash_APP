@@ -6,13 +6,13 @@ users =Blueprint('users', __name__)
 
 @users.route('/signup', methods=['POST'])
 def signup():
-    data = request.get_json()
+    data = request.get_json(force=True)
     result = users_controllers.create_user_and_token(data)
     return result
    
-@users.route('/login')
+@users.route('/login', methods=['POST'])
 def login():
-   data = request.get_json()
+   data = request.get_json(force=True)
    result = users_controllers.login_user(data)
    return result
 

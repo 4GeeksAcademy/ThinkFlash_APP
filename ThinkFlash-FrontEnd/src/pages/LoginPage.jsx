@@ -22,7 +22,7 @@ export default function LoginPage () {
       };
   
       fetch(
-        "https://automatic-spoon-xjx4xprw5pgf5r7-6969.app.github.dev/signup",
+        "https://super-duper-space-orbit-jv6x4v5x7wgfq5gg-6969.app.github.dev/login",
         options
       )
         .then((response) => {
