@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
 export default function Navbar({usernameLink}) {
@@ -13,16 +14,17 @@ export default function Navbar({usernameLink}) {
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul className="navbar-nav ms-auto">
                     <li className="nav-item">
-                        <a href="#" className="nav-link">Demo</a>
+                        <Link to={'/login'} className="nav-link">
+                            Login
+                        </Link>
                     </li>
                     <li className="nav-item">
-                        <a href="#" className="nav-link">Features</a>
+                        <Link to={'/signup'} className="nav-link">
+                            Sign Up
+                        </Link>
                     </li>
                     <li className="nav-item">
-                        <a href="#" className="nav-link">Product</a>
-                    </li>
-                    <li className="nav-item">
-                        <a href="#" className="nav-link">Contact</a>
+                        <a href="#" className="nav-link">Config</a>
                     </li>
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">User</a>
