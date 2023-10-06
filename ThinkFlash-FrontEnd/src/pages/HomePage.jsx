@@ -25,9 +25,9 @@ export default function HomePage () {
 				</div>
 			</header>
 
-			<div id="features" class="py-5">
+			<div id="features" class="py-3">
 			<div class="container">
-				<div class="row g-5 py-5">
+				<div class="row g-5 py-3">
 					<div class="col-md-4">
 						<h5 class="fw-bold">Lorem, ipsum dolor.</h5>
 						<p class="text-muted text-justify">
