@@ -11,7 +11,7 @@ Para iniciar la parte del Back, debes  lanzar:
 . $ pipenv run start (para lanzar el backend, ver Pipfile scripts)
 . Para crear el admin y gestionar la base:
     .Instalamos VSCODE extension: Database Client
-    .Abrir la extension, elegir SQLite y en SQLite DB Path indicar: /workspaces/ThinkFlash_APP/instance/project.sqlite
+    .Abrir la extension, elegir SQLite y en SQLite DB Path indicar: /workspaces/ThinkFlash_APP/ThinkFlash-BackEnd/src/instance/project.sqlite
 . $ pipenv install flask-migrate
 . $ cd /workspaces/ThinkFlash_APP/ThinkFlash-BackEnd/src (ir a la carpeta donde este contenido app.py)
 . $ pipenv run flask db init (crea la carpeta instance dentro de src donde esta el archivo con la base de datos project.sqlite y la carpeta migrations)
