@@ -2,6 +2,7 @@ from flask import Flask
 from routes.users import users
 from flask_migrate import Migrate
 from models import db
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project.sqlite'
@@ -12,6 +13,8 @@ with app.app_context():
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']
 MIGRATE = Migrate(app, db, compare_type=True)
 db.init_app(app)
+
+CORS(app)
 
 app.register_blueprint(users)
 
