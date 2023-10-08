@@ -1,16 +1,18 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import HomePage from '../pages/HomePage';
-import LoginPage from '../pages/LoginPage';
-import SignupPage from '../pages/SingupPage';
-import DashboardPage from '../pages/DashboardPage';
-import AllDecksPage from '../pages/AllDecksPage'
+import HomePage from '../pages/HomePage.jsx';
+import LoginPage from '../pages/LoginPage.jsx';
+import SignupPage from '../pages/SingupPage.jsx';
+import DashboardPage from '../pages/DashboardPage.jsx';
+import AllDecksPage from '../pages/AllDecksPage.jsx'
+import { AppContextProvider } from '../../context/AppContext';
 
 const Router = () => {
     return (
+        <AppContextProvider>
         <BrowserRouter basename=''>
             <Navbar
-            usernameLink={`/${username}`}
+            
             />
             <Routes>
                 <Route path="/" element={<HomePage />} />
@@ -20,6 +22,7 @@ const Router = () => {
                 <Route path="/alldecks" element={<AllDecksPage />} />
             </Routes>
         </BrowserRouter>
+        </AppContextProvider>
     );
 }
 
