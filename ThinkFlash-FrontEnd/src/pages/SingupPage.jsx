@@ -1,12 +1,12 @@
 import { useState } from "react";
-const apiUrl = process.env.API_URL;
+// const apiUrl = process.env.API_URL;
 
 
 export default function SignupPage () {
     const [user, setUser] = useState({})
     const sendUserInfo = async (e)=>{
       e.preventDefault()
-       const response = await fetch(`${apiUrl}/signup`, {
+       const response = await fetch(`https://automatic-spoon-xjx4xprw5pgf5r7-6969.app.github.dev/signup`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(user)
