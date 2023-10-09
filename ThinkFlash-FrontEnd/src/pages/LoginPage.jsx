@@ -1,27 +1,28 @@
 
 // const apiUrl = process.env.API_URL
 import useAppContext from "../../context/AppContext.jsx"
-
+import { useNavigate } from "react-router-dom";
 
 
 export default function LoginPage () {
     
     const { store, actions } = useAppContext();
     const { token, username, password } = store;
-    const { handleClickLogin, setUsername, setPassword } = actions;
+    const { handleClickLoginWrapper, setUsername, setPassword } = actions;
+    const navigate = useNavigate();
   
     const handleFormSubmit  = (e) => {
       e.preventDefault();
-      handleClickLogin(username, password);
+      handleClickLoginWrapper(username, password);
+      if (store.token) {
+        navigate("/:username");
+      }
     };
   
    
     return(
         <div className="text-center mt-5">
       <h1>Login</h1>
-      {token ? (
-        "You are logged in with this token: " + token
-      ) : (
         <div className="container mt-5">
           <div className="row justify-content-center">
             <div className="col-md-6">
@@ -48,7 +49,6 @@ export default function LoginPage () {
                 <button
                   type="submit"
                   className="btn btn-primary mt-3"
-                  // onClick={handleLoginClick}
                 >
                   Login
                 </button>
@@ -56,7 +56,6 @@ export default function LoginPage () {
             </div>
           </div>
         </div>
-      )}
     </div>
     )
 }

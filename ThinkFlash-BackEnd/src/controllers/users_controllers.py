@@ -25,7 +25,7 @@ def create_user_and_token(data):
     
     access_token = create_access_token(identity=new_user.id)
 
-    return jsonify({"message": "Usuario creado exitosamente", "access_token": access_token, "user_id": new_user.id}), 201
+    return jsonify({"message": "Usuario creado exitosamente", "token": access_token, "user_id": new_user.id}), 201
 
 def login_user(data):
     # data = request.get_json(force=True)
