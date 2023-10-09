@@ -1,4 +1,8 @@
+import { DataBaseURL } from "../../constants"
+
 export default function HomePage () {
+	console.log(DataBaseURL)
+
     return(
 		<div>
 			<header className="header mt-3 pt-7">
@@ -16,7 +20,7 @@ export default function HomePage () {
 									Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos est dolore nemo veritatis, quisquam quo
 									facere assumenda enim, odio necessitatibus vitae, inventore ea quibusdam fugiat.
 								</p>
-								<div class="container text-center mt-5">
+								<div className="container text-center mt-5">
 								<button className="btn btn-primary col-lg-3">Star here!</button>
 								</div>
 							</div>
@@ -25,26 +29,26 @@ export default function HomePage () {
 				</div>
 			</header>
 
-			<div id="features" class="py-3">
-			<div class="container">
-				<div class="row g-5 py-3">
-					<div class="col-md-4">
-						<h5 class="fw-bold">Lorem, ipsum dolor.</h5>
-						<p class="text-muted text-justify">
+			<div id="features" className="py-3">
+			<div className="container">
+				<div className="row g-5 py-3">
+					<div className="col-md-4">
+						<h5 className="fw-bold">Lorem, ipsum dolor.</h5>
+						<p className="text-muted text-justify">
 							Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque dolores, et officiis omnis officia
 							laudantium eos?
 						</p>
 					</div>
-					<div class="col-md-4">
-						<h5 class="fw-bold">Lorem, ipsum dolor.</h5>
-						<p class="text-muted text-justify">
+					<div className="col-md-4">
+						<h5 className="fw-bold">Lorem, ipsum dolor.</h5>
+						<p className="text-muted text-justify">
 							Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque dolores, et officiis omnis officia
 							laudantium eos?
 						</p>
 					</div>
-					<div class="col-md-4">
-						<h5 class="fw-bold">Lorem, ipsum dolor.</h5>
-						<p class="text-muted text-justify">
+					<div className="col-md-4">
+						<h5 className="fw-bold">Lorem, ipsum dolor.</h5>
+						<p className="text-muted text-justify">
 							Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque dolores, et officiis omnis officia
 							laudantium eos?
 						</p>
@@ -52,8 +56,8 @@ export default function HomePage () {
 				</div>
 			</div>
 		</div>
-		<footer class="container p-1">
-			<p class="text-center small text-muted">Copyright &copy; Think Flash 2023</p>
+		<footer className="container p-1">
+			<p className="text-center small text-muted">Copyright &copy; Think Flash 2023</p>
 		</footer>
 
 

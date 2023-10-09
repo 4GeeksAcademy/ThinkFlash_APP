@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { handleClickLogin } from "../utils/loginFetch";
+import { DataBaseURL } from "../constants";
 const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
@@ -23,7 +24,7 @@ export const AppContextProvider = ({ children }) => {
   
   const sendUserInfo = async (e) => {
     e.preventDefault();
-    const response = await fetch(`https://automatic-spoon-xjx4xprw5pgf5r7-6969.app.github.dev/signup`, {
+    const response = await fetch(`${DataBaseURL}/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user)
