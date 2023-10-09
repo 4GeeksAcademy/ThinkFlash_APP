@@ -1,4 +1,4 @@
-export const DataBaseURL = "https://thinkflash-pruebas-default-rtdb.europe-west1.firebasedatabase.app/"
+export const DataBaseURL = import.meta.env.VITE_REACT_APP_API_URL
 
 // Develop data examples:
 
