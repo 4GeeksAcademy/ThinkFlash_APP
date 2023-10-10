@@ -15,7 +15,6 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project.sqlite'
-CORS(users)
 
 db.init_app(app)
 with app.app_context():
