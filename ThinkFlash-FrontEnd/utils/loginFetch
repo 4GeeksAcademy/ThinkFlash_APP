@@ -16,7 +16,8 @@
         const response = await fetch(`${DataBaseURL}/login`, options);
         if (response.status === 200) {
           const data = await response.json();
-          return data.token;
+          return data;
+          
         } else {
           throw new Error("Error in loginfetch");
         }

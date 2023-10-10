@@ -14,7 +14,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     const tokenFromSessionStorage = sessionStorage.getItem("token");
-    if (tokenFromSessionStorage != undefined && tokenFromSessionStorage != "") {
+    if (tokenFromSessionStorage != undefined && tokenFromSessionStorage != "" && username != null && username != "") {
       navigate(`/${username}`);
     }
   }, [token, username]);
