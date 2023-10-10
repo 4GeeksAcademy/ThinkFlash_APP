@@ -17,8 +17,9 @@ export const AppContextProvider = ({ children }) => {
 
   const handleClickLoginWrapper = async (email, password) => {
     try {
-      const token = await handleClickLogin(email, password);
-      updateToken(token);
+      const data = await handleClickLogin(email, password);
+      updateToken(data.token);
+      setUsername(data.username)
     } catch (error) {
       console.error("Error fetching login", error);
     }
