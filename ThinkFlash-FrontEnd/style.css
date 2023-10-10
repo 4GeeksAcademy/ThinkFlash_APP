@@ -15,7 +15,8 @@
 
 body::-webkit-scrollbar,
 .containerDiv::-webkit-scrollbar {
-  width: 5px; /* Cambié 'height' a 'width' para la barra de desplazamiento vertical */
+  height: 8px;
+  width: 5px;
   background: transparent;
 }
 
