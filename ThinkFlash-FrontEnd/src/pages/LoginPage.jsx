@@ -2,7 +2,7 @@
 // const apiUrl = process.env.API_URL
 import useAppContext from "../../context/AppContext.jsx"
 import { useNavigate } from "react-router-dom";
-
+import React, {useEffect} from "react";
 
 export default function LoginPage () {
     
@@ -11,12 +11,16 @@ export default function LoginPage () {
     const { handleClickLoginWrapper, setUsername, setPassword } = actions;
     const navigate = useNavigate();
   
+    useEffect(() => {
+      const tokenFromSessionStorage = sessionStorage.getItem("token");
+      if (tokenFromSessionStorage != undefined  && tokenFromSessionStorage != "") {
+        navigate(`/${username}`);
+      }
+    }, [token, username]); 
+  
     const handleFormSubmit  = (e) => {
       e.preventDefault();
       handleClickLoginWrapper(username, password);
-      if (store.token) {
-        navigate("/:username");
-      }
     };
   
    
