@@ -5,10 +5,27 @@
 .decks-container {
     display: flex;
     overflow-x: auto;
-    white-space: nowrap; /* Prevent decks from wrapping to new lines */
-  }
+    white-space: nowrap;
+}
   
-  .deck {
+.deck {
     flex: 0 0 auto;
-    margin-right: 20px; /* Adjust as needed for spacing between decks */
-  }
+    margin-right: 20px;
+}
+
+body::-webkit-scrollbar,
+.containerDiv::-webkit-scrollbar {
+  width: 5px; /* Cambié 'height' a 'width' para la barra de desplazamiento vertical */
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb,
+.containerDiv::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #0d6efd;
+}
+
+body::-webkit-scrollbar-thumb:hover,
+.containerDiv::-webkit-scrollbar-thumb:hover {
+  background: #4891ff;
+}
