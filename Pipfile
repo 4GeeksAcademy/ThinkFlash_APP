@@ -23,4 +23,5 @@ start = "python /workspaces/ThinkFlash_APP/ThinkFlash-BackEnd/src/app.py"
 init = "flask db init"
 migrate = "flask db migrate"
 upgrade = "flask db upgrade"
-reset_db = ""
+reset_db = "python /workspaces/ThinkFlash_APP/ThinkFlash-BackEnd/src/comands.py"
+
