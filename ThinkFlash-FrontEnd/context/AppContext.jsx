@@ -7,15 +7,17 @@ export const AppContextProvider = ({ children }) => {
   const [token, setToken] = useState(sessionStorage.getItem("token") || "");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+
   const [user, setUser] = useState({
     username: "",
     email: "",
     password: ""
   })
 
-  const handleClickLoginWrapper = async (username, password) => {
+  const handleClickLoginWrapper = async (email, password) => {
     try {
-      const token = await handleClickLogin(username, password);
+      const token = await handleClickLogin(email, password);
       updateToken(token);
     } catch (error) {
       console.error("Error fetching login", error);
@@ -58,7 +60,8 @@ export const AppContextProvider = ({ children }) => {
     token,
     username,
     password,
-    user
+    user,
+    email
   };
 
   const actions = {
@@ -67,7 +70,8 @@ export const AppContextProvider = ({ children }) => {
     setPassword,
     setUsername,
     setUser,
-    sendUserInfo
+    sendUserInfo,
+    setEmail
   };
 
   return <AppContext.Provider value={{ store, actions }}>{children}</AppContext.Provider>;

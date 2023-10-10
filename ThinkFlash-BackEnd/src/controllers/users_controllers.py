@@ -31,9 +31,10 @@ def login_user(data):
     # data = request.get_json(force=True)
     password = data.get('password')
     username = data.get('username')
+    email = data.get('email')
 
-    user = User.query.filter_by(username=username).first()
-    if not user or user.password != password:
-        raise APIException('Invalid username or password', status_code=401)
+    user = User.query.filter_by(email=email).first()
+    if not email or user.password != password:
+        raise APIException('Invalid email or password', status_code=401)
     access_token = create_access_token(identity= user.id)
-    return jsonify({ "token": access_token, "user_id": user.id, "username": username})
+    return jsonify({ "token": access_token, "email": user.email, "user_id": user.id, "username": username})
