@@ -1,13 +1,13 @@
  import { DataBaseURL } from "../constants";
  
- export const handleClickLogin = async (username, password) => {
+ export const handleClickLogin = async (email, password) => {
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: username,
+        email: email,
         password: password,
       }),
     };
