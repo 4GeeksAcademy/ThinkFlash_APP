@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom"
 
 
 
-export default function DashboardPage() {
+export default function MyDecksPage() {
   const [deckList, setDeckList] = useState([]);
   //const [isLoading, setIsLoading] = useState(true);
   const params = useParams()
@@ -31,27 +31,14 @@ export default function DashboardPage() {
 
   return (
     <div className="h-75 container">
-      <ContainerDiv title="My Decks" height="50" link="/:username/mydecks">
+      <ContainerDiv title="My Decks" overflow="y">
         {deckList.map((deck, index) => 
           (
-            <GeneralCard key={index} title={deck.specialize} col="col-md-5 col-lg-2" minWidth="18rem">
+            <GeneralCard key={index} title={deck.specialize} col="col-4 col-lg-3" minWidth="10rem" minHeight="16rem">
               {deck.theme}
             </GeneralCard>
           ))
       }
-      </ContainerDiv>
-      <ContainerDiv title="All Decks" height="50" link="/alldecks">
-        {
-        deckList.length === 0 ? (
-          <div>No decks</div>
-        ) : (
-          
-          getDecksAreas().map((area, index) => (
-            <GeneralCard key={index} title={area} col="col-md-3 col-lg-1" minWidth="12rem">
-              {area}
-            </GeneralCard>
-          ))
-        )}
       </ContainerDiv>
     </div>
   );

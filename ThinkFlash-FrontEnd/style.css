@@ -13,6 +13,10 @@
     margin-right: 20px;
 }
 
+.h-80 {
+  height: 80%;
+}
+
 body::-webkit-scrollbar,
 .containerDiv::-webkit-scrollbar {
   height: 8px;

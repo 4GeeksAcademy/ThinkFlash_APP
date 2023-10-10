@@ -1,6 +1,6 @@
-export default function GeneralCard({ children, title, col, minWidth }) {
+export default function GeneralCard({ children, title, col, minWidth,minHeight }) {
     return (
-        <div className={`m-2 ${col}`} style={{ minWidth: minWidth }}>
+        <div className={`m-2 ${col}`} style={{ minWidth: minWidth, minHeight: minHeight }}>
             <div className="h-100">
                 
                     <div className="card h-100">
