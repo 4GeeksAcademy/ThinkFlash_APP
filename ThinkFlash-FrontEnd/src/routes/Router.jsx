@@ -5,6 +5,8 @@ import LoginPage from '../pages/LoginPage.jsx';
 import SignupPage from '../pages/SingupPage.jsx';
 import DashboardPage from '../pages/DashboardPage.jsx';
 import AllDecksPage from '../pages/AllDecksPage.jsx'
+import MyDecksPage from '../pages/MyDecksPage.jsx'
+import DeckGamePage from '../pages/DeckGamePage';
 import { AppContextProvider } from '../../context/AppContext';
 
 const Router = () => {
@@ -20,6 +22,8 @@ const Router = () => {
                 <Route path="/signup" element={<SignupPage />} />
                 <Route path="/:username" element={<DashboardPage />} />
                 <Route path="/alldecks" element={<AllDecksPage />} />
+                <Route path="/:username/mydecks" element={<MyDecksPage />} />
+                <Route path="/:username/:deck" element={<DeckGamePage />} />
             </Routes>
         </BrowserRouter>
         </AppContextProvider>
