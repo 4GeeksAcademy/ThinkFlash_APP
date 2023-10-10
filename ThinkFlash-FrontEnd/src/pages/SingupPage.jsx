@@ -1,7 +1,7 @@
 // const apiUrl = process.env.API_URL;
 import useAppContext from "../../context/AppContext.jsx"
 import { useNavigate } from "react-router-dom";
-
+import React, { useEffect } from "react";
 
 export default function SignupPage () {
   const { store, actions } = useAppContext();
@@ -9,6 +9,13 @@ export default function SignupPage () {
   const {setUser, sendUserInfo} = actions;
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const tokenFromSessionStorage = sessionStorage.getItem("token");
+
+    if (tokenFromSessionStorage != undefined  && tokenFromSessionStorage != "") {
+      navigate(`/${user.username}`);
+    }
+  }, [token, user.username]); 
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -21,9 +28,7 @@ export default function SignupPage () {
       return;
     }
     await sendUserInfo(e);
-    if (store.token) {
-      navigate("/:username");
-    }
+   
   };
     return(
         <div className="text-center mt-5">
