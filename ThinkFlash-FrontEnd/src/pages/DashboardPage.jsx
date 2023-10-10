@@ -28,31 +28,9 @@ export default function DashboardPage() {
     return Areas;
   }
 
-  // useEffect(() => {
-  //   getDecks()
-  //     .then((res) => {
-  //       console.log("fuera del if", res);
-  //       if (res == null) {
-  //         setDeckList([]);
-  //       } else {
-  //         try {
-  //           setDeckList(res);
-  //         } catch {
-  //           console.log("No ha cambiado el estado");
-  //         }
-  //       }
-  //       console.log("dentro del if", deckList);
-  //       setIsLoading(false);
-  //     })
-  //     .catch((err) => {
-  //       console.log("Error al obtener datos", err);
-  //       setIsLoading(false);
-  //     });
-  // }, []);
-
 
   return (
-    <div className="h-75">
+    <div className="h-75 container">
       <ContainerDiv title="My Decks" height="50" link="/alldecks">
         {deckList.map((deck, index) => 
           (
