@@ -11,6 +11,7 @@ flask-migrate = "*"
 flask-cors = "*"
 python-dotenv = "*"
 migrate = "*"
+mysql = "*"
 
 [dev-packages]
 
