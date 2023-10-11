@@ -32,26 +32,28 @@ export default function DashboardPage() {
   return (
     <div className="h-75 container">
       <ContainerDiv title="My Decks" height="50" link="/:username/mydecks" overflow="x">
-        {deckList.map((deck, index) => 
-          (
-            <GeneralCard key={index} title={deck.specialize} col="col" minWidth="10rem" minHeight="10rem">
+        {deckList.map((deck, index) =>
+        (
+          <GeneralCard key={index} title={deck.specialize} col="col" minWidth="10rem" minHeight="10rem"
+          img="https://avatars.githubusercontent.com/u/134429160?v=4">
             {deck.theme}
           </GeneralCard>
-          ))
-      }
+        ))
+        }
       </ContainerDiv>
       <ContainerDiv title="All Decks" height="50" link="/alldecks" overflow="x">
         {
-        deckList.length === 0 ? (
-          <div>No decks</div>
-        ) : (
-          
-          getDecksAreas().map((area, index) => (
-            <GeneralCard key={index} title={area} col="col" minWidth="10rem" minHeight="10rem">
-              {area}
-            </GeneralCard>
-          ))
-        )}
+          deckList.length === 0 ? (
+            <div>No decks</div>
+          ) : (
+
+            getDecksAreas().map((area, index) => (
+              <GeneralCard key={index} title={area} col="col" minWidth="10rem" minHeight="10rem"
+              img="https://learning-corner.learning.europa.eu/sites/default/files/styles/oe_theme_medium_no_crop/public/2021-12/eurocoin_0.png?itok=I_UddCl2">
+                {area}
+              </GeneralCard>
+            ))
+          )}
       </ContainerDiv>
     </div>
   );
