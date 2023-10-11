@@ -1,7 +1,7 @@
-export default function GeneralCard({ children, title, col, minWidth, minHeight, img, progress }) {
+export default function GeneralCard({ children, title, shadow, minWidth, minHeight, img, progress }) {
         const getProgress = () => {
             return (
-                <div className="row">
+                <div className="ratio ratio-4x3 row">
                     <div className="col-6">
                         <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-bar bg-success w-50"></div>
@@ -20,20 +20,26 @@ export default function GeneralCard({ children, title, col, minWidth, minHeight,
             )
         }
         const getImage = (img) => {
-            return (<img className="card-img-top" src={img} alt="Arriba España!" />)
+            <div className="ratio ratio-4x3">
+                <img className="card-img-top" src={img} alt="Arriba España!" />
+            </div>
+            return (<div className="ratio ratio-4x3">
+                        <img className="card-img-top p-2" src={img} alt="Arriba España!" />
+                    </div>)
         }
     
     
 
 
     return (
-        <div className={`m-2 ${col} d-flex justify-content-center`}>
-            <div className="d-flex flex-wrap">
-                <div className="card shadow-sm" style={{ minHeight: minHeight, minWidth: minWidth }}>
-                    {!img && progress ? getProgress() : getImage(img)}
-                    <h5 className="card-title m-2">{title}</h5>
+        <div className={`m-2 d-flex justify-content-center align-items-center`} style={{ minHeight: minHeight, minWidth: minWidth, maxHeight: minHeight, maxWidth: minWidth }}>
+            <div className="d-flex flex-wrap" style={{ minHeight: minHeight, minWidth: minWidth }}>
+                <div className={`card shadow${shadow}`} style={{ minHeight: minHeight, minWidth: minWidth }}>
+                        {img && getImage(img)}
+                        {progress && getProgress()}
+                    <h5 className="card-title m-2 text-center">{title}</h5>
                     <div className="card-body">
-                        <div>{children}</div>
+                        <div className="h-100 d-flex justify-content-center align-item-center">{children}</div>
                     </div>
                 </div>
 

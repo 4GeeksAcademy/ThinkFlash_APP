@@ -3,7 +3,7 @@
 import useAppContext from "../../context/AppContext.jsx"
 import { useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
-import '../styles/loginLogout.css'
+import '../../style.css'
 
 export default function LoginPage() {
 
