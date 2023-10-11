@@ -19,7 +19,7 @@ mysql = "*"
 python_version = "3.10"
 
 [scripts]
-start = "python /workspaces/ThinkFlash_APP/ThinkFlash-BackEnd/src/app.py"
+start = "python ./ThinkFlash-BackEnd/src/app.py"
 init = "flask db init"
 migrate = "flask db migrate"
 upgrade = "flask db upgrade"

@@ -1,12 +1,12 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { handleClickLogin } from "../utils/loginFetch";
 import { DataBaseURL } from "../constants";
 const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
-  const [token, setToken] = useState(sessionStorage.getItem("token") || "");
+  const [token, setToken] = useState();
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState();
   const [email, setEmail] = useState("");
 
   const [user, setUser] = useState({
@@ -15,10 +15,17 @@ export const AppContextProvider = ({ children }) => {
     password: ""
   })
 
+  useEffect(() => {
+    setToken(sessionStorage.getItem("token") || "")
+    setUsername(sessionStorage.getItem("username") || "")
+  },[])
+
+  
+
   const handleClickLoginWrapper = async (email, password) => {
     try {
       const data = await handleClickLogin(email, password);
-      updateToken(data.token);
+      updateSessionStorage({token:data.token, username:data.username});
       setUsername(data.username)
     } catch (error) {
       console.error("Error fetching login", error);
@@ -36,7 +43,8 @@ export const AppContextProvider = ({ children }) => {
     try {
       const data = await response.json();
       const token = data.token;
-      updateToken(token);
+      const username = data.username
+      updateSessionStorage({token:token, username:username});
       if (response.ok) {
         alert("Usuario creado exitosamente");
       } else {
@@ -51,9 +59,11 @@ export const AppContextProvider = ({ children }) => {
     }
   };
   
-  const updateToken = (token) => {
+  const updateSessionStorage = ({token, username}) => {
     setToken(token);
     sessionStorage.setItem("token", token);
+    setUsername(username);
+    sessionStorage.setItem("username", username)
   };
   
 

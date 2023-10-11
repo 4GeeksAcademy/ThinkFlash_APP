@@ -20,8 +20,8 @@ export default function GeneralCard({ children, title, shadow, minWidth, minHeig
             )
         }
         const getImage = (img) => {
-            <div className="ratio ratio-4x3">
-                <img className="card-img-top" src={img} alt="Arriba España!" />
+            <div className="ratio ratio-4x3 object-fit-cover border rounded">
+                <img className="card-img-top " src={img} alt="Arriba España!" />
             </div>
             return (<div className="ratio ratio-4x3">
                         <img className="card-img-top p-2" src={img} alt="Arriba España!" />
