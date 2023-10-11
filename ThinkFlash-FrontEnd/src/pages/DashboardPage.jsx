@@ -31,7 +31,7 @@ export default function DashboardPage() {
 
   return (
     <div className="h-75 container">
-      <ContainerDiv title="My Decks" height="50" link="/:username/mydecks">
+      <ContainerDiv title="My Decks" height="50" link="/:username/mydecks" overflow="x">
         {deckList.map((deck, index) => 
           (
             <GeneralCard key={index} title={deck.specialize} col="col-md-5 col-lg-2" minWidth="18rem">
@@ -40,14 +40,14 @@ export default function DashboardPage() {
           ))
       }
       </ContainerDiv>
-      <ContainerDiv title="All Decks" height="50" link="/alldecks">
+      <ContainerDiv title="All Decks" height="50" link="/alldecks" overflow="x">
         {
         deckList.length === 0 ? (
           <div>No decks</div>
         ) : (
           
           getDecksAreas().map((area, index) => (
-            <GeneralCard key={index} title={area} col="col-md-3 col-lg-1" minWidth="12rem">
+            <GeneralCard key={index} title={area} col="col-md-3 col-lg-1" minWidth="18rem">
               {area}
             </GeneralCard>
           ))
