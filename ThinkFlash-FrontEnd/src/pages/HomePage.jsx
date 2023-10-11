@@ -1,7 +1,4 @@
-import { DataBaseURL } from "../../constants"
-
 export default function HomePage () {
-	console.log(DataBaseURL)
 
     return(
 		<div>
@@ -61,10 +58,9 @@ export default function HomePage () {
 			</footer>
 			</div>
 		</div>
-		
-
-
-		
-
+		<footer className="container p-1">
+			<p className="text-center small text-muted">Copyright &copy; Think Flash 2023</p>
+		</footer>
+		</div>
     )
 }
