@@ -3,16 +3,21 @@ import GeneralCard from "../components/GeneralCard/GeneralCard"
 import getDecks from "../services/decks/getDecks"
 import { allDecksData } from "../../constants"
 import "../../style.css"
+import useAppContext from "../../context/AppContext"
 
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 
 
 
 export default function MyDecksPage() {
   const [deckList, setDeckList] = useState([]);
   //const [isLoading, setIsLoading] = useState(true);
-  const params = useParams()
+  const { store } = useAppContext();
+  const { username } = store;
+  
+  const params = useParams();
+  const navigate = useNavigate();
 
   const getDecksData = () => { // Esa funcion se cambiará por la función getDecks del hook comentado.
     const data = allDecksData
@@ -29,6 +34,8 @@ export default function MyDecksPage() {
     return Areas;
   }
 
+  if (params.username !== username) { navigate("/login") 
+  return <h1>Cargando...</h1>}
 
   return (
     <div className="h-75 container">
