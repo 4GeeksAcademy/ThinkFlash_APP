@@ -11,6 +11,7 @@ db = SQLAlchemy(app)
 
 def create_users():
     for i in range(20):
+        id = i
         email = f"test_{i}@testemail.com"
         username = f"test_{i}"
         password = f"password_{i}"

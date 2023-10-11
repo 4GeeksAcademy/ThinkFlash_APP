@@ -33,10 +33,12 @@ export default function MyDecksPage() {
   return (
     <div className="h-75 container">
       <ContainerDiv title="My Decks" overflow="y">
-        {deckList.map((deck, index) => 
+        {deckList.map((deck, index) =>
           (
             <GeneralCard key={index} title={deck.specialize} minWidth="15rem" minHeight="20rem" shadow={"-lg"}
-            img="https://img.asmedia.epimg.net/resizer/LQyBk5T2TfVttC_yVM8n5HuEYpM=/1472x828/cloudfront-eu-central-1.images.arcpublishing.com/diarioas/53YSJXSIZFHNTBV52Z4AMKISUM.png">
+            img="https://img.asmedia.epimg.net/resizer/LQyBk5T2TfVttC_yVM8n5HuEYpM=/1472x828/cloudfront-eu-central-1.images.arcpublishing.com/diarioas/53YSJXSIZFHNTBV52Z4AMKISUM.png"
+            // progress = "progress"
+            >
               {deck.theme}
             </GeneralCard>
           ))
