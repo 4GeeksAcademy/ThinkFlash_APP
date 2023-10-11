@@ -34,7 +34,7 @@ export default function MyDecksPage() {
       <ContainerDiv title="My Decks" overflow="y">
         {deckList.map((deck, index) => 
           (
-            <GeneralCard key={index} title={deck.specialize} col="col-4 col-lg-3" minWidth="10rem" minHeight="16rem">
+            <GeneralCard key={index} title={deck.specialize} col="col" minWidth="15rem" minHeight="20rem">
               {deck.theme}
             </GeneralCard>
           ))
