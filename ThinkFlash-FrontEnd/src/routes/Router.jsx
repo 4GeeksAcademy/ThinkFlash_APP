@@ -21,7 +21,7 @@ const Router = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
                 <Route path="/:username" element={<DashboardPage />} />
-                <Route path="/alldecks" element={<AllDecksPage />} />
+                <Route path="/:username/alldecks" element={<AllDecksPage />} />
                 <Route path="/:username/mydecks" element={<MyDecksPage />} />
                 <Route path="/:username/:deck" element={<DeckGamePage />} />
             </Routes>

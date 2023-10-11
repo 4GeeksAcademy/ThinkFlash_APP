@@ -1,7 +1,18 @@
 import GeneralCard from "../components/GeneralCard/GeneralCard"
 import "../../style.css"
+import useAppContext from "../../context/AppContext"
+import { useParams, useNavigate } from "react-router-dom"
 
 export default function DeckGamePage() {
+    const { store } = useAppContext();
+    const { username } = store;
+    
+    const params = useParams();
+    const navigate = useNavigate();
+
+    if (params.username !== username) { navigate("/login") 
+    return <h1>Cargando...</h1>}
+
     return (
         <div className="container h-90">
             <div className="row h-100">
