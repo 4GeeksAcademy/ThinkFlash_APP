@@ -2,6 +2,7 @@ import ContainerDiv from "../components/ContainerDiv"
 import GeneralCard from "../components/GeneralCard/GeneralCard"
 import getDecks from "../services/decks/getDecks"
 import { allDecksData } from "../../constants"
+import "../../style.css"
 
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
@@ -34,7 +35,7 @@ export default function DashboardPage() {
       <ContainerDiv title="My Decks" height="50" link="/:username/mydecks" overflow="x">
         {deckList.map((deck, index) =>
         (
-          <GeneralCard key={index} title={deck.specialize} col="col" minWidth="10rem" minHeight="10rem"
+          <GeneralCard key={index} title={deck.specialize}  minWidth="10rem" minHeight="10rem"
           img="https://avatars.githubusercontent.com/u/134429160?v=4">
             {deck.theme}
           </GeneralCard>
@@ -48,7 +49,7 @@ export default function DashboardPage() {
           ) : (
 
             getDecksAreas().map((area, index) => (
-              <GeneralCard key={index} title={area} col="col" minWidth="10rem" minHeight="10rem"
+              <GeneralCard key={index} title={area} minWidth="10rem" minHeight="10rem"
               img="https://learning-corner.learning.europa.eu/sites/default/files/styles/oe_theme_medium_no_crop/public/2021-12/eurocoin_0.png?itok=I_UddCl2">
                 {area}
               </GeneralCard>
