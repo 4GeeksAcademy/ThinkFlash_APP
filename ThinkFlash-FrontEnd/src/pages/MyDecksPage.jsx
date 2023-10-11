@@ -34,7 +34,8 @@ export default function MyDecksPage() {
       <ContainerDiv title="My Decks" overflow="y">
         {deckList.map((deck, index) => 
           (
-            <GeneralCard key={index} title={deck.specialize} col="col" minWidth="15rem" minHeight="20rem">
+            <GeneralCard key={index} title={deck.specialize} col="col" minWidth="15rem" minHeight="20rem"
+            img="https://img.asmedia.epimg.net/resizer/LQyBk5T2TfVttC_yVM8n5HuEYpM=/1472x828/cloudfront-eu-central-1.images.arcpublishing.com/diarioas/53YSJXSIZFHNTBV52Z4AMKISUM.png">
               {deck.theme}
             </GeneralCard>
           ))
