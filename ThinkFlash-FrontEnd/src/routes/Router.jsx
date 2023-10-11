@@ -6,6 +6,7 @@ import SignupPage from '../pages/SingupPage.jsx';
 import DashboardPage from '../pages/DashboardPage.jsx';
 import AllDecksPage from '../pages/AllDecksPage.jsx'
 import { AppContextProvider } from '../../context/AppContext';
+import Footer from '../components/Navbar';
 
 const Router = () => {
     return (

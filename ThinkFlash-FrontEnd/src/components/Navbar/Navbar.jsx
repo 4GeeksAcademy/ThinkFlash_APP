@@ -31,10 +31,10 @@ export default function Navbar({ usernameLink }) {
     }
 
     return (
-        <div className="navbar bg-primary navbar-expand-lg" data-bs-theme="dark">
+        <div className="navbar text-bg-dark navbar-expand-lg" data-bs-theme="dark">
             <div className="container">
                 <Link to={"/"} className="navbar-brand ps-3">
-                    <img src='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png' alt="Logo" width="auto" height="80px" />
+                    <img src='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png' alt="Logo" width="auto" height="50px" />
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
                     <span className="navbar-toggler-icon"></span>
@@ -44,7 +44,7 @@ export default function Navbar({ usernameLink }) {
                         {conditionalLinks}
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">User</a>
-                            <ul className="dropdown-menu bg-primary">
+                            <ul className="dropdown-menu text-bg-dark">
                                 <li><a className="dropdown-item" href="#">Log in</a></li>
                                 <li><a className="dropdown-item" href="#">Sign up</a></li>
                                 <li><a className="dropdown-item" href="#">Log out</a></li>
