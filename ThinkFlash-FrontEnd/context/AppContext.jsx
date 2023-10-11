@@ -4,9 +4,9 @@ import { DataBaseURL } from "../constants";
 const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
-  const [token, setToken] = useState();
+  const [token, setToken] = useState(sessionStorage.getItem("token") || "");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState();
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
 
   const [user, setUser] = useState({
