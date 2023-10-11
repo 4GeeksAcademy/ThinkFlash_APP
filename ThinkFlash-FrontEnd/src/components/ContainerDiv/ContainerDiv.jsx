@@ -6,7 +6,7 @@ export default function ContainerDiv({ children, height, title, link, overflow }
 )
     }
     const generateOverflowYClass = () => {
-        return("card-body row containerDiv justify-content-center")
+        return("card-body d-flex flex-wrap containerDiv justify-content-center")
     }
 
     return (
