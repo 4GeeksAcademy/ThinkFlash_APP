@@ -2,7 +2,7 @@ import GeneralCard from "../components/GeneralCard/GeneralCard"
 import "../../style.css"
 import useAppContext from "../../context/AppContext"
 import { useParams, useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 export default function DeckGamePage() {
     const [activeButton, setActiveButton] = useState(null);
@@ -13,35 +13,20 @@ export default function DeckGamePage() {
     const params = useParams();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const flipButtons = document.querySelectorAll(".flip-button");
-
-        flipButtons.forEach((button) => {
-            button.addEventListener("click", function () {
-                const cardInner = document.querySelector(".flip-card-inner");
-                const side = button.getAttribute("data-card-side");
-
-                if (side === "front") {
-                    cardInner.classList.remove("flipped");
-                } else {
-                    cardInner.classList.add("flipped");
-                }
-            });
-        });
-
-        return () => {
-            flipButtons.forEach((button) => {
-                button.removeEventListener("click");
-            });
-        };
-    }, [])
-
-
     const handleButtonClick = (res) => {
         if (activeButton === null) {
             setActiveButton(res);
         }
     };
+
+    const putNextButton = () => {
+        if (activeButton) {
+            return (
+                <button type="button" className="btn btn-primary border border-0">Next Card!</button>
+            )
+        }
+        return ""
+    }
 
     if (params.username !== username) {
         navigate("/login")
@@ -51,25 +36,15 @@ export default function DeckGamePage() {
     return (
         <div className="container h-90">
             <div className="row h-100">
-                <div className="col-12 col-md-6 my-auto d-flex justify-content-center">
-                    <div className="flip-card">
-                        <div className="flip-card-inner">
-                            <div className="flip-card-front">
-                                <GeneralCard minWidth="20rem" minHeight="30rem" shadow={"-lg"}>
-                                    <p className="fs-1 my-auto">
-                                        This Will be the concept of the card.
-                                    </p>
-                                </GeneralCard>
-                            </div>
-                            <div className="flip-card-back">
-                                <GeneralCard minWidth="20rem" minHeight="30rem" shadow={"-lg"}>
-                                    <p className="fs-1 my-auto">
-                                        This Will be the description of the card.
-                                    </p>
-                                </GeneralCard>
-                            </div>
-                        </div>
-                    </div>
+                <div className="mx-auto col-12 col-md-6 my-auto d-flex justify-content-center">
+                    <GeneralCard minWidth="20rem" minHeight="30rem" shadow={"-lg"}
+                  
+                    >
+                        <p className="fs-1 my-auto">
+                            This Will be the description of the card.
+                        </p>
+                        {putNextButton()}
+                    </GeneralCard>
                 </div>
                 <div className="col-12 col-md-6 my-auto mx-auto">
                     <div className="text-container d-flex flex-column justify-content-center mb-5 text-center">

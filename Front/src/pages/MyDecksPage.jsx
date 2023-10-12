@@ -6,7 +6,7 @@ import "../../style.css"
 import useAppContext from "../../context/AppContext"
 
 import { useState, useEffect } from "react"
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams, useNavigate, Link } from "react-router-dom"
 
 
 
@@ -18,6 +18,12 @@ export default function MyDecksPage() {
   
   const params = useParams();
   const navigate = useNavigate();
+
+  const progress = {
+   aciertos: 50, 
+   errores: 30, 
+   noContestadas: 20
+  }
 
   const getDecksData = () => { // Esa funcion se cambiará por la función getDecks del hook comentado.
     const data = allDecksData
@@ -43,10 +49,12 @@ export default function MyDecksPage() {
         {deckList.map((deck, index) =>
           (
             <GeneralCard key={index} title={deck.specialize} minWidth="15rem" minHeight="20rem" shadow={"-lg"}
-            img="https://img.asmedia.epimg.net/resizer/LQyBk5T2TfVttC_yVM8n5HuEYpM=/1472x828/cloudfront-eu-central-1.images.arcpublishing.com/diarioas/53YSJXSIZFHNTBV52Z4AMKISUM.png"
-            // progress = "progress"
+            progress = {progress}
             >
               {deck.theme}
+              <div className="d-flex mt-3">
+                <Link to={`../../${username}/${deck.theme}`} className="btn btn-primary my-auto w-100">Go Game</Link>
+              </div>
             </GeneralCard>
           ))
       }
