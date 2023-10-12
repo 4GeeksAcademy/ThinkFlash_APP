@@ -6,7 +6,7 @@ import "../../style.css"
 import useAppContext from "../../context/AppContext"
 
 import { useState, useEffect } from "react"
-import { useParams, useNavigate, Link } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 
 
 
@@ -42,18 +42,11 @@ export default function MyDecksPage() {
       <ContainerDiv title="My Decks" overflow="y">
         {deckList.map((deck, index) =>
           (
-            <GeneralCard 
-            key={index} 
-            title={deck.specialize} 
-            minWidth="15rem" 
-            minHeight="20rem" 
-            shadow={"-lg"}
+            <GeneralCard key={index} title={deck.specialize} minWidth="15rem" minHeight="20rem" shadow={"-lg"}
             img="https://img.asmedia.epimg.net/resizer/LQyBk5T2TfVttC_yVM8n5HuEYpM=/1472x828/cloudfront-eu-central-1.images.arcpublishing.com/diarioas/53YSJXSIZFHNTBV52Z4AMKISUM.png"
+            // progress = "progress"
             >
               {deck.theme}
-              <div className="d-flex mt-3">
-                <Link to={`../../${username}/${deck.theme}`} className="btn btn-primary my-auto w-100">Go Game</Link>
-              </div>
             </GeneralCard>
           ))
       }
