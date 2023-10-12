@@ -6,7 +6,7 @@ import "../../style.css"
 import useAppContext from "../../context/AppContext"
 
 import { useState, useEffect } from "react"
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams, useNavigate, Link } from "react-router-dom"
 
 
 
@@ -51,6 +51,9 @@ export default function MyDecksPage() {
             img="https://img.asmedia.epimg.net/resizer/LQyBk5T2TfVttC_yVM8n5HuEYpM=/1472x828/cloudfront-eu-central-1.images.arcpublishing.com/diarioas/53YSJXSIZFHNTBV52Z4AMKISUM.png"
             >
               {deck.theme}
+              <div className="d-flex mt-3">
+                <Link to={`../../${username}/${deck.theme}`} className="btn btn-primary my-auto w-100">Go Game</Link>
+              </div>
             </GeneralCard>
           ))
       }
