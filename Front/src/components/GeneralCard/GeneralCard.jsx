@@ -1,4 +1,4 @@
-export default function GeneralCard({ children, title, shadow, minWidth, minHeight, img, progress }) {
+export default function GeneralCard({ children, title, shadow, minWidth, minHeight, img, progress, button_1, button_2 }) {
         const getProgress = () => {
             return (
                 <div className="ratio ratio-4x3 row">
@@ -27,6 +27,10 @@ export default function GeneralCard({ children, title, shadow, minWidth, minHeig
                         <img className="card-img-top p-2" src={img} alt="Arriba España!" />
                     </div>)
         }
+
+        const getButton1 = (button_1) => {
+            <button type="button" class="btn btn-primary" disabled>Primary button</button>
+        }
     
     
 
@@ -39,7 +43,7 @@ export default function GeneralCard({ children, title, shadow, minWidth, minHeig
                         {progress && getProgress()}
                     <h5 className="card-title m-2 text-center">{title}</h5>
                     <div className="card-body">
-                        <div className="h-100 d-flex justify-content-center align-item-center">{children}</div>
+                        <div className="h-100 d-flex flex-column justify-content-center align-item-center text-center">{children}</div>
                     </div>
                 </div>
 
