@@ -17,11 +17,24 @@ export default function DeckGamePage() {
         <div className="container h-90">
             <div className="row h-100">
                 <div className="col-12 col-md-6 my-auto d-flex justify-content-center">
-                    <GeneralCard  minWidth="20rem" minHeight="30rem" shadow={"-lg"}>
-                        <p className="fs-1 my-auto">
-                            This Will be the description or the concept of the card.
-                        </p>
-                    </GeneralCard>
+                    <div className="flip-card">
+                        <div className="flip-card-inner">
+                            <div className="flip-card-front">
+                                <GeneralCard  minWidth="20rem" minHeight="30rem" shadow={"-lg"}>
+                                <p className="fs-1 my-auto">
+                                    This Will be the concept of the card.
+                                </p>
+                                </GeneralCard>
+                            </div>
+                            <div className="flip-card-back">
+                                <GeneralCard  minWidth="20rem" minHeight="30rem" shadow={"-lg"}>
+                                    <p className="fs-1 my-auto">
+                                        This Will be the description of the card.
+                                    </p>
+                                </GeneralCard>
+                            </div>
+                        </div>
+                    </div> 
                 </div>
                 <div className="col-12 col-md-6 my-auto mx-auto">
                     <div className="text-container d-flex flex-column justify-content-center mb-5 text-center">
