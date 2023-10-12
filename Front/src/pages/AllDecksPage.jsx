@@ -1,14 +1,7 @@
 import { allDecksData } from "../alldecks";
-import useAppContext from "../../context/AppContext"
-import { useParams, useNavigate } from "react-router-dom"
+import chekLogNavigate from "../../utils/checkLogNavigate";
 
 export default function AllDecksPage() {
-    const { store } = useAppContext();
-    const { username } = store;
-    
-    const params = useParams();
-    const navigate = useNavigate();
-
     const decksByArea = allDecksData.reduce((acc, deck) => {
       if (!acc[deck.area]) {
         acc[deck.area] = [];
@@ -17,8 +10,7 @@ export default function AllDecksPage() {
       return acc;
     }, {});
 
-    if (params.username !== username) { navigate("/login") 
-    return <h1>Cargando...</h1>}
+    chekLogNavigate()
     
     return (
       <>
