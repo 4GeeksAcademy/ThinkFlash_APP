@@ -17,7 +17,7 @@ export default function MyDecksPage() {
   const { store } = useAppContext();
   const { username } = store;
 
-  const progress = {
+  const progress = { //hardcodeado
     learned: 70, 
     midLearned: 30, 
     toLearn: 20

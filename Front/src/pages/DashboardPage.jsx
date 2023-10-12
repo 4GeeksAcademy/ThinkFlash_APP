@@ -17,6 +17,12 @@ export default function DashboardPage() {
   const { store } = useAppContext();
   const { username } = store;
 
+  const progress = { //hardcodeado
+    learned: 70, 
+    midLearned: 30, 
+    toLearn: 20
+  }
+
   const getDecksData = () => { 
     const data = allDecksData
     return data
@@ -40,7 +46,7 @@ export default function DashboardPage() {
           {deckList.map((deck, index) =>
           (
             <GeneralCard key={index} title={deck.specialize}  minWidth="10rem" minHeight="13rem" shadow={""}
-            img="https://avatars.githubusercontent.com/u/134429160?v=4">
+            progress={progress}>
               {deck.theme}
             </GeneralCard>
           ))
