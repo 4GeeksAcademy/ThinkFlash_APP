@@ -1,22 +1,24 @@
 import React, { useEffect, useRef } from 'react';
 import "../../styles/generalCard.css";
 
-export default function GeneralCard({ children, title, shadow, minWidth, minHeight, img, progress = {} }) {
-    const { aciertos, errores, noContestadas } = progress;
+export default function GeneralCard({ children, title, shadow, minWidth, minHeight, img, progress }) {
+
 
 
     const getProgress = () => {
         const canvasRef = useRef(null);
         const chartRef = useRef(null);
 
+        const { learned, midLearned, toLearn } = progress;
+
         useEffect(() => {
             const ctx = canvasRef.current.getContext('2d');
 
             const data = {
-                labels: ['Aciertos', 'Errores', 'No Contestadas'],
+                labels: ['Learned', 'Mid Learned', 'To Learn'],
                 datasets: [{
-                    data: [aciertos, errores, noContestadas],
-                    backgroundColor: ['green', 'red', 'gray'],
+                    data: [learned, midLearned, toLearn],
+                    backgroundColor: ['green','yellow', 'red'],
                     borderWidth: 0,
                 }],
             };
@@ -29,7 +31,7 @@ export default function GeneralCard({ children, title, shadow, minWidth, minHeig
                 type: 'doughnut',
                 data: data,
                 options: {
-                    cutout: '75%',
+                    cutout: '80%',
                     plugins: {
                         legend: {
                             display: false,
@@ -45,9 +47,15 @@ export default function GeneralCard({ children, title, shadow, minWidth, minHeig
                     chartRef.current.destroy();
                 }
             };
-        }, [aciertos, errores, noContestadas]);
+        }, [learned, midLearned, toLearn]);
         return (
-            <div className='circulo col-6'><canvas ref={canvasRef}></canvas></div>
+            <div className='ratio ratio-4x3 d-block'>
+                <div className='w-100 h-75 mt-4 mb-0'>
+                    <div className='circulo w-100 h-100 d-flex justify-content-center align-items-center'>
+                        <canvas ref={canvasRef}></canvas>
+                    </div>
+                </div>
+            </div>
         );
     };
 

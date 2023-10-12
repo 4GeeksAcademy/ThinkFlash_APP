@@ -1,17 +1,14 @@
 import GeneralCard from "../components/GeneralCard/GeneralCard"
-import "../../style.css"
 import useAppContext from "../../context/AppContext"
-import { useParams, useNavigate } from "react-router-dom"
+import chekLogNavigate from "../../utils/checkLogNavigate"
 import { useState } from "react"
+import "../../style.css"
 
 export default function DeckGamePage() {
     const [activeButton, setActiveButton] = useState(null);
     const [cardSide, setCardSide] = useState("front");
-    const { store } = useAppContext();
-    const { username } = store;
 
-    const params = useParams();
-    const navigate = useNavigate();
+  
 
     const handleButtonClick = (res) => {
         if (activeButton === null) {
@@ -28,17 +25,14 @@ export default function DeckGamePage() {
         return ""
     }
 
-    if (params.username !== username) {
-        navigate("/login")
-        return <h1>Cargando...</h1>
-    }
+    chekLogNavigate()
 
     return (
         <div className="container h-90">
             <div className="row h-100">
                 <div className="mx-auto col-12 col-md-6 my-auto d-flex justify-content-center">
                     <GeneralCard minWidth="20rem" minHeight="30rem" shadow={"-lg"}
-                  
+
                     >
                         <p className="fs-1 my-auto">
                             This Will be the description of the card.

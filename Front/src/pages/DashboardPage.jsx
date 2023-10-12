@@ -1,25 +1,21 @@
 import ContainerDiv from "../components/ContainerDiv"
 import GeneralCard from "../components/GeneralCard/GeneralCard"
+import chekLogNavigate from "../../utils/checkLogNavigate"
 import getDecks from "../services/decks/getDecks"
 import { allDecksData } from "../../constants"
 import "../../style.css"
 import useAppContext from "../../context/AppContext"
 
 import { useState, useEffect } from "react"
-import { useParams, useNavigate } from "react-router-dom"
+
 
 
 
 export default function DashboardPage() {
   const [deckList, setDeckList] = useState([]);
   //const [isLoading, setIsLoading] = useState(true);
-  
   const { store } = useAppContext();
   const { username } = store;
-  
-  const params = useParams();
-  const navigate = useNavigate();
- 
 
   const getDecksData = () => { 
     const data = allDecksData
@@ -36,11 +32,7 @@ export default function DashboardPage() {
     return Areas;
   }
 
-  console.log(params.username, "params")
-  console.log(username)
-
-  if (params.username !== username) { navigate("/login") 
-    return <h1>Cargando...</h1>}
+  chekLogNavigate()
     
   return (
       <div className="h-75 container">
