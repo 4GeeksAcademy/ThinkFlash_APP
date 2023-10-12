@@ -19,6 +19,7 @@ def login():
    return result
 
 @users.route('/users', methods=['GET'])
+
 def get_users():
     try:
         users = User.query.all()
