@@ -41,60 +41,59 @@ export default function SignupPage() {
 
   };
   return (
-    <div className="text-center mt-5">
-      <h1>Sign Up</h1>
+    <div className="mt-5">
+      <h1 className="text-center">Sign Up</h1>
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6">
             <form onSubmit={handleFormSubmit}>
               <div className="form-group">
-                <label>
+                <label htmlFor="username">
                   Username:
-                  <input
-                    type="username"
-                    className="form-control"
-                    id="username"
-                    placeholder="Ingrese su nombre de usuario"
-                    onChange={(e) => setUser({ ...user, username: e.target.value })}
-                  />
                 </label>
-
-
+                <input
+                  type="username"
+                  className="form-control"
+                  id="username"
+                  placeholder="Ingrese su nombre de usuario"
+                  onChange={(e) => setUser({ ...user, username: e.target.value })}
+                />
               </div>
               <div className="form-group mt-2">
-                <label>
-                  Email:
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    placeholder="Ingrese su email"
-                    onChange={(e) => setUser({ ...user, email: e.target.value })}
-                  />
-                </label>
-
+                <label htmlFor="emailInput">
+                  Email:</label>
+                <input
+                  id="emailInput"
+                  type="email"
+                  className="form-control"
+                  placeholder="Ingrese su email"
+                  onChange={(e) => setUser({ ...user, email: e.target.value })}
+                />
               </div>
               <div className="form-group mt-2">
-                <label>
+                <label htmlFor="password">
                   Password:
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    placeholder="Ingrese su contraseña"
-                    onChange={(e) => setUser({ ...user, password: e.target.value })}
-                  />
                 </label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  placeholder="Ingrese su contraseña"
+                  onChange={(e) => setUser({ ...user, password: e.target.value })}
+                />
               </div>
               <div className="form-group mt-2">
                 <label>
-                    <input className="check" type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
-                    Acepto los <a href="https://www.recetasgratis.net/receta-de-arepas-venezolanas-52618.html" target="_blank" rel="noopener noreferrer">términos y condiciones</a>
+                  <input className="check" type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
+                  Acepto los <a href="https://www.recetasgratis.net/receta-de-arepas-venezolanas-52618.html" target="_blank" rel="noopener noreferrer">términos y condiciones</a>
                 </label>
-            </div>
-              <button type="submit" className="btn btn-dark mt-3">
-                Sign Up
-              </button>
+              </div>
+              <div className="text-center">
+                <button type="submit" className="btn btn-dark mt-3">
+                  Sign Up
+                </button>
+              </div>
+
             </form>
           </div>
         </div>

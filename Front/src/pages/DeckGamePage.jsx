@@ -1,30 +1,47 @@
 import GeneralCard from "../components/GeneralCard/GeneralCard"
 import "../../style.css"
+import useAppContext from "../../context/AppContext"
+import { useParams, useNavigate } from "react-router-dom"
 
 export default function DeckGamePage() {
+    const { store } = useAppContext();
+    const { username } = store;
+    
+    const params = useParams();
+    const navigate = useNavigate();
+
+    if (params.username !== username) { navigate("/login") 
+    return <h1>Cargando...</h1>}
+
     return (
         <div className="container h-90">
             <div className="row h-100">
-                <div className="col-md-6 h-100 d-flex align-items-center">
-                    <GeneralCard title={"Title"} col="col" minWidth="30rem" minHeight="45rem"
-                    img="https://as01.epimg.net/epik/imagenes/2018/11/16/portada/1542384053_864693_1542384302_noticia_normal.jpg">
-                        {"Theme"}
+                <div className="col-12 col-md-6 my-auto d-flex justify-content-center">
+                    <GeneralCard  minWidth="20rem" minHeight="30rem" shadow={"-lg"}>
+                        <p className="fs-1 my-auto">
+                            This Will be the description or the concept of the card.
+                        </p>
                     </GeneralCard>
                 </div>
-                <div className="col-md-6">
-                    <div className="text-container p-4 d-flex flex-column justify-content-center h-100 mb-5 text-center">
+                <div className="col-12 col-md-6 my-auto mx-auto">
+                    <div className="text-container d-flex flex-column justify-content-center mb-5 text-center">
                         <div className="list-group shadow-lg bg-primary">
                             <button type="button" className="btn btn-light m-2">
-                                The current button
+                                A first solution
                             </button>
-                            <button type="button" className="btn btn-light m-2">A second button item</button>
-                            <button type="button" className="btn btn-light m-2">A third button item</button>
-                            <button type="button" className="btn btn-light m-2">A fourth button item</button>
+                            <button type="button" className="btn btn-light m-2">
+                                A second solution
+                            </button>
+                            <button type="button" className="btn btn-light m-2">
+                                A third solution
+                            </button>
+                            <button type="button" className="btn btn-light m-2">
+                                A fourth solution
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     )
 }
