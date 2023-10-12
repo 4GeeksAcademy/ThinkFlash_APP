@@ -4,64 +4,50 @@ import "../../styles/generalCard.css";
 export default function GeneralCard({ children, title, shadow, minWidth, minHeight, img, progress = {} }) {
     const { aciertos, errores, noContestadas } = progress;
 
-    const canvasRef = useRef(null);
-    const chartRef = useRef(null);
 
-    useEffect(() => {
-        const ctx = canvasRef.current.getContext('2d');
-        const data = {
-            labels: ['Aciertos', 'Errores', 'No Contestadas'],
-            datasets: [{
-                data: [aciertos, errores, noContestadas],
-                backgroundColor: ['green', 'red', 'gray'],
-                borderWidth: 0,
-            }],
-        };
+    const getProgress = () => {
+        const canvasRef = useRef(null);
+        const chartRef = useRef(null);
 
-        if (chartRef.current) {
-            chartRef.current.destroy();
-        }
+        useEffect(() => {
+            const ctx = canvasRef.current.getContext('2d');
 
-        const newChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: data,
-            options: {
-                cutout: '75%',
-                plugins: {
-                    legend: {
-                        display: false,
-                    },
-                },
-            },
-        });
+            const data = {
+                labels: ['Aciertos', 'Errores', 'No Contestadas'],
+                datasets: [{
+                    data: [aciertos, errores, noContestadas],
+                    backgroundColor: ['green', 'red', 'gray'],
+                    borderWidth: 0,
+                }],
+            };
 
-        chartRef.current = newChart;
-
-        return () => {
             if (chartRef.current) {
                 chartRef.current.destroy();
             }
-        };
-    }, [aciertos, errores, noContestadas]);
 
-    const getProgress = () => {
+            const newChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: data,
+                options: {
+                    cutout: '75%',
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                    },
+                },
+            });
+
+            chartRef.current = newChart;
+
+            return () => {
+                if (chartRef.current) {
+                    chartRef.current.destroy();
+                }
+            };
+        }, [aciertos, errores, noContestadas]);
         return (
-            <div className="ratio ratio-4x3 row">
-                <div className="col-6">
-                    <div className="progress" role="progressbar" aria-label="Success example" aria-valuenow={aciertos} aria-valuemin="0" aria-valuemax="100">
-                        <div className="progress-bar bg-success" style={{ width: `${aciertos}%` }}></div>
-                    </div>
-                    <div className="progress" role="progressbar" aria-label="Warning example" aria-valuenow={errores} aria-valuemin="0" aria-valuemax="100">
-                        <div className="progress-bar bg-warning" style={{ width: `${errores}%` }}></div>
-                    </div>
-                    <div className="progress" role="progressbar" aria-label="Danger example" aria-valuenow={noContestadas} aria-valuemin="0" aria-valuemax="100">
-                        <div className="progress-bar bg-danger" style={{ width: `${noContestadas}%` }}></div>
-                    </div>
-                </div>
-                <div className="col-6">
-                    {/* Contenido para la columna de la derecha */}
-                </div>
-            </div>
+            <div className='circulo col-6'><canvas ref={canvasRef}></canvas></div>
         );
     };
 
