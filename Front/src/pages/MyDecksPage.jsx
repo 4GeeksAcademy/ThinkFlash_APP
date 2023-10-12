@@ -19,6 +19,12 @@ export default function MyDecksPage() {
   const params = useParams();
   const navigate = useNavigate();
 
+  const progress = {
+   aciertos: 50, 
+   errores: 30, 
+   noContestadas: 20
+  }
+
   const getDecksData = () => { // Esa funcion se cambiará por la función getDecks del hook comentado.
     const data = allDecksData
     return data
@@ -42,13 +48,8 @@ export default function MyDecksPage() {
       <ContainerDiv title="My Decks" overflow="y">
         {deckList.map((deck, index) =>
           (
-            <GeneralCard 
-            key={index} 
-            title={deck.specialize} 
-            minWidth="15rem" 
-            minHeight="20rem" 
-            shadow={"-lg"}
-            img="https://img.asmedia.epimg.net/resizer/LQyBk5T2TfVttC_yVM8n5HuEYpM=/1472x828/cloudfront-eu-central-1.images.arcpublishing.com/diarioas/53YSJXSIZFHNTBV52Z4AMKISUM.png"
+            <GeneralCard key={index} title={deck.specialize} minWidth="15rem" minHeight="20rem" shadow={"-lg"}
+            progress = {progress}
             >
               {deck.theme}
               <div className="d-flex mt-3">
