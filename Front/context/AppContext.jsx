@@ -42,9 +42,8 @@ export const AppContextProvider = ({ children }) => {
     
     try {
       const data = await response.json();
-      const token = data.token;
-      const username = data.username
-      updateSessionStorage({token:token, username:username});
+      updateSessionStorage({token: data.token, username: data.username});
+      
       if (response.ok) {
         alert("Usuario creado exitosamente");
       } else {
