@@ -35,7 +35,7 @@ export default function DeckGamePage() {
                 <div className="mx-auto col-12 col-md-6 my-auto d-flex justify-content-center">
                     <SwitchTransition mode={"out-in"}>
                         <CSSTransition
-                            key={activeButton && <GeneralCard/>}
+                            key={activeButton}
                             addEndListener={(node, done) => node.addEventListener("transitionend", done, false)}
                             classNames="fade"
                         >
