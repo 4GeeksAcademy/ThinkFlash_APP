@@ -47,6 +47,7 @@ class User(db.Model):
             "email": self.email,
             "username": self.username,
             "avatar": self.avatar,
+        
         }
     
 class Sponsor(db.Model):
@@ -70,7 +71,7 @@ class Deck(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     theme = db.Column(db.String(120), unique=True, nullable=False)
     specialize = db.Column(db.String(120), unique=True, nullable=False)
-    area = db.Column(db.String(120), unique=True, nullable=False)
+    area = db.Column(db.String(120), unique=False, nullable=True)
     sponsor_id = db.Column(db.Integer, db.ForeignKey('sponsor.id'), nullable = True)
     cards= db.relationship('Card', secondary='card_deck', lazy='subquery', backref= db.backref('decks', lazy=True))
     deck_score = db.relationship('Score_per_Card', backref='deck', lazy=True)
