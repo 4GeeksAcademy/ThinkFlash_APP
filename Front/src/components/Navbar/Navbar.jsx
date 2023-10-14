@@ -16,21 +16,17 @@ export default function Navbar() {
 
     if (token == "" || !token) {
         conditionalLinks = (
-            <><button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
-                <span className="navbar-toggler-icon"></span>
-            </button>
-                <div className="collapse navbar-collapse" id="navbarNavDropdown">
-                    <li className="nav-item">
-                        <Link to={'/login'} className="nav-link">
-                            Login
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to={'/signup'} className="nav-link">
-                            Sign Up
-                        </Link>
-                    </li>
-                </div >
+            <>
+                <li className="nav-item p-3 py-md-1">
+                    <Link to={'/login'} className="nav-link">
+                        Login
+                    </Link>
+                </li>
+                <li className="nav-item p-3 py-md-1">
+                    <Link to={'/signup'} className="nav-link">
+                        Sign Up
+                    </Link>
+                </li>
             </>
         );
     }
@@ -75,24 +71,19 @@ export default function Navbar() {
                         className="offcanvas-body d-flex flex-column justify-content-between px-0"
                     >
                         <ul className="navbar-nav fs-5 justify-content-end">
-                            <li className="nav-item p-3 py-md-1">
-                                <a href="" className="nav-link">Home</a>
-                            </li>
-                            <li className="nav-item p-3 py-md-1">
-                                <a href="" className="nav-link">Login</a>
-                            </li>
-                            <li className="nav-item p-3 py-md-1">
-                                <a href="" className="nav-link">Sign Up</a>
-                            </li>
-                            <li className="nav-item p-3 py-md-1">
-                                <a href="" className="nav-link">Test User</a>
-                            </li>
-                            <li className="nav-item p-3 py-md-1">
-                                <a href="" className="nav-link">User</a>
-                            </li>
-                            <li className="nav-item p-3 py-md-1">
-                                <a href="" className="nav-link">Log out</a>
-                            </li>
+                            {!token ? conditionalLinks : (
+                                <>
+                                    <li className="nav-item p-3 py-md-1">
+                                        <a href="" className="nav-link">User</a>
+                                    </li>
+                                    <li className="nav-item p-3 py-md-1">
+                                        <a className="nav-link" onClick={logout}>
+                                            Logout
+                                        </a>
+                                    </li>
+                                </>
+                            )
+                            }
                         </ul>
                     </div>
                 </section>
