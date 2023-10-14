@@ -39,7 +39,7 @@ export default function Navbar() {
                 <Link to={token == "" || !token ? "/" : `/${username}`} className="navbar-brand ps-3 h-100">
                     <img src='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png' alt="Logo" width="auto" height="60px" />
                 </Link>
-                <p className="h4 text-white">Think Flash</p>
+                <p className="h4 text-white ms-0 me-auto">Think Flash</p>
 
 
                 <button
