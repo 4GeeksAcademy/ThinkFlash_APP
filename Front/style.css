@@ -31,12 +31,12 @@ body::-webkit-scrollbar,
 body::-webkit-scrollbar-thumb,
 .containerDiv::-webkit-scrollbar-thumb {
   border-radius: 5px;
-  background: #0d6efd;
+  background: #212529;
 }
 
 body::-webkit-scrollbar-thumb:hover,
 .containerDiv::-webkit-scrollbar-thumb:hover {
-  background: #4891ff;
+  background: #212529;
 }
 
 .h-10 {
