@@ -11,7 +11,7 @@ export default function Navbar() {
     const { store } = useAppContext();
     const { token } = store;
     const { username } = store;
-    const {avatar} = store;
+    const { avatar } = store;
 
     let conditionalLinks = null;
 
@@ -34,7 +34,7 @@ export default function Navbar() {
 
     return (
 
-        <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-md navbar-dark bg-dark">
             <div className="container-fluid">
                 <Link to={token == "" || !token ? "/" : `/${username}`} className="navbar-brand ps-3 h-100">
                     <img src='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png' alt="Logo" width="auto" height="60px" />
@@ -43,30 +43,32 @@ export default function Navbar() {
 
 
                 <button
-                    className="navbar-toggler"
+                    className="navbar-toggler btn border-0"
                     type="button"
                     data-bs-toggle="offcanvas"
                     data-bs-target="#menuLateral"
                 >
-                    <span className="navbar-toggler-icon"></span>
+                    <img className="rounded-circle" src={avatar} alt={username + " avatar "} width="auto" height="60px" />
                 </button>
 
                 <section
-                    className={`offcanvas offcanvas-start bg-dark w-75 ${classes.offcanvas}`}
+                    className={`offcanvas offcanvas-end bg-dark w-75 ${classes.offcanvas}`}
                     id="menuLateral"
-                    tabindex="-1"
+                    tabIndex="-1"
                 >
                     <div className="offcanvas-header" data-bs-theme="dark">
                         {token == "" || !token ?
                             <img src='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png' alt="Logo" width="auto" height="60px" />
-                            : 
-                            <Link to={`/${username}`} className="p-0 h-100">
-                                <img className="rounded-circle img-fluid"  src={avatar} alt={username + " avatar "} width="auto" height="60px" />
-                            </Link>
+                            :
+                            <li className="px-3">
+                                <Link to={`/${username}`} className="p-0 h-100 d-flex text-decoration-none">
+                                    <img className="rounded-circle" src={avatar} alt={username + " avatar "} width="auto" height="60px" />
+                                    <p className="text-white fw-bold px-3 my-auto">{username}</p>
+                                </Link>
+                            </li>
                         }
-                        <p className="h4 text-white ms-0 me-auto">{username}</p>
                         <button
-                            className="btn-close"
+                            className="btn-close mt-3"
                             type="button"
                             aria-label="Close"
                             data-bs-dismiss="offcanvas"
@@ -79,13 +81,20 @@ export default function Navbar() {
                         <ul className="navbar-nav fs-5 justify-content-end">
                             {!token ? conditionalLinks : (
                                 <>
-                                    <li className="nav-item p-3 py-md-1">
-                                        <a href="" className="nav-link">User</a>
+                                    <li className="nav-item px-3">
+                                        <Link to={`/${username}/mydecks`} className="nav-link">
+                                            My decks
+                                        </Link>
                                     </li>
-                                    <li className="nav-item p-3 py-md-1">
-                                        <a className="nav-link" onClick={logout}>
+                                    <li className="nav-item px-3">
+                                        <Link to={`/${username}/alldecks`} className="nav-link">
+                                            All decks
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item px-3 my-auto">
+                                        <button className="nav-link text-warning" onClick={logout}>
                                             Logout
-                                        </a>
+                                        </button>
                                     </li>
                                 </>
                             )
