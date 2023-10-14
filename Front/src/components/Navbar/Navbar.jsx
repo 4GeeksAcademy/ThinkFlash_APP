@@ -57,9 +57,13 @@ export default function Navbar() {
                     tabindex="-1"
                 >
                     <div className="offcanvas-header" data-bs-theme="dark">
-                        <Link to={token == "" || !token ? "/" : `/${username}`} className="p-0 h-100">
-                            <img className="rounded-circle img-fluid"  src={avatar} alt={username + " avatar "} width="auto" height="60px" />
-                        </Link>
+                        {token == "" || !token ?
+                            <img src='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png' alt="Logo" width="auto" height="60px" />
+                            : 
+                            <Link to={`/${username}`} className="p-0 h-100">
+                                <img className="rounded-circle img-fluid"  src={avatar} alt={username + " avatar "} width="auto" height="60px" />
+                            </Link>
+                        }
                         <p className="h4 text-white ms-0 me-auto">{username}</p>
                         <button
                             className="btn-close"
