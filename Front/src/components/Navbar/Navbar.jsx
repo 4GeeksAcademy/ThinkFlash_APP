@@ -11,6 +11,7 @@ export default function Navbar() {
     const { store } = useAppContext();
     const { token } = store;
     const { username } = store;
+    const {avatar} = store;
 
     let conditionalLinks = null;
 
@@ -33,10 +34,10 @@ export default function Navbar() {
 
     return (
 
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
             <div className="container-fluid">
-                <Link to={"/"} className="ms-5 navbar-brand p-0">
-                    <img src='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png' alt="Logo" width="auto" height="50px" />
+                <Link to={token == "" || !token ? "/" : `/${username}`} className="navbar-brand ps-3 h-100">
+                    <img src='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png' alt="Logo" width="auto" height="60px" />
                 </Link>
                 <p className="h4 text-white">Think Flash</p>
 
@@ -51,14 +52,15 @@ export default function Navbar() {
                 </button>
 
                 <section
-                    className={`offcanvas offcanvas-start bg-dark ${classes.offcanvas}`}
+                    className={`offcanvas offcanvas-start bg-dark w-75 ${classes.offcanvas}`}
                     id="menuLateral"
                     tabindex="-1"
                 >
                     <div className="offcanvas-header" data-bs-theme="dark">
-                        <Link to={"/"} className="ms-5 navbar-brand p-0">
-                            <img src='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png' alt="Logo" width="auto" height="50px" />
-                        </Link><p className="h4 text-white">Think Flash</p>
+                        <Link to={token == "" || !token ? "/" : `/${username}`} className="p-0 h-100">
+                            <img className="rounded-circle img-fluid"  src={avatar} alt={username + " avatar "} width="auto" height="60px" />
+                        </Link>
+                        <p className="h4 text-white ms-0 me-auto">{username}</p>
                         <button
                             className="btn-close"
                             type="button"
