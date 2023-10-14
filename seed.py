@@ -6,8 +6,9 @@ from Back.src.models import User, Sponsor, Deck, Card, Fake_concepts, Fake_descr
 def create_initial_data():
 
     #Creo estas listas porque al declararlos con bucles, no puedo acceder a ellos. Con estas listas lo arreglamos.
-    users = [] 
-    decks = []
+    users = [];
+    sponsors = [];
+    decks = [];
 
     # Create some users
     with app.app_context():
@@ -23,6 +24,7 @@ def create_initial_data():
                         db.session.add(user)
                         users.append(user)
                         db.session.commit()
+
         except Exception as e:
                 print("No se ha podido crear los usuarios", e)
 
@@ -31,41 +33,58 @@ def create_initial_data():
         try:
             sponsor1 = Sponsor(name="Sponsor 1", logo="sponsor1.png", user_id=users[0].id)
             sponsor2 = Sponsor(name="Sponsor 2", logo="sponsor2.png", user_id=users[1].id)
+
             db.session.add(sponsor1)
+            sponsors.append(sponsor1)
             db.session.add(sponsor2)
+            sponsors.append(sponsor2)
             db.session.commit()
+
         except Exception as e:
                 print("No se ha podido crear los sponsors", e)
 
         # Create some decks
-        
-        for i in range(3, 10):
-            theme = f"Theme {i}"
-            specialize = f"Specialize {i}",
-            area = f"Area {random.randint(1, 5)}",
-            deck = Deck(theme=theme, specialize=specialize, area=area)
-        db.session.add(deck)
-        db.session.commit()
-
+        try:
         # Create some decks with sponsors
-        deck1 = Deck(theme="Theme 1", specialize="Specialize 1",
-                     area=f"Area {random.randint(1, 5)}", sponsor_id=sponsor1.id)
-        deck2 = Deck(theme="Theme 2", specialize="Specialize 2",
-                     area=f"Area {random.randint(1, 5)}", sponsor_id=sponsor2.id)
-
+            deck1 = Deck(theme="Theme 1", specialize="Specialize 1",area=f"Area {random.randint(1, 5)}", sponsor_id=sponsors[0].id)
+            deck2 = Deck(theme="Theme 2", specialize="Specialize 2",area=f"Area {random.randint(1, 5)}", sponsor_id=sponsors[1].id)
         # Add and commit the decks first to obtain their IDs
-        db.session.add(deck1)
-        db.session.add(deck2)
-        db.session.commit()
+            db.session.add(deck1)
+            decks.append(deck1)
+            db.session.add(deck2)
+            decks.append(deck2)
+            db.session.commit()
+
+            for i in range(3, 11):
+                theme = f"Theme {i}"
+                specialize = f"Specialize {i}"
+                area = f"Area {random.randint(1, 5)}"
+                deck = Deck(theme=theme, specialize=specialize, area=area)
+
+                db.session.add(deck)
+                decks.append(deck)
+                db.session.commit()
+
+        except Exception as e:
+                print("No se ha podido crear las decks", e)
 
         # Create some cards associated with the decks
-        card1 = Card(description="Card 1 Description",
-                     concept="Card 1 Concept", area="Area 1", deck_id=deck1.id)
-        card2 = Card(description="Card 2 Description",
-                     concept="Card 2 Concept", area="Area 2", deck_id=deck2.id)
-        db.session.add(card1)
-        db.session.add(card2)
-        db.session.commit()
+        try:
+
+                for i in range(1, 51):
+                        number_of_decks = len(decks)
+                        random_deck = random.randint(1, (number_of_decks))
+                        description=f"Card {i} Description"
+                        concept=f"Card {i} Concept"
+                        area= f"{decks[(random_deck-1)].area}"
+                        deck_id= decks[(random_deck-1)].id
+                        card = Card(description=description, concept=concept, area=area, deck_id=deck_id)
+                        db.session.add(card)
+                        users.append(card)
+                        db.session.commit()
+
+        except Exception as e:
+                print("No se ha podido crear las cartas", e)
 
         # Create some fake concepts and descriptions for cards
         fake_concept1 = Fake_concepts(

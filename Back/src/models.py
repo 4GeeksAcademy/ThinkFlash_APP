@@ -92,7 +92,7 @@ class Card(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(250), unique=True, nullable=False)
     concept = db.Column(db.String(250), unique=True, nullable=False)
-    area = db.Column(db.String(120), unique=True, nullable=False)
+    area = db.Column(db.String(120), unique=False, nullable=False)
     deck_id = db.Column(db.Integer, db.ForeignKey('deck.id'), nullable = False)
     fake_concepts= db.relationship('Fake_concepts', backref= db.backref('cards', lazy=True))
     fake_descriptions= db.relationship('Fake_descriptions', backref= db.backref('cards', lazy=True))
