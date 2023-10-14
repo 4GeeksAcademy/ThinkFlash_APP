@@ -8,6 +8,7 @@ export const AppContextProvider = ({ children }) => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [avatar, setAvatar] = useState("https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded_nologo/36243334/36243334-1672676117894-fb369f088856b.jpg")
 
   const [user, setUser] = useState({
     username: "",
@@ -27,6 +28,7 @@ export const AppContextProvider = ({ children }) => {
       const data = await handleClickLogin(email, password);
       updateSessionStorage({token:data.token, username:data.username});
       setUsername(data.username)
+      setAvatar(data.avatar)
     } catch (error) {
       console.error("Error fetching login", error);
     }
@@ -71,6 +73,7 @@ export const AppContextProvider = ({ children }) => {
     username,
     password,
     user,
+    avatar,
     email
   };
 
