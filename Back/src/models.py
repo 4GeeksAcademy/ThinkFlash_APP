@@ -47,6 +47,7 @@ class User(db.Model):
             "email": self.email,
             "username": self.username,
             "avatar": self.avatar,
+        
         }
     
 class Sponsor(db.Model):
@@ -68,9 +69,9 @@ class Sponsor(db.Model):
 
 class Deck(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    theme = db.Column(db.String(120), unique=True, nullable=False)
-    specialize = db.Column(db.String(120), unique=True, nullable=False)
-    area = db.Column(db.String(120), unique=True, nullable=False)
+    theme = db.Column(db.String(120), unique=False, nullable=False)
+    specialize = db.Column(db.String(120), unique=False, nullable=False)
+    area = db.Column(db.String(120), unique=False, nullable=True)
     sponsor_id = db.Column(db.Integer, db.ForeignKey('sponsor.id'), nullable = True)
     cards= db.relationship('Card', secondary='card_deck', lazy='subquery', backref= db.backref('decks', lazy=True))
     deck_score = db.relationship('Score_per_Card', backref='deck', lazy=True)
@@ -89,9 +90,9 @@ class Deck(db.Model):
 
 class Card(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.String(250), unique=True, nullable=False)
-    concept = db.Column(db.String(250), unique=True, nullable=False)
-    area = db.Column(db.String(120), unique=True, nullable=False)
+    description = db.Column(db.String(250), unique=False, nullable=False)
+    concept = db.Column(db.String(250), unique=False, nullable=False)
+    area = db.Column(db.String(120), unique=False, nullable=False)
     deck_id = db.Column(db.Integer, db.ForeignKey('deck.id'), nullable = False)
     fake_concepts= db.relationship('Fake_concepts', backref= db.backref('cards', lazy=True))
     fake_descriptions= db.relationship('Fake_descriptions', backref= db.backref('cards', lazy=True))
