@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppContextProvider } from '../../context/AppContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Navbar from '../components/Navbar';
 import HomePage from '../pages/HomePage.jsx';
