@@ -4,6 +4,28 @@
    height: 100px; 
    overflow: auto; 
 }
+.progressBarContainer::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+.progressBarContainer::-webkit-scrollbar-thumb {
+background-color: #212529;
+border-radius: 5px;
+}
+
+.progressBarContainer::-webkit-scrollbar-thumb:hover {
+background-color: #212529;
+}
+
+.progressBarContainer {
+scrollbar-width: thin;
+scrollbar-color: #212529 transparent;
+}
+
+.progressBarContainer:hover {
+scrollbar-color: #212529 #f8f9fa;
+}
+
 .progressBarLabelGreen{
     font-size: small;
     font-weight: bold;
