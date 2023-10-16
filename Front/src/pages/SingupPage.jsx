@@ -1,16 +1,16 @@
-// const apiUrl = process.env.API_URL;
 import useAppContext from "../../context/AppContext.jsx"
 import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import '../styles/loginLogout.css'
+import { sendUserInfo } from "../../utils/sendUserInfo.js";
 import { toast } from "react-toastify";
 
 export default function SignupPage() {
   const { store, actions } = useAppContext();
   const { user } = store;
-  const { setUser, sendUserInfo } = actions;
+  const { setUser } = actions;
   const [isChecked, setIsChecked] = useState(false);
-
+  const navigate = useNavigate(); 
  
 
   const handleCheckboxChange = () => {
@@ -31,7 +31,12 @@ export default function SignupPage() {
       toast("😊Por favor, acepta los términos y condiciones.");
       return;
     }
-    await sendUserInfo(e);
+    try {
+      await sendUserInfo(user);
+      navigate("/login");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
