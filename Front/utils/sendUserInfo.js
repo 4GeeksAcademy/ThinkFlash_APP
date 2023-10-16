@@ -1,28 +1,28 @@
+// import { toast } from 'react-toastify';
 // import { DataBaseURL } from "../constants";
-// import useAppContext from "../context/AppContext";
+// import useAppContext from '../context/AppContext';
 
-// export const sendUserInfo = async (e) => {
-//     const {store} = useAppContext();
+// export const sendUserInfo = async (e, navigate) => {
+//     const { store } = useAppContext();
 //     const { user } = store;
 
-//     e.preventDefault();
 //     const response = await fetch(`${DataBaseURL}/signup`, {
 //       method: "POST",
 //       headers: { "Content-Type": "application/json" },
 //       body: JSON.stringify(user)
 //     });
-    
+
 //     try {
 //       const data = await response.json();
-//       updateSessionStorage({token: data.token, username: data.username});
-      
 //       if (response.ok) {
-//         alert("Usuario creado exitosamente");
+//         toast("🦄 Usuario creado exitosamente!!");
+//         toast("✉️Confirme su email en su bandeja de entrada para hacer Login!!");
+//             navigate(`/login`);
 //       } else {
 //         if (data.error === "El usuario ya existe") {
-//           alert("El usuario ya existe. Por favor, elija otro nombre de usuario.");
+//           toast("🙅‍♀️El nombre o email ya existen. Por favor, elija otro nombre o email de usuario.");
 //         } else {
-//           alert("Error al crear el usuario. Por favor, inténtelo de nuevo más tarde.");
+//           toast("❌❌Error al crear el usuario. Por favor, inténtelo de nuevo más tarde.");
 //         }
 //       }
 //     } catch (error) {
