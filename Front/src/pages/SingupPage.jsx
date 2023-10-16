@@ -3,21 +3,15 @@ import useAppContext from "../../context/AppContext.jsx"
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import '../styles/loginLogout.css'
+import { toast } from "react-toastify";
 
 export default function SignupPage() {
   const { store, actions } = useAppContext();
-  const { user, token } = store;
+  const { user } = store;
   const { setUser, sendUserInfo } = actions;
-  const navigate = useNavigate();
   const [isChecked, setIsChecked] = useState(false);
 
-  useEffect(() => {
-    const tokenFromSessionStorage = sessionStorage.getItem("token");
-
-    if (tokenFromSessionStorage != undefined && tokenFromSessionStorage != "") {
-      navigate(`/${user.username}`);
-    }
-  }, [token, user.username]);
+ 
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -26,20 +20,20 @@ export default function SignupPage() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (user.username.trim() === '' || user.email.trim() === '' || user.password.trim() === '') {
-      alert("Por favor, complete todos los campos.");
+      toast("🥺Por favor, complete todos los campos.");
       return;
     }
     if (user.password.length < 8) {
-      alert("La contraseña debe tener al menos 8 caracteres.");
+      toast("😒La contraseña debe tener al menos 8 caracteres.");
       return;
     }
     if (!isChecked) {
-      alert("Por favor, acepta los términos y condiciones.");
+      toast("😊Por favor, acepta los términos y condiciones.");
       return;
     }
     await sendUserInfo(e);
-
   };
+
   return (
     <div className="mt-5">
       <h1 className="text-center">Sign Up</h1>
