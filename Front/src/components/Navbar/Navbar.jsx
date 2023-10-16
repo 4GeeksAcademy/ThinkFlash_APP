@@ -36,10 +36,10 @@ export default function Navbar() {
 
         <nav className="navbar navbar-expand-md navbar-dark bg-dark">
             <div className="container-fluid">
-                <Link to={token == "" || !token ? "/" : `/${username}`} className="navbar-brand ps-3 h-100">
+                <Link to={token == "" || !token ? "/" : `/${username}`} className="navbar-brand ps-3 h-100 d-flex">
                     <img src='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png' alt="Logo" width="auto" height="60px" />
+                    <p className="h4 text-white my-auto">Think Flash</p>
                 </Link>
-                <p className="h4 text-white ms-0 me-auto">Think Flash</p>
 
 
                 <button

@@ -1,6 +1,6 @@
-from app import app, db  # Import your SQLAlchemy instance
+from app import app, db  # Import your SQLAlchemy instance no
 import random
-from Back.src.models import User, Sponsor, Deck, Card, Fake_concepts, Fake_descriptions, Score_per_Card
+from Back.src.models import User, Sponsor, Deck, Card, Fake_concept, Fake_description, Score_per_Card
 
 
 def create_initial_data():
@@ -87,9 +87,23 @@ def create_initial_data():
                 print("No se ha podido crear las cartas", e)
 
         # Create some fake concepts and descriptions for cards
-        fake_concept1 = Fake_concepts(
+        try:
+
+                for i in range(1, 151):
+                        fake_concept=f"Fake Concept {i}"
+                        card_id= decks[(random_deck-1)].id
+                        fake_concept = Card(description=description, concept=concept, area=area, deck_id=deck_id)
+                        db.session.add(card)
+                        users.append(card)
+                        db.session.commit()
+
+        except Exception as e:
+                print("No se ha podido crear las cartas", e)
+
+
+        fake_concept1 = Fake_concept(
             fake_concept="Fake Concept 1", card_id=card1.id)
-        fake_concept2 = Fake_concepts(
+        fake_concept2 = Fake_concept(
             fake_concept="Fake Concept 2", card_id=card2.id)
         db.session.add(fake_concept1)
         db.session.add(fake_concept2)
