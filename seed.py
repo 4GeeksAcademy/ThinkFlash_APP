@@ -74,11 +74,13 @@ def create_initial_data():
                 for i in range(1, 51):
                         number_of_decks = len(decks)
                         random_deck = random.randint(1, (number_of_decks))
+                        print(number_of_decks)
+                        print(random_deck)
+
                         description=f"Card {i} Description"
                         concept=f"Card {i} Concept"
                         area= f"{decks[(random_deck-1)].area}"
-                        deck_id= decks[(random_deck-1)].id
-                        card = Card(description=description, concept=concept, area=area, deck_id=deck_id)
+                        card = Card(description=description, concept=concept, area=area)
                         db.session.add(card)
                         users.append(card)
                         db.session.commit()

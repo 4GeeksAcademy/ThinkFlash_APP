@@ -94,8 +94,8 @@ class Card(db.Model):
     description = db.Column(db.String(250), unique=False, nullable=False)
     concept = db.Column(db.String(250), unique=False, nullable=False)
     area = db.Column(db.String(120), unique=False, nullable=False)
-    fake_concepts= db.relationship('Fake_concepts', backref= db.backref('cards', lazy=True))
-    fake_descriptions= db.relationship('Fake_descriptions', backref= db.backref('cards', lazy=True))
+    fake_concepts= db.relationship('Fake_concept', backref= db.backref('cards', lazy=True))
+    fake_descriptions= db.relationship('Fake_description', backref= db.backref('cards', lazy=True))
     score = db.relationship('Score_per_Card', backref='card', lazy=True)
 
     def __repr__(self):
@@ -106,8 +106,7 @@ class Card(db.Model):
             "id": self.id,
             "description": self.description,
             "concept": self.concept,
-            "area": self.area,
-            "deck_id": self.deck_id
+            "area": self.area
         }
     
 
@@ -117,7 +116,7 @@ class Fake_concept(db.Model):
     card_id = db.Column(db.Integer, db.ForeignKey('card.id'), nullable = False)
 
     def __repr__(self):
-            return '<Fake_concepts %r>' % self.id
+            return '<Fake_concept %r>' % self.id
 
     def serialize(self):
         return {
@@ -132,7 +131,7 @@ class Fake_description(db.Model):
     card_id = db.Column(db.Integer, db.ForeignKey('card.id'), nullable = False)
 
     def __repr__(self):
-            return '<Deck %r>' % self.id
+            return '<Fake_description %r>' % self.id
 
     def serialize(self):
         return {
