@@ -1,0 +1,60 @@
+.progressBarContainer {
+   display: block;
+   width: 250px; 
+   height: 100px; 
+   overflow: auto; 
+}
+.progressBarContainer::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+.progressBarContainer::-webkit-scrollbar-thumb {
+background-color: #212529;
+border-radius: 5px;
+}
+
+.progressBarContainer::-webkit-scrollbar-thumb:hover {
+background-color: #212529;
+}
+
+.progressBarContainer {
+scrollbar-width: thin;
+scrollbar-color: #212529 transparent;
+}
+
+.progressBarContainer:hover {
+scrollbar-color: #212529 #f8f9fa;
+}
+
+.progressBarLabelGreen{
+    font-size: small;
+    font-weight: bold;
+    background-color: #4caf50;
+    border-radius: 5%;
+    border-width: 10px; 
+    margin-bottom: 2px;
+  
+}
+.progressBarLabelOrange{
+    font-size: small;
+    font-weight: bold;
+    background-color: #ff9800;
+    border-radius: 5%;
+    margin-bottom: 2px;
+ }
+ .progressBarLabelRed{
+    font-size: small;
+    font-weight: bold;
+    background-color:#f44336;
+    border-radius: 5%;
+   
+ }
+.progressBar {
+    margin-bottom: 3px; 
+    font-weight: bold;
+    font-size:small;
+}
+.additionalInfo {
+    max-width: 200px; 
+    text-align: center;
+}
