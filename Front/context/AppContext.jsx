@@ -22,7 +22,7 @@ export const AppContextProvider = ({ children }) => {
   const handleClickLoginWrapper = async (email, password) => {
     try {
       const data = await handleClickLogin(email, password);
-      updateSessionStorage({ token: data.token, username: data.username });
+      updateSessionStorage({ token: data.token, username: data.username, id: data.user_id });
       setUsername(data.username)
       setAvatar(data.avatar)
     } catch (error) {
@@ -30,11 +30,12 @@ export const AppContextProvider = ({ children }) => {
     }
   };
 
-  const updateSessionStorage = ({ token, username }) => {
+  const updateSessionStorage = ({ token, username, id }) => {
     setToken(token);
     sessionStorage.setItem("token", token);
     setUsername(username);
     sessionStorage.setItem("username", username)
+    sessionStorage.setItem("user_id", id)
   };
 
 
