@@ -1,5 +1,5 @@
-import GetProgress from '../../../utils/GetProgress';
-import GetImage from '../../../utils/GetImage';
+import GetProgress from './components/GetProgress';
+import GetImage from './components/GetImage';
 import React from 'react';
 
 
