@@ -100,7 +100,7 @@ def create_initial_data():
                         db.session.commit()
 
         except Exception as e:
-                print("No se ha podido crear las cartas", e)
+                print("No se ha podido crear las fake", e)
 
 
         fake_concept1 = Fake_concept(

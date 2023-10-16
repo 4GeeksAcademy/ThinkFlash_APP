@@ -9,8 +9,6 @@ export default function DeckGamePage() {
     const [activeButton, setActiveButton] = useState(null);
     const [cardSide, setCardSide] = useState("front");
 
-
-
     const handleButtonClick = (res) => {
         if (activeButton === null) {
             setActiveButton(res);
@@ -26,7 +24,9 @@ export default function DeckGamePage() {
         return ""
     }
 
-    chekLogNavigate()
+    
+
+    chekLogNavigate() 
 
     return (
 
