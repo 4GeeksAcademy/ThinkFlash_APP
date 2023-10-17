@@ -9,7 +9,7 @@ CORS(users)
 @users.route('/signup', methods=['POST'])
 def signup():
     data = request.get_json(force=True)
-    result = users_controllers.create_user_and_token(data)
+    result = users_controllers.create_user_and_send_email(data)
     return result
    
 @users.route('/login', methods=['POST', 'GET'])
