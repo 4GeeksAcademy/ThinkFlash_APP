@@ -63,7 +63,7 @@ def login_user(data):
 
     user = User.query.filter_by(email=email).first()
     
-    if user is None or user.password != password:
+    if user is None or user.password != password or not user.confirmed:
         return jsonify({"error": "Credenciales inválidas"}), 401
 
     access_token = create_access_token(identity=user.id)
