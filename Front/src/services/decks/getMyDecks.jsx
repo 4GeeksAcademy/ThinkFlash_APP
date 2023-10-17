@@ -1,7 +1,7 @@
 const DataBaseURL = import.meta.env.VITE_REACT_APP_API_URL;
 
-export default function getDecks() {
-  return fetch(`${DataBaseURL}/all_decks`)
+export default function getMyDecks() {
+  return fetch(`${DataBaseURL}/:username`)
     .then((res) => {
       if (!res.ok) {
         throw Error('Error fetch!!!');

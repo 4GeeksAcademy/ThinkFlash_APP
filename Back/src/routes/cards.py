@@ -11,3 +11,4 @@ def get_cards():
         return jsonify({"message": f'All cards accessed', "cards": [card.serialize() for card in cards]}), 200
     except Exception as e:
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
+    

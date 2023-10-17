@@ -19,10 +19,30 @@ def login():
    return result
 
 @users.route('/users', methods=['GET'])
-
 def get_users():
     try:
         users = User.query.all()
         return jsonify({"message": f'All users accessed', "users": [user.serialize() for user in users]}), 200
     except Exception as e:
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
+
+@users.route('/user/<int:user_id>/decks', methods=['GET'])
+def get_user_decks(user_id):
+    user = User.query.get(user_id)
+
+    if not user:
+        return jsonify({'message': 'Usuario no encontrado'}), 404
+
+    user_decks = user.decks
+
+    deck_list = []
+    for deck in user_decks:
+        deck_list.append({
+            'id': deck.id,
+            'theme': deck.theme,
+            'specialize': deck.specialize,
+            'area': deck.area,
+            'sponsor_id': deck.sponsor_id
+        })
+
+    return jsonify({'decks': deck_list}), 200
