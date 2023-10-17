@@ -9,9 +9,10 @@ export default function SignupPage() {
   const { store, actions } = useAppContext();
   const { user } = store;
   const { setUser } = actions;
+  const [isLoading, setIsLoading] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
-  const navigate = useNavigate(); 
- 
+  const navigate = useNavigate();
+
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -31,11 +32,19 @@ export default function SignupPage() {
       toast("😊Por favor, acepta los términos y condiciones.");
       return;
     }
+    setIsLoading(true);
     try {
-      await sendUserInfo(user);
-      navigate("/login");
+      const result = await sendUserInfo(user);
+      setIsLoading(false);
+      if (result === "OK") {
+        navigate("/infoSignup");
+      } else {
+        toast("❌❌Error al crear el usuario. Por favor, inténtelo de nuevo más tarde.");
+      }
     } catch (error) {
+      setIsLoading(false);
       console.error(error);
+      toast("❌❌Error al crear el usuario. Por favor, inténtelo de nuevo más tarde.");
     }
   };
 
@@ -88,8 +97,8 @@ export default function SignupPage() {
                 </label>
               </div>
               <div className="text-center">
-                <button type="submit" className="btn btn-dark mt-3">
-                  Sign Up
+                <button type="submit" className="btn btn-dark mt-3" disabled={isLoading}>
+                  {isLoading ? "Registrando..." : "Sign Up"}
                 </button>
               </div>
 
