@@ -34,6 +34,7 @@ class User(db.Model):
     username = db.Column(db.String(250), unique=True, nullable=False)
     password = db.Column(db.String(250), nullable=False)
     avatar = db.Column(db.String(500), nullable = True)
+    confirmed = db.Column(db.Boolean, default=False)
     decks= db.relationship('Deck', secondary='user_deck', lazy='subquery', backref= db.backref('users', lazy=True))
     academies = db.relationship('Sponsor', secondary='students', lazy='subquery', backref= db.backref('students', lazy=True))
     cards_score = db.relationship('Score_per_Card', backref='user', lazy=True)
@@ -47,7 +48,7 @@ class User(db.Model):
             "email": self.email,
             "username": self.username,
             "avatar": self.avatar,
-        
+            "confirmed": self.confirmed 
         }
     
 class Sponsor(db.Model):
