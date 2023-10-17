@@ -4,16 +4,18 @@ import random
 
 def create_initial_data():
     with app.app_context():
-        # Crea algunos usuarios
+
+        # Create some users
         users = []
-        user1 = User(email="user1@example.com", username="user1", password="password1", confirmed=True)
-        user2 = User(email="user2@example.com", username="user2", password="password2", confirmed=True)
-        user3 = User(email="user3@example.com", username="user3", password="password3", confirmed=True)
+        user1 = User(email="user1@example.com", username="user1", password="password1")
+        user2 = User(email="user2@example.com", username="user2", password="password2")
+        user3 = User(email="user3@example.com", username="user3", password="password3")
         db.session.add_all([user1, user2, user3])
         users.extend([user1, user2, user3])
         db.session.commit()
 
-        # Crea algunos patrocinadores
+
+        # Create some sponsors
         sponsor1 = Sponsor(name="Sponsor 1", logo="sponsor1.png", user_id=user1.id)
         sponsor2 = Sponsor(name="Sponsor 2", logo="sponsor2.png", user_id=user2.id)
         db.session.add(sponsor1)
@@ -48,25 +50,30 @@ def create_initial_data():
 
         # Genera 200 cartas (10 para cada uno de los 20 mazos)
         cards = []
+        active_cards=[]
         for deck in decks:
-            for _ in range(1, 11):
+            for i in range(1, 11):
                 try:
-                    description = f"Card Description for Deck {deck.id}"
-                    concept = f"Card Concept for Deck {deck.id}"
+                    description = f"Card {i} Description for Deck {deck.id}"
+                    concept = f"Card {i} Concept for Deck {deck.id}"
                     area = deck.area
                     card = Card(description=description, concept=concept, area=area)
+                    
                     cards.append(card)
                     db.session.add(card)
                     db.session.commit()
                 except Exception as e:
                     print("No se ha podido crear las cards", e)
-
+                
+                # Crear la relación entre carta y deck.
                 card_deck_association = card_deck.insert().values(card_id=card.id, deck_id=deck.id)
-                db.session.execute(card_deck_association)
-
-        db.session.commit()
-
-        # Crea algunos conceptos y descripciones falsas para las cartas
+                active_cards.append(card.id)
+                
+                db.session.connection().execute(card_deck_association)
+            print(active_cards)
+        
+        
+        # Create some fake concepts and descriptions for the cards
         for card in cards:
             fake_concept = Fake_concept(concept=f"Fake Concept for {card.id}", card_id=card.id)
             fake_description = Fake_description(description=f"Fake Description for {card.id}", card_id=card.id)
@@ -74,13 +81,25 @@ def create_initial_data():
             db.session.add(fake_description)
         db.session.commit()
 
-        # Crea algunas puntuaciones para las cartas
-        for user in users:
-            for deck in user_decks[user.id]:
-                deck_cards = [card.id for card in cards if deck.id in [deck.id for deck in card.decks]]
-                for card_id in deck_cards:
-                    score = Score_per_Card(user_id=user.id, card_id=card_id, score=random.randint(1, 4))
-                    db.session.add(score)
+       
+        # Create some scores for the cards
+
+        # for deck_id in user_decks:
+        #     for card in cards:
+        #         if card.deck == deck_id
+        #     score = Score_per_Card(user=user, card=card,  score=random.randint(1,4))
+        #     db.session.add(score)
+        # db.session.commit()
+
+
+
+
+        # # Add students to the students table using SQLAlchemy Core
+        # student1 = students.insert().values(student_id=user1.id, academy_id=sponsor1.id)
+        # student2 = students.insert().values(student_id=user2.id, academy_id=sponsor2.id)
+        # # Execute the insert statements
+        # db.session.execute(student1)
+        # db.session.execute(student2)
         db.session.commit()
 
 if __name__ == "__main__":
