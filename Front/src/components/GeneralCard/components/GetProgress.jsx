@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import "../src/styles/getProgress.css";
+import "../../../styles/getProgress.css"
 
 
 const GetProgress = ({ progress }) => {

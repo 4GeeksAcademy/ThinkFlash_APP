@@ -1,7 +1,20 @@
-import { allDecksData } from "../alldecks";
+import getDecks from "../services/decks/getDecks";
 import chekLogNavigate from "../../utils/checkLogNavigate";
+import { useEffect, useState } from "react";
 
 export default function AllDecksPage() {
+  const [allDecksData, setAllDecksData] = useState([])
+
+  useEffect(() => {
+    getDecks()
+      .then((res) => {
+        setAllDecksData(res.decks);
+      })
+      .catch((error) => {
+        console.error('Error fetching decks:', error);
+      });
+  }, []);
+    
     const decksByArea = allDecksData.reduce((acc, deck) => {
       if (!acc[deck.area]) {
         acc[deck.area] = [];
@@ -10,8 +23,8 @@ export default function AllDecksPage() {
       return acc;
     }, {});
 
-    chekLogNavigate()
-    
+    chekLogNavigate();
+     
     return (
       <>
         {Object.entries(decksByArea).map(([area, decks]) => (

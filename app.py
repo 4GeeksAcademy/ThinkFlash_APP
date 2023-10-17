@@ -6,7 +6,6 @@ from Back.src.routes.decks import decks
 from Back.src.routes.cards import cards
 from Back.src.routes.sponsors import sponsors
 from flask_migrate import Migrate
-from flask_migrate import Migrate
 from Back.src.models import db, User, Deck, Card
 from flask_cors import CORS 
 from flask_jwt_extended import JWTManager
