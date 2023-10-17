@@ -2,12 +2,42 @@ from flask import request, jsonify
 from ..models import db, User
 from ..utils import APIException
 from flask_jwt_extended import create_access_token, get_jwt_identity, get_jwt_identity
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from decouple import config
 
+FRONT_URL = config('FRONT_URL')
 
-def create_user_and_token(data):
-    # data = request.get_json()
+def send_email(to_email, user_id, username):
+
+    from_email= "think_flash@outlook.com"
+    password = "thinkflash45"
+    subject = "Welcome to ThinkFlash"
+    body=  f"""
+    Hola {username}, gracias por registrarse.😊 Por favor, confirme su email en este enlace:
+
+    {FRONT_URL}/user/{user_id}.
+
+    Atentamente el equipo ThinkFlash."""
+
+    message = MIMEMultipart()
+    message["From"] = from_email
+    message["To"] = to_email
+    message["Subject"] = subject
+    message.attach(MIMEText(body, "plain"))
+
+    server = smtplib.SMTP("smtp-mail.outlook.com", 587)
+    server.starttls()
+    server.login(from_email, password)
+
+    server.sendmail(from_email, to_email, message.as_string())
+
+    server.quit()
+
     
-    # data = request.get_json(force=True)
+
+def create_user_and_send_email(data):
     email = data.get('email')
     username = data.get('username')
     password = data.get('password')
@@ -23,6 +53,8 @@ def create_user_and_token(data):
     db.session.add(new_user)
     db.session.commit()
 
+    send_email(email, new_user.id, username)
+
     
     access_token = create_access_token(identity=new_user.id)
 
@@ -34,7 +66,7 @@ def login_user(data):
 
     user = User.query.filter_by(email=email).first()
     
-    if user is None or user.password != password:
+    if user is None or user.password != password or not user.confirmed:
         return jsonify({"error": "Credenciales inválidas"}), 401
 
     access_token = create_access_token(identity=user.id)

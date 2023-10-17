@@ -18,4 +18,5 @@ To start the Backend, follow these steps:
 7. Initialize the database: ```$ pipenv run flask db init``` (This creates the 'instance' folder inside 'src', where the 'project.sqlite' database file and 'migrations' folder are located).
 8. Run migrations: ```$ pipenv run migrate``` (see Pipfile [scripts] for more details, you can add a message as a comment if needed, e.g., ```$ pipenv run flask migrate -m "message"```).
 9. Apply migrations: ```$ pipenv run upgrade``` (This makes the modifications effective, see Pipfile [scripts] for more details).
+10. To reset the database and to load the testing data: ```$ pipenv run reset_db```
 

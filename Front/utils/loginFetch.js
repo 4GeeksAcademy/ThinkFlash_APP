@@ -19,7 +19,7 @@ export const handleClickLogin = async (email, password) => {
       const data = await response.json();
       return data;
     } else if (response.status === 401) {
-      toast.error("🙅‍♀️🙅‍♀️🤦‍♂️🤯Credenciales inválidas. Por favor, verifica tu correo electrónico y contraseña.");
+      toast.error("🙅‍♀️🙅‍♀️🤦‍♂️🤯Credenciales inválidas o email no confirmado. Por favor, verifica tu correo electrónico y contraseña");
       return null; 
     } else {
       throw new Error("Error in loginfetch");
