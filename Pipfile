@@ -12,6 +12,7 @@ flask-cors = "*"
 python-dotenv = "*"
 migrate = "*"
 mysql = "*"
+python-decouple = "*"
 
 [dev-packages]
 

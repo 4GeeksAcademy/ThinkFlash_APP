@@ -11,7 +11,8 @@ import DashboardPage from '../pages/DashboardPage.jsx';
 import AllDecksPage from '../pages/AllDecksPage.jsx'
 import MyDecksPage from '../pages/MyDecksPage.jsx'
 import DeckGamePage from '../pages/DeckGamePage';
-
+import ConfirmUser from '../pages/ConfirmUser.jsx';
+import InfoSignUp from '../pages/InfoSignup.jsx'
 
 const Router = () => {
     return (
@@ -40,6 +41,8 @@ const Router = () => {
                     <Route path="/:username/alldecks" element={<AllDecksPage />} />
                     <Route path="/:username/mydecks" element={<MyDecksPage />} />
                     <Route path="/:username/:deck" element={<DeckGamePage />} />
+                    <Route path="/user/:user_id" element={<ConfirmUser />} />
+                    <Route path="/infoSignup" element={<InfoSignUp />} />
                 </Routes>
             </AppContextProvider>
         </BrowserRouter>

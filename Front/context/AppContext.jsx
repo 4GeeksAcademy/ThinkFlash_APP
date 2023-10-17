@@ -6,6 +6,7 @@ export const AppContextProvider = ({ children }) => {
   const [token, setToken] = useState(sessionStorage.getItem("token") || "");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [id, setUserID] = useState("");
   const [email, setEmail] = useState("");
   const [avatar, setAvatar] = useState("https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded_nologo/36243334/36243334-1672676117894-fb369f088856b.jpg")
   const [user, setUser] = useState({
@@ -17,6 +18,7 @@ export const AppContextProvider = ({ children }) => {
   useEffect(() => {
     setToken(sessionStorage.getItem("token") || "")
     setUsername(sessionStorage.getItem("username") || "")
+    setUserID(sessionStorage.getItem("userID") || "")
   }, [])
 
   const handleClickLoginWrapper = async (email, password) => {
@@ -25,6 +27,7 @@ export const AppContextProvider = ({ children }) => {
       updateSessionStorage({ token: data.token, username: data.username, id: data.user_id });
       setUsername(data.username)
       setAvatar(data.avatar)
+      setUserID(data.user_id)
     } catch (error) {
       console.error("Error fetching login", error);
     }
@@ -45,7 +48,8 @@ export const AppContextProvider = ({ children }) => {
     password,
     user,
     avatar,
-    email
+    email,
+    id
   };
 
   const actions = {
@@ -54,7 +58,7 @@ export const AppContextProvider = ({ children }) => {
     setPassword,
     setUsername,
     setUser,
-    setEmail
+    setEmail,
   };
 
   return <AppContext.Provider value={{ store, actions }}>{children}</AppContext.Provider>;
