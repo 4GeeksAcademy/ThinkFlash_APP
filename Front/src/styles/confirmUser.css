@@ -1,0 +1,21 @@
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.pulsating-heart {
+    animation: heartbeat 1.5s infinite;
+}
+
+.rounded-button {
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.rounded-button:hover {
+    background-color: #333;
+}

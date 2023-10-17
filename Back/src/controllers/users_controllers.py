@@ -6,12 +6,17 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-def send_email(to_email):
+def send_email(to_email, user_id, username):
 
     from_email= "think_flash@outlook.com"
     password = "thinkflash45"
     subject = "Welcome to ThinkFlash"
-    body= "Hola, gracias por registrase. Confirme su email porfavor. Atentamente el equipo ThinkFlash."
+    body=  f"""
+    Hola {username}, gracias por registrarse.😊 Por favor, confirme su email en este enlace:
+
+    https://silver-space-potato-7gwxw5797pg2pqj4-5173.app.github.dev/user/{user_id}.
+
+    Atentamente el equipo ThinkFlash."""
 
     message = MIMEMultipart()
     message["From"] = from_email
@@ -45,7 +50,7 @@ def create_user_and_send_email(data):
     db.session.add(new_user)
     db.session.commit()
 
-    send_email(email)
+    send_email(email, new_user.id, username)
 
     
     access_token = create_access_token(identity=new_user.id)
