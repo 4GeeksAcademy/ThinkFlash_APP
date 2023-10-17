@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import CORS 
 from ..controllers import users_controllers
-from ..models import db, User
+from ..models import db, User, Deck
 
 users =Blueprint('users', __name__)
 CORS(users)
@@ -39,3 +39,22 @@ def confirm_user(user_id):
             return jsonify({"error": "Usuario no encontrado"}), 404
     except Exception as e:
         return jsonify({"error": f"Error al confirmar el usuario: {str(e)}"}), 500
+
+@users.route('/users/add_deck/<int:user_id>/<int:deck_id>', methods=['POST'])
+def add_deck_to_user(user_id, deck_id):
+    try:
+        user = User.query.get(user_id)
+        deck = Deck.query.get(deck_id)
+
+        if user is None:
+            return jsonify({'error': f'User with ID {user_id} not found'}), 404
+
+        if deck is None:
+            return jsonify({'error': f'Deck with ID {deck_id} not found'}), 404
+
+        user.decks.append(deck)
+        db.session.commit()
+
+        return jsonify({'message': f'Deck {deck_id} added to user {user_id}'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500

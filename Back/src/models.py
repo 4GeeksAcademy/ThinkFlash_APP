@@ -48,7 +48,8 @@ class User(db.Model):
             "email": self.email,
             "username": self.username,
             "avatar": self.avatar,
-            "confirmed": self.confirmed 
+            "confirmed": self.confirmed,
+            "decks": [deck.serialize() for deck in self.decks]
         }
     
 class Sponsor(db.Model):

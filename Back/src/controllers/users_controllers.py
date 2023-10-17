@@ -5,6 +5,9 @@ from flask_jwt_extended import create_access_token, get_jwt_identity, get_jwt_id
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from decouple import config
+
+FRONT_URL = config('FRONT_URL')
 
 def send_email(to_email, user_id, username):
 
@@ -14,7 +17,7 @@ def send_email(to_email, user_id, username):
     body=  f"""
     Hola {username}, gracias por registrarse.😊 Por favor, confirme su email en este enlace:
 
-    https://silver-space-potato-7gwxw5797pg2pqj4-5173.app.github.dev/user/{user_id}.
+    {FRONT_URL}/user/{user_id}.
 
     Atentamente el equipo ThinkFlash."""
 
