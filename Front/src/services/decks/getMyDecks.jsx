@@ -1,7 +1,9 @@
 const DataBaseURL = import.meta.env.VITE_REACT_APP_API_URL;
+// import {useAppContext} from "../../../context/AppContext";
 
-export default function getMyDecks() {
-  return fetch(`${DataBaseURL}/:username`)
+export default function getMyDecks(user_id) {
+    // const { store } = useAppContext();
+  return fetch(`${DataBaseURL}/users/${user_id}`)
     .then((res) => {
       if (!res.ok) {
         throw Error('Error fetch!!!');
@@ -13,4 +15,4 @@ export default function getMyDecks() {
       return data;
     })
     .catch((err) => console.log(err));
-  }
+}
