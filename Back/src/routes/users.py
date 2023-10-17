@@ -58,3 +58,17 @@ def add_deck_to_user(user_id, deck_id):
         return jsonify({'message': f'Deck {deck_id} added to user {user_id}'})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@users.route('/users/<int:user_id>', methods=['GET'])
+def my_decks(user_id):
+    try:
+        user = User.query.get(user_id)
+
+        if user is None:
+            return jsonify({'error': f'User with ID {user_id} not found'}), 404
+
+        decks = [deck.serialize() for deck in user.decks]
+
+        return jsonify({'decks': decks})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500

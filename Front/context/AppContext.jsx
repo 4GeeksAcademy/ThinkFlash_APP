@@ -18,7 +18,7 @@ export const AppContextProvider = ({ children }) => {
   useEffect(() => {
     setToken(sessionStorage.getItem("token") || "")
     setUsername(sessionStorage.getItem("username") || "")
-    setUserID(sessionStorage.getItem("userID") || "")
+    setUserID(sessionStorage.getItem("user_id") || "")
   }, [])
 
   const handleClickLoginWrapper = async (email, password) => {
