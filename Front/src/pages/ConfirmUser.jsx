@@ -24,6 +24,7 @@ export default function ConfirmUser() {
             if (response.ok) {
                 toast('✅😊😁 Usuario confirmado, puede hacer Login y empezar a aprender!!!');
                 console.log('Usuario confirmado correctamente');
+                navigate("/login")
             } else {
                 toast('🥺Error al confirmar el usuario!');
                 console.error('Error al confirmar usuario');
