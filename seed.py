@@ -1,6 +1,7 @@
 from app import app, db
 from Back.src.models import User, Sponsor, Deck, Card, Fake_concept, Fake_description, Score_per_Card, card_deck, user_deck
 import random
+from flask_bcrypt import Bcrypt as bcrypt
 
 def create_initial_data():
     with app.app_context():
