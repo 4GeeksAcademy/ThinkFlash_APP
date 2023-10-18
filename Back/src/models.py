@@ -36,7 +36,8 @@ class User(db.Model):
     avatar = db.Column(db.String(500), nullable = True)
     confirmed = db.Column(db.Boolean, default=False)
     decks= db.relationship('Deck', secondary='user_deck', lazy='subquery', backref= db.backref('users', lazy=True))
-    academies = db.relationship('Sponsor', secondary='students', lazy='subquery', backref= db.backref('students', lazy=True))
+    # sponsor= db.relationship('Sponsor', lazy='subquery', backref= db.backref('user', lazy=True))
+    academies = db.relationship('Sponsor', secondary='students', lazy='subquery', backref= db.backref('users', lazy=True))
     cards_score = db.relationship('Score_per_Card', backref='user', lazy=True)
 
     def __repr__(self):

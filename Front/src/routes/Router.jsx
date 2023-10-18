@@ -42,7 +42,7 @@ const Router = () => {
                     <Route path="/:username" element={<DashboardPage />} />
                     <Route path="/:username/alldecks" element={<AllDecksPage />} />
                     <Route path="/:username/mydecks" element={<MyDecksPage />} />
-                    <Route path="/:username/:deck" element={<DeckGamePage />} />
+                    <Route path="/:username/:deck_id" element={<DeckGamePage />} />
                     <Route path="/user/:user_id" element={<ConfirmUser />} />
                     <Route path="/infoSignup" element={<InfoSignUp />} />
                     <Route path="/recoveryEmail" element={<RecoveryEmail />} />
