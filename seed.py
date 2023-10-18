@@ -49,10 +49,10 @@ def create_initial_data():
         # Genera 200 cartas (10 para cada uno de los 20 mazos)
         cards = []
         for deck in decks:
-            for _ in range(1, 11):
+            for i in range(1, 11):
                 try:
-                    description = f"Card Description for Deck {deck.id}"
-                    concept = f"Card Concept for Deck {deck.id}"
+                    description = f"Card Description {i} for Deck {deck.id}"
+                    concept = f"Card Concept {i} for Deck {deck.id}"
                     area = deck.area
                     card = Card(description=description, concept=concept, area=area)
                     cards.append(card)
