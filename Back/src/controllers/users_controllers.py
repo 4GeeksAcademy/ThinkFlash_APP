@@ -80,3 +80,61 @@ def login_user(data):
         "user_id": user.id,
         "username": user.username
     })
+
+def send_recovery_email(to_email, user_id, username):
+
+    from_email= "think_flash@outlook.com"
+    password = "thinkflash45"
+    subject = "Recovery ThinkFlash Password"
+    body=  f"""
+    Hola {username}, puede cambiar su contraseña aquí.😊 Por favor, siga este enlace:
+
+    {FRONT_URL}/recoveryPassword/{user_id}.
+
+    Atentamente el equipo ThinkFlash."""
+    message = MIMEMultipart()
+    message["From"] = from_email
+    message["To"] = to_email
+    message["Subject"] = subject
+    message.attach(MIMEText(body, "plain"))
+
+    server = smtplib.SMTP("smtp-mail.outlook.com", 587)
+    server.starttls()
+    server.login(from_email, password)
+
+    server.sendmail(from_email, to_email, message.as_string())
+
+    server.quit()
+
+def recovery_password(data):
+    try:
+        email = data.get('email')
+        new_password = data.get('password')
+        user = User.query.filter_by(email=email).first()
+        hashed_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
+        if user:
+            user.password = hashed_password
+            db.session.commit()
+            return jsonify({"message": "Usuario confirmado exitosamente"}), 200
+        else:
+            return jsonify({"error": "Usuario no encontrado"}), 404
+    except Exception as e:
+        return jsonify({"error": f"Error al confirmar el usuario: {str(e)}"}), 500
+
+# def send_recovery_email_route(data):
+#     try:
+#         to_email = data.get('email')
+#         print("email", email)
+#         user = User.query.filter_by(email=to_email).first()
+#         print("user", user)
+
+#         if user:
+#             user_id = user.id
+#             username = user.username
+#             send_recovery_email(to_email, user_id, username)
+#             return jsonify({"message": "Email sent successfully"}), 200
+#         else:
+#             return jsonify({"error": "User not found"}), 404
+
+#     except Exception as e:
+#         return jsonify({"error": f"Error sending email: {str(e)}"}), 500
