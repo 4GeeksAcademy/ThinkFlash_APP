@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import GeneralCard from "../components/GeneralCard/GeneralCard";
+import changeCardScore from "../services/cards/changeCardScore";
 import useAppContext from "../../context/AppContext";
 import chekLogNavigate from "../../utils/checkLogNavigate";
 import getDeckCards from "../services/cards/getDeckCards";
@@ -15,6 +16,7 @@ export default function DeckGamePage() {
     const [bodyCard, setBodyCard] = useState("");
     const [solutions, setSolutions] = useState([]);
     const [correctSolution, setCorrectSolution] = useState("");
+    const [cardId, setCardId] = useState("")
     const [isLoading, setIsLoading] = useState(true);
     const [activeButtonIndex, setActiveButtonIndex] = useState(null);
     const { store } = useAppContext();
@@ -68,6 +70,7 @@ export default function DeckGamePage() {
                     selectedCard.fake_concepts[2]
                 ]);
                 setCorrectSolution(selectedCard.concept);
+                setCardId(selectedCard.id)
             } else {
                 if (getRandomInt(10) <= 6) {
                     selectedCard = toLearnCardList[getRandomInt(toLearnCardList.length)];
@@ -84,6 +87,7 @@ export default function DeckGamePage() {
                     selectedCard.fake_descriptions[2]
                 ]);
                 setCorrectSolution(selectedCard.description);
+                setCardId(selectedCard.id)
             }
             setActiveButtonIndex(null);
         }
@@ -100,14 +104,15 @@ export default function DeckGamePage() {
         setSolutions(randomizedSolutions);
     };
 
-    const handleButtonClick = (index) => {
+    const handleButtonClick = ({index, card_id}) => {
         if (activeButtonIndex === null) {
             setActiveButtonIndex(index);
             const selectedSolution = solutions[index];
             if (selectedSolution === correctSolution) {
-                // La solución seleccionada es correcta
+                changeCardScore({user_id:id, deck_id:deck_id, card_id:card_id, operation:"sum"})
+                
             } else {
-                // La solución seleccionada es incorrecta
+                changeCardScore({user_id:id, deck_id:deck_id, card_id:card_id, operation:"subs"})
             }
         }
     };
@@ -169,7 +174,7 @@ export default function DeckGamePage() {
                                                 : ""
                                             : ""
                                     }`}
-                                    onClick={() => handleButtonClick(index)}
+                                    onClick={() => handleButtonClick({index:index, card_id:cardId})}
                                 >
                                     {solution}
                                 </button>
