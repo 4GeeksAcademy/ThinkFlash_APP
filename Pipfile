@@ -13,6 +13,7 @@ python-dotenv = "*"
 migrate = "*"
 mysql = "*"
 python-decouple = "*"
+flask-bcrypt = "*"
 
 [dev-packages]
 

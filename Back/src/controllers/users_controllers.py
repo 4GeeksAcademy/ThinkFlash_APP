@@ -6,7 +6,9 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from decouple import config
+from flask_bcrypt import Bcrypt
 
+bcrypt = Bcrypt()
 FRONT_URL = config('FRONT_URL')
 
 def send_email(to_email, user_id, username):
@@ -48,8 +50,10 @@ def create_user_and_send_email(data):
     existing_user_by_email = User.query.filter_by(email=email).first()
     if existing_user_by_email or existing_user_by_username:
         return jsonify({"error": "El usuario ya existe"}), 400
+    
+    hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
-    new_user = User(email=email, password=password, username = username)
+    new_user = User(email=email, password=hashed_password, username = username)
     db.session.add(new_user)
     db.session.commit()
 
@@ -66,7 +70,7 @@ def login_user(data):
 
     user = User.query.filter_by(email=email).first()
     
-    if user is None or user.password != password or not user.confirmed:
+    if user is None or not bcrypt.check_password_hash(user.password, password) or not user.confirmed:
         return jsonify({"error": "Credenciales inválidas"}), 401
 
     access_token = create_access_token(identity=user.id)
