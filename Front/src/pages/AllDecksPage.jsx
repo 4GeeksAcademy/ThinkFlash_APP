@@ -2,20 +2,17 @@ import getDecks from "../services/decks/getDecks";
 import getDMyDecks from "../services/decks/getMyDecks";
 import chekLogNavigate from "../../utils/checkLogNavigate";
 import { useEffect, useState } from "react";
-import useAppContext from "../../context/AppContext";
 import '../styles/allDecksActivation.css';
 const DataBaseURL = import.meta.env.VITE_REACT_APP_API_URL;
 
 export default function AllDecksPage() {
-  // const { store } = useAppContext();
-  const [userId, setUserId] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
+  const [userId, setUserId] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [userDecks, setUserDecks] = useState([]);
   const [allDecksData, setAllDecksData] = useState([]);
-  console.log('Hello', userId)
+  const [decksToShow, setDecksToShow] = useState([]);
+  const [activatedCards, setActivatedCards] = useState([]);
 
-  const [userDecks, setUserDecks] = useState([])
-
-  
   useEffect(() => {
     setUserId(sessionStorage.getItem("user_id"));
 
@@ -23,19 +20,16 @@ export default function AllDecksPage() {
       .then(([userDecksResponse, allDecksResponse]) => {
         setUserDecks(userDecksResponse.decks);
         setAllDecksData(allDecksResponse.decks);
+        const myDeckIds = userDecksResponse.decks.map((deck) => deck.id);
+        setDecksToShow(allDecksResponse.decks.filter((deck) => !myDeckIds.includes(deck.id)));
       })
       .catch((error) => {
         console.error('Error fetching decks:', error);
       })
       .finally(() => {
-        setIsLoading(false); // Set loading to false whether there was an error or not
+        setIsLoading(false);
       });
   }, [userId]);
-
-  console.log(userDecks)
-  
-  // const myDecksIds = 
-  // const allDecksIds = 
 
   const handleClickActive = async (user_id, deck_id) => {
     try {
@@ -47,10 +41,19 @@ export default function AllDecksPage() {
       });
 
       if (response.ok) {
-        // Handle successful activation
+        
         console.log(`Deck ${deck_id} activated`);
+        setActivatedCards([...activatedCards, deck_id]);
+        
+        
+        setTimeout(() => {
+          setActivatedCards(activatedCards.filter((id) => id !== deck_id));
+          
+          
+          setDecksToShow(decksToShow.filter((deck) => deck.id !== deck_id));
+        }, 2000);
       } else {
-        // Handle activation failure
+        
         console.error(`Error activating deck ${deck_id}`);
       }
     } catch (error) {
@@ -59,24 +62,19 @@ export default function AllDecksPage() {
   };
 
   chekLogNavigate();
-  
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
- // Find the IDs of decks in userDecks
- const myDeckIds = userDecks.map((deck) => deck.id);
 
- // Filter the decks that are not in myDecks
- const filteredDecks = allDecksData.filter((deck) => !myDeckIds.includes(deck.id));
+  const decksByArea = decksToShow.reduce((acc, deck) => {
+    if (!acc[deck.area]) {
+      acc[deck.area] = [];
+    }
+    acc[deck.area].push(deck);
+    return acc;
+  }, {});
 
- const decksByArea = filteredDecks.reduce((acc, deck) => {
-  if (!acc[deck.area]) {
-    acc[deck.area] = [];
-  }
-  acc[deck.area].push(deck);
-  return acc;
-}, {});
-    
   return (
     <>
       {Object.entries(decksByArea).map(([area, decks]) => (
@@ -85,7 +83,7 @@ export default function AllDecksPage() {
           <div className="decks-container">
             {decks.map((deck) => (
               <div key={deck.id} className="deck">
-                <div className="card" style={{ width: "18rem" }}>
+                <div className={`card ${activatedCards.includes(deck.id) ? 'activated' : ''}`} style={{ width: "18rem" }}>
                   <img
                     className="card-img-top p-2 rounded"
                     src="https://placehold.co/600x400"
@@ -98,7 +96,7 @@ export default function AllDecksPage() {
                     </p>
                     <div className="justify-content-center d-flex">
                       <button className="btn btn-primary justify-content-center  w-100" onClick={() => handleClickActive(userId, deck.id)}>
-                        Activate
+                        {activatedCards.includes(deck.id) ? 'Deck Activated!' : 'Activate'}
                       </button>
                     </div>
                   </div>

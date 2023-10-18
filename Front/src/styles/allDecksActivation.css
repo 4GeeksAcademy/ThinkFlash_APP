@@ -1,0 +1,9 @@
+/* Define the transition for background color and opacity */
+.card {
+    transition: background-color 0.5s ease, opacity 0.5s ease;
+  }
+  
+  .card.activated {
+    background-color: green;
+    opacity: 0.7;
+  }
