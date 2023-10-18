@@ -1,8 +1,6 @@
 const DataBaseURL = import.meta.env.VITE_REACT_APP_API_URL;
-// import {useAppContext} from "../../../context/AppContext";
 
-export default function getMyDecks(user_id) {
-    // const { store } = useAppContext();
+export default function getDeckCards(deck_id) {
   return fetch(`${DataBaseURL}/users/${user_id}/decks`)
     .then((res) => {
       if (!res.ok) {

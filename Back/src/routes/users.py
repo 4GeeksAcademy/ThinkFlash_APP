@@ -79,6 +79,7 @@ def get_user_decks(user_id):
         })
 
     return jsonify({'decks': deck_list}), 200
+
 @users.route('/users/<int:user_id>', methods=['GET'])
 def my_decks(user_id):
     try:

@@ -16,7 +16,7 @@ export default function DashboardPage() {
   const [deckList, setDeckList] = useState([]);
   //const [isLoading, setIsLoading] = useState(true);
   const { store } = useAppContext();
-  const { username } = store;
+  const { username, id } = store;
 
   const progress = { //hardcodeado
     learned: 70, 
@@ -24,20 +24,15 @@ export default function DashboardPage() {
     toLearn: 20
   }
 
-
-  // useEffect(() => {
-  //   const data = getDecksData()
-  //   setDeckList(data)
-  // }, [])
-  useEffect(()=>{
-    const data = getMyDecks()      
-    .then((res) => {
-      setAllDecksData(res.decks);
-    })
-    .catch((error) => {
-      console.error('Error fetching decks:', error);
-    });
-  }, [])
+  useEffect(() => {
+    getMyDecks(id)
+      .then((res) => {
+        setDeckList(res.decks);
+      })
+      .catch((error) => {
+        console.error("Error fetching decks:", error);
+      });
+  }, [id]);
 
   const getDecksAreas = () => {
     const Areas = [...new Set(deckList.map(objeto => objeto.area))];
