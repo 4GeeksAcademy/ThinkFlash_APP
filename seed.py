@@ -1,13 +1,14 @@
 from app import app, db  # Import your SQLAlchemy instance
 from Back.src.models import User, Sponsor, Deck, Card, Fake_concept, Fake_description, Score_per_Card, students, card_deck
 import random
+from flask_bcrypt import Bcrypt as bcrypt
 
 def create_initial_data():
     # Create some users
     with app.app_context():
-        user1 = User(email="user1@example.com", username="user1", password="password1")
-        user2 = User(email="user2@example.com", username="user2", password="password2")
-        user3 = User(email="user3@example.com", username="user3", password="password3")
+        user1 = User(email="user1@example.com", username="user1", password="password1", confirmed = True)
+        user2 = User(email="user2@example.com", username="user2", password="password2", confirmed = True)
+        user3 = User(email="user3@example.com", username="user3", password="password3", confirmed = True)
         
         db.session.add(user1)
         db.session.add(user2)
