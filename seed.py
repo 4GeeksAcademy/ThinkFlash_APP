@@ -6,9 +6,9 @@ def create_initial_data():
     with app.app_context():
         # Crea algunos usuarios
         users = []
-        user1 = User(email="user1@example.com", username="user1", password="password1")
-        user2 = User(email="user2@example.com", username="user2", password="password2")
-        user3 = User(email="user3@example.com", username="user3", password="password3")
+        user1 = User(email="user1@example.com", username="user1", password="password1", confirmed=True)
+        user2 = User(email="user2@example.com", username="user2", password="password2", confirmed=True)
+        user3 = User(email="user3@example.com", username="user3", password="password3", confirmed=True)
         db.session.add_all([user1, user2, user3])
         users.extend([user1, user2, user3])
         db.session.commit()

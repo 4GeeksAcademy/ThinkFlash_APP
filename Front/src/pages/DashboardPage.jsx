@@ -4,6 +4,7 @@ import chekLogNavigate from "../../utils/checkLogNavigate"
 import getDecks from "../services/decks/getDecks"
 import { allDecksData } from "../../constants"
 import "../../style.css"
+import getMyDecks from "../services/decks/getMyDecks"
 import useAppContext from "../../context/AppContext"
 
 import { useState, useEffect } from "react"
@@ -23,14 +24,19 @@ export default function DashboardPage() {
     toLearn: 20
   }
 
-  const getDecksData = () => { 
-    const data = allDecksData
-    return data
-  }
 
-  useEffect(() => {
-    const data = getDecksData()
-    setDeckList(data)
+  // useEffect(() => {
+  //   const data = getDecksData()
+  //   setDeckList(data)
+  // }, [])
+  useEffect(()=>{
+    const data = getMyDecks()      
+    .then((res) => {
+      setAllDecksData(res.decks);
+    })
+    .catch((error) => {
+      console.error('Error fetching decks:', error);
+    });
   }, [])
 
   const getDecksAreas = () => {
