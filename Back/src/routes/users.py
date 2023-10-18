@@ -40,6 +40,31 @@ def confirm_user(user_id):
     except Exception as e:
         return jsonify({"error": f"Error al confirmar el usuario: {str(e)}"}), 500
 
+@users.route('/users/recovery_email', methods=['POST'])
+def send_recovery_email_route():
+    try:
+        data = request.get_json(force=True)
+        to_email = data.get('email')
+        user = User.query.filter_by(email=to_email).first()
+        if user:
+            user_id = user.id
+            username = user.username
+            users_controllers.send_recovery_email(to_email, user_id, username)
+            return jsonify({"message": "Email sent successfully"}), 200
+        else:
+            return jsonify({"error": "User not found"}), 404
+
+    except Exception as e:
+        return jsonify({"error": f"Error sending email: {str(e)}"}), 500
+
+@users.route('/users/recovery_password', methods=['PATCH'])
+def recovery():
+    data = request.get_json(force=True)
+    result = users_controllers.recovery_password(data)
+    return result
+
+
+
 @users.route('/users/add_deck/<int:user_id>/<int:deck_id>', methods=['POST'])
 def add_deck_to_user(user_id, deck_id):
     try:

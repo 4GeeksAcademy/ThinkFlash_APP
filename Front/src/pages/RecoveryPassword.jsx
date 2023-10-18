@@ -1,36 +1,52 @@
-
-// const apiUrl = process.env.API_URL
 import useAppContext from "../../context/AppContext.jsx"
 import { useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
 import { Link } from 'react-router-dom';
+import { toast } from "react-toastify";
+import { DataBaseURL } from "../../constants";
 
 
 
 
-export default function LoginPage() {
+export default function RecoveryPassword() {
 
   const { store, actions } = useAppContext();
-  const { token, username, password, email } = store;
-  const { handleClickLoginWrapper, setPassword, setEmail } = actions;
+  const { password, email } = store;
+  const { setPassword, setEmail } = actions;
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const tokenFromSessionStorage = sessionStorage.getItem("token");
-    if (tokenFromSessionStorage != undefined && tokenFromSessionStorage != "" && username != null && username != "") {
-      navigate(`/${username}`);
+  const recoveryFetch = async () => {
+    try {
+      const response = await fetch(`${DataBaseURL}/users/recovery_password`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email, password: password }),
+      });
+
+      if (response.ok) {
+        toast('✅😊😁 Password changed succesfully!!');
+        console.log('Password changed succesfully!!');
+        navigate("/login")
+      } else {
+        toast('🥺Error changing password...');
+        console.error('Error changing password...');
+      }
+    } catch (error) {
+      toast('Try later... We have some trouble here...🥴');
+      console.error('Error en la solicitud PATCH:', error);
     }
-  }, [token, username]);
+  };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    handleClickLoginWrapper(email, password);
+    recoveryFetch(email, password);
   };
-
 
   return (
     <div className="mt-5">
-      <h1 className="text-center">Login</h1>
+      <h1 className="text-center">New password</h1>
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6">
@@ -47,7 +63,7 @@ export default function LoginPage() {
                 />
               </div>
               <div className="form-group mt-2 text-left">
-                <label htmlFor="passwordInput">Password:</label>
+                <label htmlFor="passwordInput">New password:</label>
                 <input
                   id="passwordInput"
                   type="password"
@@ -62,11 +78,8 @@ export default function LoginPage() {
                   type="submit"
                   className="btn btn-dark mt-3"
                 >
-                  Login
+                  Send New Password
                 </button>
-              </div>
-              <div className="text-center mt-3">
-                <Link  to= "/recoveryEmail">Forgot your password? Get a new one!</Link>
               </div>
             </form>
           </div>
