@@ -13,4 +13,4 @@ export default function getDecks() {
       return data;
     })
     .catch((err) => console.log(err));
-}
+  }

@@ -38,6 +38,7 @@ export const AppContextProvider = ({ children }) => {
     sessionStorage.setItem("token", token);
     setUsername(username);
     sessionStorage.setItem("username", username)
+    setUserID(id)
     sessionStorage.setItem("user_id", id)
   };
 

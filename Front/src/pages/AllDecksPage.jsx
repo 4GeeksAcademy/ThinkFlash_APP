@@ -64,7 +64,8 @@ export default function AllDecksPage() {
         <div key={area} className="container mt-5">
           <h1>{area}</h1>
           <div className="decks-container">
-            {decks.map((deck) => (
+            {decks.map((deck) =>(
+
               <div key={deck.id} className="deck">
                 <div className="card" style={{ width: "18rem" }}>
                   <img
@@ -78,7 +79,7 @@ export default function AllDecksPage() {
                       This is a short description of the deck content
                     </p>
                     <div className="justify-content-center d-flex">
-                      <button className="btn btn-primary justify-content-center  w-100" onClick={() => handleClickActive(user_id, deck.id)}>
+                      <button className="btn btn-dark justify-content-center  w-100" onClick={() => handleClickActive(user_id, deck.id)}>
                         Activate
                       </button>
                     </div>
