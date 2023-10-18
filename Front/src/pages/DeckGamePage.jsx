@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import GeneralCard from "../components/GeneralCard/GeneralCard";
 import useAppContext from "../../context/AppContext";
 import chekLogNavigate from "../../utils/checkLogNavigate";
@@ -13,8 +13,10 @@ export default function DeckGamePage() {
     const [midLearnedCardList, setMidLearnedCardList] = useState([]);
     const [toLearnCardList, setToLearnCardList] = useState([]);
     const [bodyCard, setBodyCard] = useState("");
+    const [solutions, setSolutions] = useState([]);
+    const [correctSolution, setCorrectSolution] = useState("");
     const [isLoading, setIsLoading] = useState(true);
-    const [activeButton, setActiveButton] = useState(null);
+    const [activeButtonIndex, setActiveButtonIndex] = useState(null);
     const { store } = useAppContext();
     const { id } = store;
 
@@ -58,7 +60,14 @@ export default function DeckGamePage() {
                 } else {
                     selectedCard = midLearnedCardList[getRandomInt(midLearnedCardList.length)];
                 }
-                setBodyCard(`${selectedCard.description} score: ${selectedCard.score}`)
+                setBodyCard(`${selectedCard.description} score: ${selectedCard.score}`);
+                setSolutions([
+                    selectedCard.concept,
+                    selectedCard.fake_concepts[0],
+                    selectedCard.fake_concepts[1],
+                    selectedCard.fake_concepts[2]
+                ]);
+                setCorrectSolution(selectedCard.concept);
             } else {
                 if (getRandomInt(10) <= 6) {
                     selectedCard = toLearnCardList[getRandomInt(toLearnCardList.length)];
@@ -67,30 +76,60 @@ export default function DeckGamePage() {
                 } else {
                     selectedCard = midLearnedCardList[getRandomInt(midLearnedCardList.length)];
                 }
-                setBodyCard(`${selectedCard.concept} score: ${selectedCard.score}`)
-            };
-            setActiveButton(null)
+                setBodyCard(`${selectedCard.concept} score: ${selectedCard.score}`);
+                setSolutions([
+                    selectedCard.description,
+                    selectedCard.fake_descriptions[0],
+                    selectedCard.fake_descriptions[1],
+                    selectedCard.fake_descriptions[2]
+                ]);
+                setCorrectSolution(selectedCard.description);
+            }
+            setActiveButtonIndex(null);
         }
     };
 
-    const handleButtonClick = (res) => {
-        if (activeButton === null) {
-            setActiveButton(res);
+    const generateRandomSolutions = () => {
+        const availableSolutions = [...solutions];
+        const randomizedSolutions = [];
+        for (let i = 0; i < 4; i++) {
+            const randomIndex = getRandomInt(availableSolutions.length);
+            const solution = availableSolutions.splice(randomIndex, 1)[0];
+            randomizedSolutions.push(solution);
+        }
+        setSolutions(randomizedSolutions);
+    };
+
+    const handleButtonClick = (index) => {
+        if (activeButtonIndex === null) {
+            setActiveButtonIndex(index);
+            const selectedSolution = solutions[index];
+            if (selectedSolution === correctSolution) {
+                // La solución seleccionada es correcta
+            } else {
+                // La solución seleccionada es incorrecta
+            }
         }
     };
 
     const putNextButton = () => {
-        if (activeButton) {
+        if (activeButtonIndex !== null) {
             return (
-                <button type="button" className="btn btn-dark border border-0" onClick={getRandomDescriptionOrConcept}>Next Card!</button>
+                <button type="button" className="btn btn-dark border border-0" onClick={getRandomDescriptionOrConcept}>
+                    Next Card!
+                </button>
             );
         }
-        return "";
+        return null;
     };
 
     useEffect(() => {
         getRandomDescriptionOrConcept();
     }, [toLearnCardList, learnedCardList, midLearnedCardList]);
+
+    useEffect(() => {
+        generateRandomSolutions();
+    }, [bodyCard]);
 
     chekLogNavigate();
 
@@ -100,14 +139,12 @@ export default function DeckGamePage() {
                 <div className="mx-auto col-12 col-md-6 my-auto d-flex justify-content-center">
                     <SwitchTransition mode="out-in">
                         <CSSTransition
-                            key={activeButton}
+                            key={activeButtonIndex}
                             addEndListener={(node, done) => node.addEventListener("transitionend", done, false)}
                             classNames="fade"
                         >
                             <GeneralCard minWidth="20rem" minHeight="30rem" shadow="-lg">
-                                <p className="fs-1 my-auto">
-                                    {bodyCard || "Loading..."}
-                                </p>
+                                <p className="fs-1 my-auto">{bodyCard || "Loading..."}</p>
                                 {putNextButton()}
                             </GeneralCard>
                         </CSSTransition>
@@ -116,34 +153,27 @@ export default function DeckGamePage() {
                 <div className="col-12 col-md-6 my-auto mx-auto">
                     <div className="text-container d-flex flex-column justify-content-center mb-5 text-center">
                         <div className="list-group shadow-lg bg-dark">
-                            <button
-                                type="button"
-                                className={`btn btn-light m-2 flip-button ${activeButton === "first" ? "active" : ""}`}
-                                onClick={() => handleButtonClick("first")}
-                            >
-                                A first solution
-                            </button>
-                            <button
-                                type="button"
-                                className={`btn btn-light m-2 flip-button ${activeButton === "second" ? "active" : ""}`}
-                                onClick={() => handleButtonClick("second")}
-                            >
-                                A second solution
-                            </button>
-                            <button
-                                type="button"
-                                className={`btn btn-light m-2 flip-button ${activeButton === "third" ? "active" : ""}`}
-                                onClick={() => handleButtonClick("third")}
-                            >
-                                A third solution
-                            </button>
-                            <button
-                                type="button"
-                                className={`btn btn-light m-2 flip-button ${activeButton === "fourth" ? "active" : ""}`}
-                                onClick={() => handleButtonClick("fourth")}
-                            >
-                                A fourth solution
-                            </button>
+                            {solutions.map((solution, index) => (
+                                <button
+                                    key={index}
+                                    type="button"
+                                    className={`btn btn-light m-2 flip-button ${
+                                        activeButtonIndex === index ? solution === correctSolution
+                                        ? "active border-2 border-success"
+                                        : "active border-2 border-danger"
+                                    : ""
+                                    } ${
+                                        activeButtonIndex !== null && activeButtonIndex !== index
+                                            ? solution === correctSolution
+                                                ? "border-2 border-success"
+                                                : ""
+                                            : ""
+                                    }`}
+                                    onClick={() => handleButtonClick(index)}
+                                >
+                                    {solution}
+                                </button>
+                            ))}
                         </div>
                     </div>
                 </div>

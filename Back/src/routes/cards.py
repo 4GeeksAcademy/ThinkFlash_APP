@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from ..models import db, User, Card, Deck, Score_per_Card
+from ..models import db, User, Card, Deck, Score_per_Card, Fake_concept, Fake_description
 # from ..controllers import cards_controllers
 
 cards =Blueprint('cards', __name__)
@@ -31,11 +31,15 @@ def get_deck_cards(user_id, deck_id):
         for card in deck.cards:
             score_per_card = Score_per_Card.query.filter_by(user_id=user_id, card_id=card.id).first()
             if score_per_card:
+                fake_descriptions = [fd.description for fd in Fake_description.query.filter_by(card_id=card.id).all()]
+                fake_concepts = [fc.concept for fc in Fake_concept.query.filter_by(card_id=card.id).all()]
                 cards_with_score.append({
                     'id': card.id,
                     'description': card.description,
                     'concept': card.concept,
                     'area': card.area,
+                    'fake_descriptions': fake_descriptions,
+                    'fake_concepts': fake_concepts,
                     'score': score_per_card.score
                 })
             else:

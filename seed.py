@@ -68,10 +68,11 @@ def create_initial_data():
 
         # Crea algunos conceptos y descripciones falsas para las cartas
         for card in cards:
-            fake_concept = Fake_concept(concept=f"Fake Concept for {card.id}", card_id=card.id)
-            fake_description = Fake_description(description=f"Fake Description for {card.id}", card_id=card.id)
-            db.session.add(fake_concept)
-            db.session.add(fake_description)
+            for i in range (1, 4):
+                fake_concept = Fake_concept(concept=f"Fake Concept {i} for {card.id}", card_id=card.id)
+                fake_description = Fake_description(description=f"Fake Description {i} for {card.id}", card_id=card.id)
+                db.session.add(fake_concept)
+                db.session.add(fake_description)
         db.session.commit()
 
         # Crea algunas puntuaciones para las cartas
