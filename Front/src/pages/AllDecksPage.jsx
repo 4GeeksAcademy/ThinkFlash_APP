@@ -81,7 +81,8 @@ export default function AllDecksPage() {
         <div key={area} className="container mt-5">
           <h1>{area}</h1>
           <div className="decks-container">
-            {decks.map((deck) => (
+            {decks.map((deck) =>(
+
               <div key={deck.id} className="deck">
                 <div className={`card ${activatedCards.includes(deck.id) ? 'activated' : ''}`} style={{ width: "18rem" }}>
                   <img

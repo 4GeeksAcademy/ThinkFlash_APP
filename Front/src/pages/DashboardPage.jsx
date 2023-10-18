@@ -4,6 +4,7 @@ import chekLogNavigate from "../../utils/checkLogNavigate"
 import getDecks from "../services/decks/getDecks"
 import { allDecksData } from "../../constants"
 import "../../style.css"
+import getMyDecks from "../services/decks/getMyDecks"
 import useAppContext from "../../context/AppContext"
 
 import { useState, useEffect } from "react"
@@ -13,9 +14,10 @@ import { useState, useEffect } from "react"
 
 export default function DashboardPage() {
   const [deckList, setDeckList] = useState([]);
+  const [myDeckList, setMyDeckList] = useState([])
   //const [isLoading, setIsLoading] = useState(true);
   const { store } = useAppContext();
-  const { username } = store;
+  const { username, id } = store;
 
   const progress = { //hardcodeado
     learned: 70, 
@@ -23,15 +25,24 @@ export default function DashboardPage() {
     toLearn: 20
   }
 
-  const getDecksData = () => { 
-    const data = allDecksData
-    return data
-  }
-
   useEffect(() => {
-    const data = getDecksData()
-    setDeckList(data)
-  }, [])
+    getMyDecks(id)
+      .then((res) => {
+        setMyDeckList(res.decks);
+      })
+      .catch((error) => {
+        console.error("Error fetching decks:", error);
+      });
+  }, [id]);
+  useEffect(() => {
+    getDecks()
+      .then((res) => {
+        setDeckList(res.decks);
+      })
+      .catch((error) => {
+        console.error("Error fetching decks:", error);
+      });
+  }, []);
 
   const getDecksAreas = () => {
     const Areas = [...new Set(deckList.map(objeto => objeto.area))];
@@ -43,7 +54,7 @@ export default function DashboardPage() {
   return (
       <div className="h-75 container">
         <ContainerDiv title="My Decks" height="50" link={`/${username}/mydecks`} overflow="x">
-          {deckList.map((deck, index) =>
+          {myDeckList.map((deck, index) =>
           (
             <GeneralCard key={index} title={deck.specialize}  minWidth="10rem" minHeight="13rem" shadow={""}
             progress={progress}>
