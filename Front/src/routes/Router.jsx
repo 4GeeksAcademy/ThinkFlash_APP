@@ -13,6 +13,8 @@ import MyDecksPage from '../pages/MyDecksPage.jsx'
 import DeckGamePage from '../pages/DeckGamePage';
 import ConfirmUser from '../pages/ConfirmUser.jsx';
 import InfoSignUp from '../pages/InfoSignup.jsx'
+import RecoveryEmail from '../pages/RecoveryEmail.jsx'
+import RecoveryPassword from '../pages/RecoveryPassword.jsx'
 
 const Router = () => {
     return (
@@ -43,6 +45,9 @@ const Router = () => {
                     <Route path="/:username/:deck_id" element={<DeckGamePage />} />
                     <Route path="/user/:user_id" element={<ConfirmUser />} />
                     <Route path="/infoSignup" element={<InfoSignUp />} />
+                    <Route path="/recoveryEmail" element={<RecoveryEmail />} />
+                    <Route path="/recoveryPassword/:user_id" element={<RecoveryPassword />} />
+
                 </Routes>
             </AppContextProvider>
         </BrowserRouter>
