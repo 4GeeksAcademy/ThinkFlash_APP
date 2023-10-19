@@ -43,7 +43,7 @@ export default function MyDecksPage() {
       <ContainerDiv title="My Decks" overflow="y">
         {getDecksAreas().map((area, index) => {
           return (
-            <ContainerDiv key={index} subtitle={area} overflow="x">
+            <ContainerDiv key={index} subtitle={area} height="75" overflow="x">
               {deckList.map((deck, index) => {
                 console.log("importante", deck.area)
                 if (deck.area == area) {
