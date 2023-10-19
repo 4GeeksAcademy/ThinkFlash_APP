@@ -63,7 +63,7 @@ export default function DashboardPage() {
           ))
           }
         </ContainerDiv>
-        <ContainerDiv title="All Decks" height="50" link={`/${username}/alldecks`} overflow="x">
+        <ContainerDiv title="All Decks" height="75" link={`/${username}/alldecks`} overflow="x">
           {
             deckList.length === 0 ? (
               <div>No decks</div>

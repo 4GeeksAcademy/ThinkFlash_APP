@@ -110,9 +110,10 @@ export default function DeckGamePage() {
             const selectedSolution = solutions[index];
             if (selectedSolution === correctSolution) {
                 changeCardScore({user_id:id, deck_id:deck_id, card_id:card_id, operation:"sum"})
-                
+                setCardList(cardList)
             } else {
                 changeCardScore({user_id:id, deck_id:deck_id, card_id:card_id, operation:"subs"})
+                setCardList(cardList)
             }
         }
     };
