@@ -140,24 +140,24 @@ export default function DeckGamePage() {
     chekLogNavigate();
 
     return (
-        <div className="container h-90">
+        <div className="container vh-90">
             <div className="row h-100">
-                <div className="mx-auto col-12 col-md-6 my-auto d-flex justify-content-center">
+                <div className="mx-auto col-12  mb-0 mt-auto d-flex justify-content-center">
                     <SwitchTransition mode="out-in">
                         <CSSTransition
                             key={activeButtonIndex}
                             addEndListener={(node, done) => node.addEventListener("transitionend", done, false)}
                             classNames="fade"
                         >
-                            <GeneralCard minWidth="20rem" minHeight="30rem" shadow="-lg">
-                                <p className="fs-1 my-auto">{bodyCard || "Loading..."}</p>
+                            <GeneralCard minWidth="16rem" minHeight="21rem" shadow="-lg">
+                                <p className="fs-2 my-auto">{bodyCard || "Loading..."}</p>
                                 {putNextButton()}
                             </GeneralCard>
                         </CSSTransition>
                     </SwitchTransition>
                 </div>
-                <div className="col-12 col-md-6 my-auto mx-auto">
-                    <div className="text-container d-flex flex-column justify-content-center mb-5 text-center">
+                <div className="col-12 col-sm-8 col-lg-6 mb-auto mx-auto">
+                    <div className="text-container d-flex flex-column justify-content-center text-center">
                         <div className="list-group shadow-lg bg-dark">
                             {solutions.map((solution, index) => (
                                 <button
