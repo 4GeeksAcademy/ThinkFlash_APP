@@ -4,18 +4,21 @@ import chekLogNavigate from "../../utils/checkLogNavigate";
 import { useEffect, useState } from "react";
 import '../styles/allDecksActivation.css';
 const DataBaseURL = import.meta.env.VITE_REACT_APP_API_URL;
+import Loading from "../components/Loading";
 
 export default function AllDecksPage() {
-  const [userId, setUserId] = useState([]);
+  const [userId, setUserId] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [userDecks, setUserDecks] = useState([]);
   const [allDecksData, setAllDecksData] = useState([]);
   const [decksToShow, setDecksToShow] = useState([]);
   const [activatedCards, setActivatedCards] = useState([]);
 
-  useEffect(() => {
-    setUserId(sessionStorage.getItem("user_id"));
+  
 
+  useEffect(() => {
+    
+    setUserId(sessionStorage.getItem("user_id"));
     Promise.all([getDMyDecks(userId), getDecks()])
       .then(([userDecksResponse, allDecksResponse]) => {
         setUserDecks(userDecksResponse.decks);
@@ -30,7 +33,7 @@ export default function AllDecksPage() {
         setIsLoading(false);
       });
   }, [userId]);
-
+  console.log(userId)
   const handleClickActive = async (user_id, deck_id) => {
     try {
       const response = await fetch(`${DataBaseURL}/users/add_deck/${user_id}/${deck_id}`, {
@@ -64,9 +67,10 @@ export default function AllDecksPage() {
   chekLogNavigate();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading/>
+    
   }
-
+  
   const decksByArea = decksToShow.reduce((acc, deck) => {
     if (!acc[deck.area]) {
       acc[deck.area] = [];

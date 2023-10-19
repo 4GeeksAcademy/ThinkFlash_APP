@@ -6,7 +6,7 @@ import { allDecksData } from "../../constants"
 import "../../style.css"
 import getMyDecks from "../services/decks/getMyDecks"
 import useAppContext from "../../context/AppContext"
-
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react"
 
 
@@ -18,6 +18,7 @@ export default function DashboardPage() {
   //const [isLoading, setIsLoading] = useState(true);
   const { store } = useAppContext();
   const { username, id } = store;
+  const navigate  = useNavigate();
 
   const progress = { //hardcodeado
     learned: 70, 
@@ -42,11 +43,14 @@ export default function DashboardPage() {
       .catch((error) => {
         console.error("Error fetching decks:", error);
       });
-  }, []);
+  }, [id]);
 
   const getDecksAreas = () => {
     const Areas = [...new Set(deckList.map(objeto => objeto.area))];
     return Areas;
+  }
+  const navigateToAllDecks = () => {
+    navigate(`/${username}/alldecks`)
   }
 
   chekLogNavigate()
@@ -54,14 +58,19 @@ export default function DashboardPage() {
   return (
       <div className="h-75 container">
         <ContainerDiv title="My Decks" height="50" link={`/${username}/mydecks`} overflow="x">
-          {myDeckList.map((deck, index) =>
+          {myDeckList.length === 0 ? (
+              <p className="mt-5">
+              There are no decks to show 😊, go to <span onClick={navigateToAllDecks} className="linkstyle">All Decks</span> to add new ones
+            </p>
+            ) : (
+          myDeckList.map((deck, index) =>
           (
             <GeneralCard key={index} title={deck.specialize}  minWidth="10rem" minHeight="13rem" shadow={""}
             progress={progress}>
               {deck.theme}
             </GeneralCard>
           ))
-          }
+          )}
         </ContainerDiv>
         <ContainerDiv title="All Decks" height="75" link={`/${username}/alldecks`} overflow="x">
           {
