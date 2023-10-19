@@ -1,15 +1,17 @@
 from app import app, db
 from Back.src.models import User, Sponsor, Deck, Card, Fake_concept, Fake_description, Score_per_Card, card_deck, user_deck
 import random
-from flask_bcrypt import Bcrypt as bcrypt
+from flask_bcrypt import Bcrypt 
 
 def create_initial_data():
     with app.app_context():
         # Crea algunos usuarios
+        bcrypt = Bcrypt()
+        dummy_password = bcrypt.generate_password_hash("test").decode('utf-8')
         users = []
-        user1 = User(email="user1@example.com", username="user1", password="password1", confirmed=True)
-        user2 = User(email="user2@example.com", username="user2", password="password2", confirmed=True)
-        user3 = User(email="user3@example.com", username="user3", password="password3", confirmed=True)
+        user1 = User(email="user1@example.com", username="user1", password=dummy_password, confirmed=True)
+        user2 = User(email="user2@example.com", username="user2", password=dummy_password, confirmed=True)
+        user3 = User(email="user3@example.com", username="user3", password=dummy_password, confirmed=True)
         db.session.add_all([user1, user2, user3])
         users.extend([user1, user2, user3])
         db.session.commit()
