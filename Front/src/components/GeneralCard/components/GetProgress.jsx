@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import ProgressBar from "react-bootstrap/ProgressBar";
 import "../../../styles/getProgress.css"
 
 
@@ -9,6 +8,12 @@ const GetProgress = ({ progress }) => {
     const chartRef = useRef(null);
 
     const { learned, midLearned, toLearn } = progress;
+
+    
+    const totalCards = learned + midLearned + toLearn;
+    const learnedPercentage = (learned / totalCards) * 100;
+    const midLearnedPercentage = (midLearned / totalCards) * 100;
+    const toLearnPercentage = (toLearn / totalCards) * 100;
 
     useEffect(() => {
         if (canvasRef.current) {
@@ -25,24 +30,7 @@ const GetProgress = ({ progress }) => {
                 ],
             };
 
-            if (chartRef.current) {
-                chartRef.current.destroy();
-            }
-
-            if (clicked) {
-                const barData = {
-                    labels: ["Learned", "Mid Learned", "To Learn"],
-                    datasets: [
-                        {
-                            label: "Percentage",
-                            data: [learned, midLearned, toLearn],
-                            backgroundColor: ["#4caf50", "#ff9800", "#f44336"],
-                            borderWidth: 3,
-                        },
-                    ],
-                };
-
-            } else {
+            if (!clicked) {
                 const newChart = new Chart(ctx, {
                     type: "doughnut",
                     data: data,
@@ -78,9 +66,9 @@ const GetProgress = ({ progress }) => {
                     {clicked ? (
 
                         <div className="container progressBarContainer my-auto">
-                            <div className="progressBarLabelGreen ps-1"> Learned: {learned}%</div>
-                            <div className="progressBarLabelOrange ps-1">Mid Learned: {midLearned}%</div>
-                            <div className="progressBarLabelRed ps-1">To Learn: {toLearn}%</div>
+                            <div className="progressBarLabelGreen ps-1"> <i class="fa-solid fa-check" style="color: #19191a;"></i> {learnedPercentage.toFixed(1)}%</div>
+                            <div className="progressBarLabelOrange ps-1"><i class="fa-solid fa-exclamation" style="color: #141414;"></i>{midLearnedPercentage.toFixed(1)}%</div>
+                            <div className="progressBarLabelRed ps-1"> <i class="fa-solid fa-x" style="color: #111212;"> </i> {toLearnPercentage.toFixed(1)}%</div>
                             <div className="additionalInfo">
                             <div className="additionalInfo position-absolute top-0 end-0">
                             <i className="fa-solid fa-circle-minus fa-beat-fade"></i>
