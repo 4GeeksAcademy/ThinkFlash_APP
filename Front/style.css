@@ -59,48 +59,6 @@ body::-webkit-scrollbar-thumb:hover,
   min-width: 100%;
 }
 
-.flip-card {
-  perspective: 1000px;
-  width: 200px; /* Ajusta el ancho según tus necesidades */
-  height: 300px; /* Ajusta la altura según tus necesidades */
-}
-
-.flip-card-inner {
-  width: 100%;
-  height: 100%;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-}
-
-.flip-card:active .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front,
-.flip-card-back {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  backface-visibility: hidden;
-}
-
-.flip-card-front {
-  background-color: #f1f1f1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.flip-card-back {
-  background-color: #2980b9;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transform: rotateY(180deg);
-}
-
-
 .fade-enter{
   opacity: 0;
   transform: translateX(-100%);
@@ -124,33 +82,63 @@ body::-webkit-scrollbar-thumb:hover,
   
 }
 
+/* Light mode */
+
 .text-light-mode{
-  color:black
+  color:rgb(0, 0, 0)
+}
+
+.important-text-light-mode {
+  color: rgb(25, 0, 255);
 }
 
 .btn.btn-light-mode {
   background-color: rgba(89, 122, 172, 0.507);
 }
 
-.bg-light-mode {
+.btn.card-btn-light-mode {
   background-color: rgba(89, 122, 172, 0.507);
+}
+
+.bg-light-mode {
+  background-color: rgba(89, 122, 172, 0.267);
+}
+
+.offcanvas.bg-light-mode {
+  background-color: rgba(255, 255, 255, 0.932);
+}
+
+.navbar.bg-light-mode{
+  background-color: rgba(89, 122, 172, 0.507);
+  color:white
 }
 
 .body-bg-light-mode {
   background-image: url(https://static.vecteezy.com/system/resources/previews/001/966/612/non_2x/abstract-light-silver-background-vector.jpg);
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  height: 100%;
+  background-attachment: fixed;
+  height: auto;
   width: 100%;
 }
+
+/* Dark mode */
 
 .text-dark-mode{
   color:white;
 }
 
-.btn.btn-dark-mode {
+.important-text-dark-mode {
+  color: rgb(255, 196, 0);
+}
+
+.btn.card-btn-dark-mode {
   background-color: rgba(0, 0, 0, 0.726);
+  color:white
+}
+
+.btn.btn-dark-mode {
+  background-color: rgba(150, 150, 150, 0.4);
   color:white
 }
 
@@ -159,13 +147,17 @@ body::-webkit-scrollbar-thumb:hover,
   color:rgb(255, 255, 255);
 }
 
+.offcanvas.bg-dark-mode {
+  background-color: rgb(32, 32, 32)
+}
+
 .navbar.bg-dark-mode{
   background-color: rgba(110, 110, 110, 0.4);
   color:white
 }
 
 .body-bg-dark-mode {
-  background-image: url(https://st.depositphotos.com/32687418/54216/i/450/depositphotos_542162292-stock-photo-old-black-background-grunge-texture.jpg);
+  background-image: url(https://wallpapercave.com/wp/wp6418808.jpg);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

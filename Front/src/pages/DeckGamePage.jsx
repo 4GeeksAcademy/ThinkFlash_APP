@@ -124,7 +124,7 @@ export default function DeckGamePage() {
     const putNextButton = () => {
         if (activeButtonIndex !== null) {
             return (
-                <button type="button" className={`btn btn-${colorMode} border border-0`} onClick={getRandomDescriptionOrConcept}>
+                <button type="button" className={`btn card-btn-${colorMode} border border-0`} onClick={getRandomDescriptionOrConcept}>
                     Next Card!
                 </button>
             );
@@ -166,7 +166,7 @@ export default function DeckGamePage() {
                                 <button
                                     key={index}
                                     type="button"
-                                    className={`btn btn-${colorMode} m-2 flip-button ${
+                                    className={`btn card-btn-${colorMode} m-2 flip-button ${
                                         activeButtonIndex === index ? solution === correctSolution
                                         ? "active border-2 border-success"
                                         : "active border-2 border-danger"
