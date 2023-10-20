@@ -1,9 +1,8 @@
-
-// const apiUrl = process.env.API_URL
 import useAppContext from "../../context/AppContext.jsx"
 import { useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import getPreferentColor from "../services/colors/getPreferentColor.js";
 
 
@@ -25,6 +24,9 @@ export default function LoginPage() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    if (email.trim() === '' || password.trim() === '') {
+      toast("🥺Por favor, complete todos los campos.");
+      return;}
     handleClickLoginWrapper(email, password);
   };
 

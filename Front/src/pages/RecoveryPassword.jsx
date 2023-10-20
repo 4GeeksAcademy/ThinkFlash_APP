@@ -1,18 +1,15 @@
 import useAppContext from "../../context/AppContext.jsx"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect } from "react";
-import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 import { DataBaseURL } from "../../constants";
 
 
-
-
 export default function RecoveryPassword() {
-
+  const { user_uuid } = useParams();
   const { store, actions } = useAppContext();
-  const { password, email } = store;
-  const { setPassword, setEmail } = actions;
+  const { password } = store;
+  const { setPassword} = actions;
   const navigate = useNavigate();
 
   const recoveryFetch = async () => {
@@ -22,7 +19,7 @@ export default function RecoveryPassword() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email: email, password: password }),
+        body: JSON.stringify({ user_uuid: user_uuid, password: password }),
       });
 
       if (response.ok) {
@@ -41,7 +38,11 @@ export default function RecoveryPassword() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    recoveryFetch(email, password);
+    if (password.trim() === '') {
+      toast("🥺Please, type a new password...");
+      return;}
+    recoveryFetch(
+       password);
   };
 
   return (
@@ -51,17 +52,6 @@ export default function RecoveryPassword() {
         <div className="row justify-content-center">
           <div className="col-md-6">
             <form onSubmit={handleFormSubmit}>
-              <div className="form-group text-left">
-                <label htmlFor="emailInput">Email:</label>
-                <input
-                  id="emailInput"
-                  type="email"
-                  className="form-control input-lg"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
               <div className="form-group mt-2 text-left">
                 <label htmlFor="passwordInput">New password:</label>
                 <input
