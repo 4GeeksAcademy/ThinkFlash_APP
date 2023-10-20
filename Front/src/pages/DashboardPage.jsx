@@ -7,11 +7,7 @@ import "../../style.css"
 import getMyDecks from "../services/decks/getMyDecks"
 import useAppContext from "../../context/AppContext"
 import getDeckProgress from "../services/decks/getDeckProgress"
-
 import { useState, useEffect } from "react"
-
-
-
 
 export default function DashboardPage() {
   const [deckList, setDeckList] = useState([]);
