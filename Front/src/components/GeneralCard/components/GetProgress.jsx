@@ -74,26 +74,25 @@ const GetProgress = ({ progress }) => {
     return (
         <div className="ratio ratio-4x3 d-block">
             <div className="w-100 h-75 mt-4 mb-0" onClick={handleClick}>
-                <div className=" w-100 h-100 d-flex justify-content-center align-items-center">
+                <div className=" w-100 h-100 d-flex justify-content-center align-items-center position-relative">
                     {clicked ? (
 
-                        <div className="container progressBarContainer ">
-                            <div className="progressBarLabelGreen"> Learned: {learned}%</div>
-                            <div className="progressBarLabelOrange">Mid Learned: {midLearned}%</div>
-                            <div className="progressBarLabelRed">To Learn: {toLearn}%</div>
+                        <div className="container progressBarContainer my-auto">
+                            <div className="progressBarLabelGreen ps-1"> Learned: {learned}%</div>
+                            <div className="progressBarLabelOrange ps-1">Mid Learned: {midLearned}%</div>
+                            <div className="progressBarLabelRed ps-1">To Learn: {toLearn}%</div>
                             <div className="additionalInfo">
-                            <p><strong>Click para menos info!</strong></p>
+                            <div className="additionalInfo position-absolute top-0 end-0">
+                            <i className="fa-solid fa-circle-minus fa-beat-fade"></i>
                             </div>
-
-
+                            </div>
                         </div>
                     ) : (
                         <>
                             <canvas ref={canvasRef}></canvas>
-                            <div className="additionalInfo">
-                                <p> <strong>Click para + info!</strong></p>
+                            <div className="additionalInfo position-absolute top-0 end-0">
+                                <i className="fa-solid fa-circle-plus fa-beat-fade"></i>
                             </div>
-
                         </>
 
                     )}

@@ -9,7 +9,6 @@ export default function getDeckCards(user_id, deck_id) {
       return res.json();
     })
     .then((data) => {
-      console.log(data); 
       return data;
     })
     .catch((err) => console.log(err));
