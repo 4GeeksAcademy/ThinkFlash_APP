@@ -9,7 +9,7 @@ const GetProgress = ({ progress }) => {
 
     const { learned, midLearned, toLearn } = progress;
 
-    
+
     const totalCards = learned + midLearned + toLearn;
     const learnedPercentage = (learned / totalCards) * 100;
     const midLearnedPercentage = (midLearned / totalCards) * 100;
@@ -66,13 +66,32 @@ const GetProgress = ({ progress }) => {
                     {clicked ? (
 
                         <div className="container progressBarContainer my-auto">
-                            <div className="progressBarLabelGreen ps-1"> <i class="fa-solid fa-check" style="color: #19191a;"></i> {learnedPercentage.toFixed(1)}%</div>
-                            <div className="progressBarLabelOrange ps-1"><i class="fa-solid fa-exclamation" style="color: #141414;"></i>{midLearnedPercentage.toFixed(1)}%</div>
-                            <div className="progressBarLabelRed ps-1"> <i class="fa-solid fa-x" style="color: #111212;"> </i> {toLearnPercentage.toFixed(1)}%</div>
-                            <div className="additionalInfo">
-                            <div className="additionalInfo position-absolute top-0 end-0">
-                            <i className="fa-solid fa-circle-minus fa-beat-fade"></i>
+                            <div className="progressBarLabelGreen d-flex ps-1">
+                                <div className="w-25 text-center">
+                                    <i className="fa-solid fa-check" style={{ color: '#19191a' }}></i>
+                                </div>
+                                <div className="w-75"> {learnedPercentage.toFixed(1)}%</div>
                             </div>
+                            <div className="progressBarLabelOrange d-flex ps-1">
+                                <div className="w-25 text-center">
+                                    <i className="fa-solid fa-exclamation" style={{ color: '#141414' }}></i>
+                                </div>
+                                <div className="w-75">
+                                    {midLearnedPercentage.toFixed(1)}%
+                                </div>
+                            </div>
+                            <div className="progressBarLabelRed d-flex ps-1">
+                                <div className="w-25 text-center">
+                                    <i className="fa-solid fa-x" style={{ color: '#111212' }}></i>
+                                </div>
+                                <div className="w-75">
+                                    {toLearnPercentage.toFixed(1)}%
+                                </div>
+                            </div>
+                            <div className="additionalInfo">
+                                <div className="additionalInfo position-absolute top-0 end-0">
+                                    <i className="fa-solid fa-circle-minus fa-beat-fade"></i>
+                                </div>
                             </div>
                         </div>
                     ) : (
