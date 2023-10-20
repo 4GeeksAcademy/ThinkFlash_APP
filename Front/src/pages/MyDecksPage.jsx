@@ -6,6 +6,7 @@ import useAppContext from "../../context/AppContext";
 import "../../style.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import getPreferentColor from "../services/colors/getPreferentColor";
 
 export default function MyDecksPage() {
   const [deckList, setDeckList] = useState([]);
@@ -36,6 +37,8 @@ export default function MyDecksPage() {
     return Areas;
   }
 
+  const colorMode = getPreferentColor()
+
   chekLogNavigate()
 
   return (
@@ -43,7 +46,7 @@ export default function MyDecksPage() {
       <ContainerDiv title="My Decks" overflow="y">
         {getDecksAreas().map((area, index) => {
           return (
-            <ContainerDiv key={index} subtitle={area} overflow="x">
+            <ContainerDiv key={index} subtitle={area} height="75" overflow="x">
               {deckList.map((deck, index) => {
                 console.log("importante", deck.area)
                 if (deck.area == area) {
@@ -53,12 +56,11 @@ export default function MyDecksPage() {
                     >
                       {deck.theme}
                       <div className="d-flex mt-3">
-                        <Link to={`../../${username}/${deck.id}`} className="btn btn-dark my-auto w-100">Go Game</Link>
+                        <Link to={`../../${username}/${deck.id}`} className={`btn card-btn-${colorMode} my-auto w-100`}>Go Game</Link>
                       </div>
                     </GeneralCard>
                   )
                 }
-
               }
               )
               }

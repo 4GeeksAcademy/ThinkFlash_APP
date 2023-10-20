@@ -15,12 +15,14 @@ import ConfirmUser from '../pages/ConfirmUser.jsx';
 import InfoSignUp from '../pages/InfoSignup.jsx'
 import RecoveryEmail from '../pages/RecoveryEmail.jsx'
 import RecoveryPassword from '../pages/RecoveryPassword.jsx'
+import getPreferentColor from '../services/colors/getPreferentColor';
 
 const Router = () => {
+    const colorMode=getPreferentColor()
     return (
 
         <BrowserRouter basename=''>
-            <AppContextProvider>
+            <AppContextProvider >
                 <ToastContainer
                     position="top-center"
                     autoClose={8000}
@@ -34,6 +36,7 @@ const Router = () => {
                     theme="dark"
 
                 />
+                <div className={`body-bg-${colorMode}`}>
                 <Navbar />
                 <Routes>
                     <Route path="/" element={<HomePage />} />
@@ -49,6 +52,7 @@ const Router = () => {
                     <Route path="/recoveryPassword/:user_uuid" element={<RecoveryPassword />} />
 
                 </Routes>
+                </div>
             </AppContextProvider>
         </BrowserRouter>
     );

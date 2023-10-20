@@ -96,7 +96,7 @@ export default function AllDecksPage() {
                       This is a short description of the deck content
                     </p>
                     <div className="justify-content-center d-flex">
-                      <button className="btn btn-primary justify-content-center  w-100" onClick={() => handleClickActive(userId, deck.id)}>
+                      <button className="btn btn-dark justify-content-center  w-100" onClick={() => handleClickActive(userId, deck.id)}>
                         {activatedCards.includes(deck.id) ? 'Deck Activated!' : 'Activate'}
                       </button>
                     </div>

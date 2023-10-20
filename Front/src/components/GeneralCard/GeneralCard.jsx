@@ -1,14 +1,17 @@
 import GetProgress from './components/GetProgress';
 import GetImage from './components/GetImage';
 import React from 'react';
+import getPreferentColor from '../../services/colors/getPreferentColor';
 
 
 export default function GeneralCard({ children, title, shadow, minWidth, minHeight, img, progress }) {
 
+    const colorMode = getPreferentColor()
+
     return (
         <div className={`m-2 d-flex justify-content-center align-items-center`} style={{ minHeight: minHeight, minWidth: minWidth, maxHeight: minHeight, maxWidth: minWidth }}>
             <div className="d-flex flex-wrap" style={{ minHeight: minHeight, minWidth: minWidth }}>
-                <div className={`card shadow${shadow}`} style={{ minHeight: minHeight, minWidth: minWidth }}>
+                <div className={`card bg-${colorMode} shadow${shadow}`} style={{ minHeight: minHeight, minWidth: minWidth }}>
                    <div className="container">
                     {img && GetImage(img)}
                     {progress && GetProgress({progress:progress})}

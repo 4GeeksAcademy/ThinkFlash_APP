@@ -36,7 +36,7 @@ export default function RecoveryEmail() {
 
     return (
         <div>
-            <div className="container h-90 d-flex flex-column justify-content-center align-items-center">
+            <div className="container vh-90 d-flex flex-column justify-content-center align-items-center">
                 <h5 className='text-center mb-4 pulsating-heart'>Type your email here, so that we can send you a link to change your password...</h5>
                 <div className="mb-4">
                     <div className="form-group mt-2 text-left align-items-center justify-content-center ">

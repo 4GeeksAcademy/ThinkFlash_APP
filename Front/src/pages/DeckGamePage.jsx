@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import GeneralCard from "../components/GeneralCard/GeneralCard";
+import getPreferentColor from "../services/colors/getPreferentColor";
 import changeCardScore from "../services/cards/changeCardScore";
 import useAppContext from "../../context/AppContext";
 import chekLogNavigate from "../../utils/checkLogNavigate";
@@ -46,6 +47,8 @@ export default function DeckGamePage() {
         setMidLearnedCardList(cardList.filter(card => card.score > 1 && card.score < 4));
         setLearnedCardList(cardList.filter(card => card.score === 4));
     }, [cardList]);
+
+    const colorMode = getPreferentColor();
 
     const getRandomInt = (max) => {
         return Math.floor(Math.random() * max);
@@ -110,9 +113,10 @@ export default function DeckGamePage() {
             const selectedSolution = solutions[index];
             if (selectedSolution === correctSolution) {
                 changeCardScore({user_id:id, deck_id:deck_id, card_id:card_id, operation:"sum"})
-                
+                setCardList(cardList)
             } else {
                 changeCardScore({user_id:id, deck_id:deck_id, card_id:card_id, operation:"subs"})
+                setCardList(cardList)
             }
         }
     };
@@ -120,7 +124,7 @@ export default function DeckGamePage() {
     const putNextButton = () => {
         if (activeButtonIndex !== null) {
             return (
-                <button type="button" className="btn btn-dark border border-0" onClick={getRandomDescriptionOrConcept}>
+                <button type="button" className={`btn card-btn-${colorMode} border border-0`} onClick={getRandomDescriptionOrConcept}>
                     Next Card!
                 </button>
             );
@@ -139,30 +143,30 @@ export default function DeckGamePage() {
     chekLogNavigate();
 
     return (
-        <div className="container h-90">
+        <div className="container vh-90">
             <div className="row h-100">
-                <div className="mx-auto col-12 col-md-6 my-auto d-flex justify-content-center">
+                <div className="mx-auto col-12  mb-0 mt-auto d-flex justify-content-center">
                     <SwitchTransition mode="out-in">
                         <CSSTransition
                             key={activeButtonIndex}
                             addEndListener={(node, done) => node.addEventListener("transitionend", done, false)}
                             classNames="fade"
                         >
-                            <GeneralCard minWidth="20rem" minHeight="30rem" shadow="-lg">
-                                <p className="fs-1 my-auto">{bodyCard || "Loading..."}</p>
+                            <GeneralCard minWidth="16rem" minHeight="21rem" shadow="-lg">
+                                <p className="fs-2 my-auto">{bodyCard || "Loading..."}</p>
                                 {putNextButton()}
                             </GeneralCard>
                         </CSSTransition>
                     </SwitchTransition>
                 </div>
-                <div className="col-12 col-md-6 my-auto mx-auto">
-                    <div className="text-container d-flex flex-column justify-content-center mb-5 text-center">
-                        <div className="list-group shadow-lg bg-dark">
+                <div className="col-12 col-sm-8 col-lg-6 mb-auto mx-auto">
+                    <div className="text-container d-flex flex-column justify-content-center text-center">
+                        <div className={`list-group shadow-lg bg-${colorMode}`}>
                             {solutions.map((solution, index) => (
                                 <button
                                     key={index}
                                     type="button"
-                                    className={`btn btn-light m-2 flip-button ${
+                                    className={`btn card-btn-${colorMode} m-2 flip-button ${
                                         activeButtonIndex === index ? solution === correctSolution
                                         ? "active border-2 border-success"
                                         : "active border-2 border-danger"

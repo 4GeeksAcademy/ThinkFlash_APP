@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import '../styles/loginLogout.css'
 import { sendUserInfo } from "../../utils/sendUserInfo.js";
 import { toast } from "react-toastify";
+import getPreferentColor from "../services/colors/getPreferentColor.js";
 
 export default function SignupPage() {
   const { store, actions } = useAppContext();
@@ -48,14 +49,16 @@ export default function SignupPage() {
     }
   };
 
+  const colorMode = getPreferentColor()
+
   return (
-    <div className="mt-5">
-      <h1 className="text-center">Sign Up</h1>
+    <div className="mt-5 vh-90">
+      <h1 className={`text-center text-${colorMode}`}>Sign Up</h1>
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6">
             <form onSubmit={handleFormSubmit}>
-              <div className="form-group">
+              <div className={`form-group text-${colorMode}`}>
                 <label htmlFor="username">
                   Username:
                 </label>
@@ -67,7 +70,7 @@ export default function SignupPage() {
                   onChange={(e) => setUser({ ...user, username: e.target.value })}
                 />
               </div>
-              <div className="form-group mt-2">
+              <div className={`form-group mt-2 text-${colorMode}`}>
                 <label htmlFor="emailInput">
                   Email:</label>
                 <input
@@ -78,7 +81,7 @@ export default function SignupPage() {
                   onChange={(e) => setUser({ ...user, email: e.target.value })}
                 />
               </div>
-              <div className="form-group mt-2">
+              <div className={`form-group mt-2 text-${colorMode}`}>
                 <label htmlFor="password">
                   Password:
                 </label>
@@ -90,14 +93,14 @@ export default function SignupPage() {
                   onChange={(e) => setUser({ ...user, password: e.target.value })}
                 />
               </div>
-              <div className="form-group mt-2">
+              <div className={`form-group mt-2 text-${colorMode}`}>
                 <label>
                   <input className="check" type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
                   Acepto los <a href="https://www.recetasgratis.net/receta-de-arepas-venezolanas-52618.html" target="_blank" rel="noopener noreferrer">términos y condiciones</a>
                 </label>
               </div>
               <div className="text-center">
-                <button type="submit" className="btn btn-dark mt-3" disabled={isLoading}>
+                <button type="submit" className={`btn btn-${colorMode} mt-3`} disabled={isLoading}>
                   {isLoading ? "Registrando..." : "Sign Up"}
                 </button>
               </div>
