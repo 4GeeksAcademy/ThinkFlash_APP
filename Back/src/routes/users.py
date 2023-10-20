@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_cors import CORS 
 from ..controllers import users_controllers
 from ..models import db, User, Deck
+import uuid
 
 users =Blueprint('users', __name__)
 CORS(users)
@@ -26,10 +27,18 @@ def get_users():
     except Exception as e:
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
 
-@users.route('/users/confirm/<int:user_id>', methods=['PATCH'])
-def confirm_user(user_id):
+@users.route('/users/confirm', methods=['PATCH'])
+def confirm_user():
     try:
-        user = User.query.get(user_id)
+        data = request.get_json(force=True)
+        user_uuid = data.get('user_uuid')
+        print(user_uuid, "user_uuid")
+        if not uuid.UUID(user_uuid):
+            return jsonify({"error": "UUID inválido"}), 400
+
+        user = User.query.filter_by(user_uuid=user_uuid).first()
+        print(user, "user")
+
         if user:
             user.confirmed = True
             db.session.commit()
@@ -43,12 +52,15 @@ def confirm_user(user_id):
 def send_recovery_email_route():
     try:
         data = request.get_json(force=True)
+        print("data", data)
+
         to_email = data.get('email')
         user = User.query.filter_by(email=to_email).first()
+        print("user", user)
         if user:
-            user_id = user.id
+            user_uuid = user.user_uuid
             username = user.username
-            users_controllers.send_recovery_email(to_email, user_id, username)
+            users_controllers.send_recovery_email(to_email, user_uuid, username)
             return jsonify({"message": "Email sent successfully"}), 200
         else:
             return jsonify({"error": "User not found"}), 404

@@ -7,19 +7,19 @@ import { useNavigate } from 'react-router-dom';
 
 
 export default function ConfirmUser() {
-    const { user_id } = useParams();
+    const { user_uuid } = useParams();
     const navigate  = useNavigate();
-    console.log( "userid",user_id)
-    console.log(DataBaseURL)
+
     const confirmUser = async () => {
         try {
-            const response = await fetch(`${DataBaseURL}/users/confirm/${user_id}`, {
+            const response = await fetch(`${DataBaseURL}/users/confirm`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ confirmed: true }),
+                body: JSON.stringify({ user_uuid: user_uuid}),
             });
+
 
             if (response.ok) {
                 toast('✅😊😁 Usuario confirmado, puede hacer Login y empezar a aprender!!!');

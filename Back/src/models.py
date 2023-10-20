@@ -35,6 +35,7 @@ class User(db.Model):
     password = db.Column(db.String(250), nullable=False)
     avatar = db.Column(db.String(500), nullable = True)
     confirmed = db.Column(db.Boolean, default=False)
+    user_uuid= db.Column(db.String(250), nullable=True)
     decks= db.relationship('Deck', secondary='user_deck', lazy='subquery', backref= db.backref('users', lazy=True))
     # sponsor= db.relationship('Sponsor', lazy='subquery', backref= db.backref('user', lazy=True))
     academies = db.relationship('Sponsor', secondary='students', lazy='subquery', backref= db.backref('users', lazy=True))
