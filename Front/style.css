@@ -123,3 +123,52 @@ body::-webkit-scrollbar-thumb:hover,
   transition: opacity 500ms, transform 500ms
   
 }
+
+.text-light-mode{
+  color:black
+}
+
+.btn.btn-light-mode {
+  background-color: rgba(89, 122, 172, 0.507);
+}
+
+.bg-light-mode {
+  background-color: rgba(89, 122, 172, 0.507);
+}
+
+.body-bg-light-mode {
+  background-image: url(https://static.vecteezy.com/system/resources/previews/001/966/612/non_2x/abstract-light-silver-background-vector.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+}
+
+.text-dark-mode{
+  color:white;
+}
+
+.btn.btn-dark-mode {
+  background-color: rgba(0, 0, 0, 0.726);
+  color:white
+}
+
+.bg-dark-mode {
+  background-color: rgba(150, 150, 150, 0.4);
+  color:rgb(255, 255, 255);
+}
+
+.navbar.bg-dark-mode{
+  background-color: rgba(110, 110, 110, 0.4);
+  color:white
+}
+
+.body-bg-dark-mode {
+  background-image: url(https://st.depositphotos.com/32687418/54216/i/450/depositphotos_542162292-stock-photo-old-black-background-grunge-texture.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: auto;
+  width: 100%;
+}

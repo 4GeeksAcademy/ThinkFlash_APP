@@ -52,7 +52,7 @@ export default function DashboardPage() {
   chekLogNavigate()
     
   return (
-      <div className="h-75 container">
+      <div className="vh-90 container">
         <ContainerDiv title="My Decks" height="50" link={`/${username}/mydecks`} overflow="x">
           {myDeckList.map((deck, index) =>
           (
