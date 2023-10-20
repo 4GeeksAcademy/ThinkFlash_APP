@@ -11,7 +11,7 @@ export default function getMyDecks(user_id) {
       return res.json();
     })
     .then((data) => {
-      console.log(data); 
+      // console.log(data); 
       return data;
     })
     .catch((err) => console.log(err));

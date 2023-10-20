@@ -74,7 +74,6 @@ export default function MyDecksPage() {
           return (
             <ContainerDiv key={index} subtitle={area} height="75" overflow="x">
               {deckList.map((deck, index) => {
-                console.log("importante", deck.area)
                 if (deck.area == area) {
                   return (
                     <GeneralCard key={index} title={deck.specialize} minWidth="15rem" minHeight="20rem" shadow={"-lg"}

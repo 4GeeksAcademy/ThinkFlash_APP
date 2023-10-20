@@ -75,7 +75,21 @@ export default function AllDecksPage() {
     return acc;
   }, {});
 
+  if (!Object.keys(decksByArea).length){
+    return (
+      <div className="vh-100 container">
+        <ContainerDiv title="All Decks" overflow="y" className="text-dark-mode">
+          <h1 className="pt-5">No decks are available at the moment.</h1>
+        </ContainerDiv>
+      </div>
+    );
+  }
+
+  
+
+
   return (
+    
     <div className="vh-100 container">
       <ContainerDiv title="All Decks" overflow="y">
         {Object.entries(decksByArea).map(([area, decks]) => (

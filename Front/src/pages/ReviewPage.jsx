@@ -80,7 +80,7 @@ return (
             }
 
         </ContainerDiv>
-        <ContainerDiv title="MidLearned Cards" overflow="y">
+        <ContainerDiv title="Learned Cards" overflow="y">
             {learnedCardList.map((card, index) => {
                 return(
                     <GeneralCard key={index} title={"Card"} minWidth="15rem" minHeight="20rem" shadow={"-lg"}
