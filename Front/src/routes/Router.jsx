@@ -16,6 +16,7 @@ import InfoSignUp from '../pages/InfoSignup.jsx'
 import RecoveryEmail from '../pages/RecoveryEmail.jsx'
 import RecoveryPassword from '../pages/RecoveryPassword.jsx'
 import getPreferentColor from '../services/colors/getPreferentColor';
+import ReviewPage from '../pages/ReviewPage';
 
 const Router = () => {
     const colorMode=getPreferentColor()
@@ -50,6 +51,7 @@ const Router = () => {
                     <Route path="/infoSignup" element={<InfoSignUp />} />
                     <Route path="/recoveryEmail" element={<RecoveryEmail />} />
                     <Route path="/recoveryPassword/:user_uuid" element={<RecoveryPassword />} />
+                    <Route path="/:username/:deck_id/review" element={<ReviewPage/>}/>
 
                 </Routes>
                 </div>
