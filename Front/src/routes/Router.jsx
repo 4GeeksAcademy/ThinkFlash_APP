@@ -9,6 +9,7 @@ import LoginPage from '../pages/LoginPage.jsx';
 import SignupPage from '../pages/SingupPage.jsx';
 import DashboardPage from '../pages/DashboardPage.jsx';
 import AllDecksPage from '../pages/AllDecksPage.jsx'
+import CreateCardPage from '../pages/CreateCardPage';
 import MyDecksPage from '../pages/MyDecksPage.jsx'
 import DeckGamePage from '../pages/DeckGamePage';
 import ConfirmUser from '../pages/ConfirmUser.jsx';
@@ -36,7 +37,7 @@ const Router = () => {
                     theme="dark"
 
                 />
-                <div className={`body-bg-${colorMode}`}>
+                <div className={`min-vh-100 min-vw-100 body-bg-${colorMode}`}>
                 <Navbar />
                 <Routes>
                     <Route path="/" element={<HomePage />} />
@@ -46,6 +47,7 @@ const Router = () => {
                     <Route path="/:username/alldecks" element={<AllDecksPage />} />
                     <Route path="/:username/mydecks" element={<MyDecksPage />} />
                     <Route path="/:username/:deck_id" element={<DeckGamePage />} />
+                    <Route path="/:username/:deck_id/create_card" element={<CreateCardPage />} />
                     <Route path="/user/:user_uuid" element={<ConfirmUser />} />
                     <Route path="/infoSignup" element={<InfoSignUp />} />
                     <Route path="/recoveryEmail" element={<RecoveryEmail />} />
