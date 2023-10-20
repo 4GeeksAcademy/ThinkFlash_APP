@@ -3,6 +3,7 @@ import GeneralCard from "../components/GeneralCard/GeneralCard";
 import chekLogNavigate from "../../utils/checkLogNavigate";
 import getMyDecks from "../services/decks/getMyDecks";
 import useAppContext from "../../context/AppContext";
+import getDeckProgress from "../services/decks/getDeckProgress";
 import "../../style.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -12,6 +13,7 @@ import LoadingPage from "./LoadingPage";
 export default function MyDecksPage() {
   const [deckList, setDeckList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [myProgressList, setMyProgressList] = useState({});
   const { store } = useAppContext();
   const { username, id } = store;
 
@@ -32,6 +34,25 @@ export default function MyDecksPage() {
         setIsLoading(false);
       });
   }, [id]);
+
+  useEffect(() => {
+    const fetchProgress = async () => {
+      const progressList = {};
+      for (const deck of deckList) {
+        try {
+          const progress = await getDeckProgress({ user_id: id, deck_id: deck.id });
+          progressList[deck.id] = progress;
+        } catch (error) {
+          console.error("Error fetching deck progress:", error);
+        }
+      }
+      setMyProgressList(progressList);
+    };
+
+    if (deckList.length > 0) {
+      fetchProgress();
+    }
+  }, [deckList, id]);
 
   const getDecksAreas = () => {
     const Areas = [...new Set(deckList.map(objeto => objeto.area))];
@@ -57,7 +78,7 @@ export default function MyDecksPage() {
                 if (deck.area == area) {
                   return (
                     <GeneralCard key={index} title={deck.specialize} minWidth="15rem" minHeight="20rem" shadow={"-lg"}
-                      progress={progress}
+                      progress={myProgressList[deck.id]}
                     >
                       {deck.theme}
                       <div className="d-flex mt-3">
