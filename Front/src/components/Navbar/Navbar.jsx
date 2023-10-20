@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import useAppContext from "../../../context/AppContext";
 import useLogout from "../../../utils/useLogout";
 import classes from "./styles.module.css"
+import getPreferentColor from "../../services/colors/getPreferentColor";
 
 
 
@@ -14,6 +15,7 @@ export default function Navbar() {
     const { avatar } = store;
 
     let conditionalLinks = null;
+    const colorMode = getPreferentColor()
 
     if (token == "" || !token) {
         conditionalLinks = (
@@ -34,7 +36,7 @@ export default function Navbar() {
 
     return (
 
-        <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+        <nav className={`navbar navbar-expand-md bg-${colorMode}`}>
             <div className="container-fluid">
                 <Link to={token == "" || !token ? "/" : `/${username}`} className="navbar-brand ps-3 h-100 d-flex">
                     <img src='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png' alt="Logo" width="auto" height="60px" />

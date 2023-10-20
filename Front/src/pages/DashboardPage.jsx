@@ -52,7 +52,7 @@ export default function DashboardPage() {
   chekLogNavigate()
     
   return (
-      <div className="h-75 container">
+      <div className="vh-90 container">
         <ContainerDiv title="My Decks" height="50" link={`/${username}/mydecks`} overflow="x">
           {myDeckList.map((deck, index) =>
           (
@@ -71,7 +71,7 @@ export default function DashboardPage() {
 
               getDecksAreas().map((area, index) => (
                 <GeneralCard key={index} title={area} minWidth="10rem" minHeight="13rem" shadow={""}
-                img="https://learning-corner.learning.europa.eu/sites/default/files/styles/oe_theme_medium_no_crop/public/2021-12/eurocoin_0.png?itok=I_UddCl2">
+                img="https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png">
                   {area}
                 </GeneralCard>
               ))
