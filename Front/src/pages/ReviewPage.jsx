@@ -55,6 +55,48 @@ return (
          <ContainerDiv title="To Learn Cards" overflow="y">
             {toLearnCardList.map((card, index) => {
                 return(
+                    <GeneralCard key={index} title={card.concept} minWidth="15rem" minHeight="20rem" shadow={"-lg"}
+                    className=""
+                    img='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png'>
+                        {card.description}
+                    </GeneralCard>
+                )
+            })
+
+            }
+
+        </ContainerDiv>
+        <ContainerDiv title="To Learn Cards" overflow="y">
+            {toLearnCardList.map((card, index) => {
+                return(
+                    <GeneralCard key={index} title={"Card"} minWidth="15rem" minHeight="20rem" shadow={"-lg"}
+                    className=""
+                    img='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png'>
+                        hola
+                    </GeneralCard>
+                )
+            })
+
+            }
+
+        </ContainerDiv>
+        <ContainerDiv title="MidLearned Cards" overflow="y">
+            {midLearnedCardList.map((card, index) => {
+                return(
+                    <GeneralCard key={index} title={"Card"} minWidth="15rem" minHeight="20rem" shadow={"-lg"}
+                    className=""
+                    img='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png'>
+                        hola
+                    </GeneralCard>
+                )
+            })
+
+            }
+
+        </ContainerDiv>
+        <ContainerDiv title="MidLearned Cards" overflow="y">
+            {learnedCardList.map((card, index) => {
+                return(
                     <GeneralCard key={index} title={"Card"} minWidth="15rem" minHeight="20rem" shadow={"-lg"}
                     className="">
                         hola
@@ -64,14 +106,6 @@ return (
 
             }
 
-        <GeneralCard
-            title="Sample Card"
-            minWidth="18rem"
-            minHeight="200px"
-            shadow=""
-        >
-            This is a sample card content.
-        </GeneralCard>
         </ContainerDiv>
     </div>
 );
