@@ -26,7 +26,7 @@ export default function getDeckProgress({ user_id, deck_id }) {
                 progress.midLearned++;
             }
         }
-
+        console.log(progress)
         return progress;
     })
     .catch((error) => {

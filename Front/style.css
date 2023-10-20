@@ -19,26 +19,6 @@
     margin-right: 20px;
 }
 
-
-
-body::-webkit-scrollbar,
-.containerDiv::-webkit-scrollbar {
-  height: 8px;
-  width: 5px;
-  background: transparent;
-}
-
-body::-webkit-scrollbar-thumb,
-.containerDiv::-webkit-scrollbar-thumb {
-  border-radius: 5px;
-  background: #212529;
-}
-
-body::-webkit-scrollbar-thumb:hover,
-.containerDiv::-webkit-scrollbar-thumb:hover {
-  background: #212529;
-}
-
 .h-10 {
   height: 10vh;
 }
@@ -59,6 +39,28 @@ body::-webkit-scrollbar-thumb:hover,
   min-width: 100%;
 }
 
+/* Estilos de las scrollbar */
+body::-webkit-scrollbar,
+.containerDiv::-webkit-scrollbar {
+  height: 8px;
+  width: 5px;
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb,
+.containerDiv::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #212529;
+}
+
+body::-webkit-scrollbar-thumb:hover,
+.containerDiv::-webkit-scrollbar-thumb:hover {
+  background: #212529;
+}
+
+
+
+/* Efectos de entrada de la card */
 .fade-enter{
   opacity: 0;
   transform: translateX(-100%);
