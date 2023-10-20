@@ -6,7 +6,9 @@ import LoadingPage from "./LoadingPage";
 import '../styles/allDecksActivation.css';
 import "../../style.css"
 import ContainerDiv from "../components/ContainerDiv";
-import GeneralCard from "../components/GeneralCard/GeneralCard";  // Ensure this path is correct
+import GeneralCard from "../components/GeneralCard/GeneralCard";
+import { Link } from "react-router-dom";
+import useAppContext from "../../context/AppContext";
 
 const DataBaseURL = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -17,6 +19,8 @@ export default function AllDecksPage() {
   const [allDecksData, setAllDecksData] = useState([]);
   const [decksToShow, setDecksToShow] = useState([]);
   const [activatedCards, setActivatedCards] = useState([]);
+  const {store} = useAppContext();
+  const { username, id } = store;
 
   useEffect(() => {
     setUserId(sessionStorage.getItem("user_id"));
@@ -75,16 +79,19 @@ export default function AllDecksPage() {
     return acc;
   }, {});
 
-  if (!Object.keys(decksByArea).length){
+  if (!Object.keys(decksByArea).length) {
     return (
       <div className="vh-100 container">
-        <ContainerDiv title="All Decks" overflow="y" className="text-dark-mode">
-          <h1 className="pt-5">No decks are available at the moment.</h1>
+        <ContainerDiv title="All Decks" overflow="y" className="text-dark-mode justify-content-center align-items-center flex-direction-row">
+        <div className="text-center g-0">
+          <p className="pt-5 text-white">
+          You activated all the available decks!! 😊 <br /> Go to <Link to={`../../${username}/mydecks`}>My decks</Link> to start learning
+          </p>
+          </div>
         </ContainerDiv>
       </div>
     );
   }
-
   
 
 
