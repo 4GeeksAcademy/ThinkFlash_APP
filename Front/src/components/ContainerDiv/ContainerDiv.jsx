@@ -18,7 +18,7 @@ export default function ContainerDiv({ children, height, title, link, overflow, 
                 <div className="border border-0 container">
                     <div className={`w-100 border-0 align-baseline d-flex justify-content-between align-items-end bg-transparent text-${colorMode}`}>
                         <h2 className="mb-0 mt-0">{subtitle}</h2>
-                        {link && <Link to={link} className="ms-auto me-0 fs-7 text-body-secondary text-end">View all</Link>}
+                        {link && <Link to={link} className={`ms-auto me-0 fs-7 text-${colorMode} text-end`}>View all</Link>}
                     </div>
                 </div>
                 <div className={`${overflow !== "y" ? generateOverflowXClass() : generateOverflowYClass()}`}>
@@ -32,7 +32,7 @@ export default function ContainerDiv({ children, height, title, link, overflow, 
             <div className="border border-0 h-25">
                 <div className={`w-100 border-bottom align-baseline d-flex justify-content-between align-items-end bg-transparent text-${colorMode}`}>
                     <h1 className="mb-0 mt-0">{title}</h1>
-                    {link && <Link to={link} className="ms-auto me-0 fs-7 text-body-secondary text-end">View all</Link>}
+                    {link && <Link to={link} className={`ms-auto me-0 fs-7 text-${colorMode} text-end`}>View all</Link>}
                 </div>
             </div>
             <div className={ overflow !== "y" ? generateOverflowXClass() : generateOverflowYClass()}>
