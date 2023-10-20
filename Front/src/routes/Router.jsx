@@ -43,10 +43,10 @@ const Router = () => {
                     <Route path="/:username/alldecks" element={<AllDecksPage />} />
                     <Route path="/:username/mydecks" element={<MyDecksPage />} />
                     <Route path="/:username/:deck_id" element={<DeckGamePage />} />
-                    <Route path="/user/:user_id" element={<ConfirmUser />} />
+                    <Route path="/user/:user_uuid" element={<ConfirmUser />} />
                     <Route path="/infoSignup" element={<InfoSignUp />} />
                     <Route path="/recoveryEmail" element={<RecoveryEmail />} />
-                    <Route path="/recoveryPassword/:user_id" element={<RecoveryPassword />} />
+                    <Route path="/recoveryPassword/:user_uuid" element={<RecoveryPassword />} />
 
                 </Routes>
             </AppContextProvider>
