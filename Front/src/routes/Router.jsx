@@ -39,7 +39,7 @@ const Router = () => {
                     theme="dark"
 
                 />
-                <div className={`min-vh-100 min-vw-100 body-bg-${colorMode}`}>
+                <div className={`min-vh-100 body-bg-${colorMode} d-flex flex-column`}>
                 <Navbar />
                 <Routes>
                     <Route path="/" element={<HomePage />} />

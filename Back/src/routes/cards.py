@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from ..models import db, User, Card, Deck, Score_per_Card, Fake_concept, Fake_description
+from ..models import db, User, Card, Deck, Score_per_Card, Fake_concept, Fake_description, card_deck
 # from ..controllers import cards_controllers
 
 cards =Blueprint('cards', __name__)
@@ -12,8 +12,8 @@ def get_cards():
     except Exception as e:
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
     
-@cards.route('/users/<int:user_id>/decks/<int:deck_id>/cards', methods=['GET'])
-def get_deck_cards(user_id, deck_id):
+@cards.route('/users/<int:user_id>/decks/<int:deck_id>/cards', methods=['GET', 'POST'])
+def manage_deck_cards(user_id, deck_id):
     try:
         user = User.query.get(user_id)
         deck = Deck.query.get(deck_id)
@@ -27,6 +27,38 @@ def get_deck_cards(user_id, deck_id):
         if deck not in user.decks:
             return jsonify({'error': 'User does not have access to this deck'}), 403
 
+        if request.method == 'POST':
+            data = request.get_json()
+            description = data.get('description')
+            concept = data.get('concept')
+            fake_concepts = data.get('fake_concepts', [])
+            fake_descriptions = data.get('fake_descriptions', [])
+
+            try:
+                new_card = Card(description=description, concept=concept, author=user.id, area=deck.area)
+                db.session.add(new_card)
+                db.session.commit()
+
+                for fake_concept in fake_concepts:
+                    new_fake_concept = Fake_concept(concept=fake_concept, card_id=new_card.id)
+                    db.session.add(new_fake_concept)
+
+                for fake_description in fake_descriptions:
+                    new_fake_description = Fake_description(description=fake_description, card_id=new_card.id)
+                    db.session.add(new_fake_description)
+
+                db.session.commit()
+
+                card_deck_association = card_deck.insert().values(card_id=new_card.id, deck_id=deck.id)
+                db.session.execute(card_deck_association)
+                db.session.commit()
+
+                return jsonify({'message': 'Card created successfully'}), 201
+
+            except Exception as e:
+                db.session.rollback()
+                return jsonify({'error': str(e)}), 500
+            
         cards_with_score = []
         for card in deck.cards:
             score_per_card = Score_per_Card.query.filter_by(user_id=user_id, card_id=card.id).first()
