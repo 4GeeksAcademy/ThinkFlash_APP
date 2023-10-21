@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import HomePage from '../pages/HomePage.jsx';
 import LoginPage from '../pages/LoginPage.jsx';
 import SignupPage from '../pages/SingupPage.jsx';
@@ -17,6 +18,7 @@ import InfoSignUp from '../pages/InfoSignup.jsx'
 import RecoveryEmail from '../pages/RecoveryEmail.jsx'
 import RecoveryPassword from '../pages/RecoveryPassword.jsx'
 import getPreferentColor from '../services/colors/getPreferentColor';
+import ReviewPage from '../pages/ReviewPage';
 
 const Router = () => {
     const colorMode=getPreferentColor()
@@ -52,8 +54,10 @@ const Router = () => {
                     <Route path="/infoSignup" element={<InfoSignUp />} />
                     <Route path="/recoveryEmail" element={<RecoveryEmail />} />
                     <Route path="/recoveryPassword/:user_uuid" element={<RecoveryPassword />} />
+                    <Route path="/:username/:deck_id/review" element={<ReviewPage/>}/>
 
                 </Routes>
+                <Footer/>
                 </div>
             </AppContextProvider>
         </BrowserRouter>

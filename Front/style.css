@@ -19,6 +19,10 @@
     margin-right: 20px;
 }
 
+.custom-spinner {
+  background-color: transparent;
+}
+
 .h-10 {
   height: 10vh;
 }
@@ -164,6 +168,6 @@ body::-webkit-scrollbar-thumb:hover,
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
-  height:auto;
+  height: auto;
   width: 100%;
 }

@@ -8,6 +8,7 @@ import "../../style.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import getPreferentColor from "../services/colors/getPreferentColor";
+import LoadingPage from "./LoadingPage";
 
 export default function MyDecksPage() {
   const [deckList, setDeckList] = useState([]);
@@ -60,16 +61,19 @@ export default function MyDecksPage() {
 
   const colorMode = getPreferentColor()
 
+
   chekLogNavigate()
+  if (isLoading){
+    return <LoadingPage/>
+  }
 
   return (
-    <div className="h-75 container">
+    <div className="h-auto container">
       <ContainerDiv title="My Decks" overflow="y">
         {getDecksAreas().map((area, index) => {
           return (
             <ContainerDiv key={index} subtitle={area} height="75" overflow="x">
               {deckList.map((deck, index) => {
-                console.log("importante", deck.area)
                 if (deck.area == area) {
                   return (
                     <GeneralCard key={index} title={deck.specialize} minWidth="15rem" minHeight="20rem" shadow={"-lg"}
@@ -77,7 +81,8 @@ export default function MyDecksPage() {
                     >
                       {deck.theme}
                       <div className="d-flex mt-3">
-                        <Link to={`../../${username}/${deck.id}`} className={`btn card-btn-${colorMode} my-auto w-100`}>Go Game</Link>
+                        <Link to={`../../${username}/${deck.id}`} className={`btn card-btn-${colorMode} my-auto w-100 me-2`}>Go Game</Link>
+                        <Link to={`../../${username}/${deck.id}/review`} className={`btn card-btn-${colorMode} my-auto w-100`}>Review</Link>
                       </div>
                     </GeneralCard>
                   )

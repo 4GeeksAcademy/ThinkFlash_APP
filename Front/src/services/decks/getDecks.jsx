@@ -9,7 +9,7 @@ export default function getDecks() {
       return res.json();
     })
     .then((data) => {
-      console.log(data); 
+      // console.log(data); 
       return data;
     })
     .catch((err) => console.log(err));
