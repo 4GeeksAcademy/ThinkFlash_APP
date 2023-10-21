@@ -16,6 +16,7 @@ export default function MyDecksPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [myProgressList, setMyProgressList] = useState({});
   const [deleteMode, setDeleteMode] = useState(false);
+  const [deactivating, setDeactivating] = useState(false); 
   const { store } = useAppContext();
   const { username, id } = store;
 
@@ -61,22 +62,28 @@ export default function MyDecksPage() {
     setDeleteMode(!deleteMode);
   };
 
-  const handleDeleteDeck = (deckId) => {
-    console.log(deckId)
+  const handleDeactivateDeck = (deckId) => {
+    
+    setDeactivating(true);
+
     resetCardsScore(id, deckId)
       .then(() => {
         removeDeckFromUser(id, deckId)
           .then(() => {
+           
             setTimeout(() => {
               setDeckList((prevDeckList) => prevDeckList.filter((deck) => deck.id !== deckId));
+              setDeactivating(false); 
             }, 2000);
           })
           .catch((error) => {
             console.error('Error removing deck from user:', error);
+            setDeactivating(false); 
           });
       })
       .catch((error) => {
-        console.error('Error resetting card scores:', error);
+        console.error('Error deactivating deck:', error);
+        setDeactivating(false); 
       });
   };
 
@@ -98,42 +105,47 @@ export default function MyDecksPage() {
     );
   }
 
+  
+  const areas = getDecksAreas();
+  const nonEmptyAreas = areas.filter((area) => deckList.some((deck) => deck.area === area));
+
   return (
     <div className="h-auto container">
       <button className={`btn card-btn-${colorMode} float-end me-3`} onClick={toggleDeleteMode}>
         {deleteMode ? <i className="fa-solid fa-arrow-right-from-bracket"></i> : <i className="fas fa-edit"></i>}
       </button>
-
       <ContainerDiv title="My Decks" overflow="y">
-        {getDecksAreas().map((area, index) => (
-          <ContainerDiv key={index} subtitle={area} height="75" overflow="x">
-            {deckList.map((deck, index) => {
-              if (deck.area === area) {
-                return (
-                  <div key={index} className={`deck-card${deleteMode ? ' shake' : ''}`}>
+        {nonEmptyAreas.map((area, index) => {
+          const areaDecks = deckList.filter((deck) => deck.area === area);
+          return (
+            <ContainerDiv key={index} subtitle={area} height="75" overflow="x">
+              {areaDecks.map((deck, index) => (
+                <div key={index} className={`deck-card${deleteMode ? ' shake' : ''}`}>
 
-                    <GeneralCard title={deck.specialize} minWidth="15rem" minHeight="20rem" shadow="-lg" progress={myProgressList[deck.id]}>
-                      {deck.theme}
-                      {!deleteMode ?  (
-                        <div className="d-flex mt-3">
-                          <Link to={`../../${username}/${deck.id}`} className={`btn card-btn-${colorMode} my-auto w-100 me-2`}>Go Game</Link>
-                          <Link to={`../../${username}/${deck.id}/review`} className={`btn card-btn-${colorMode} my-auto w-100`}>Review</Link>
-                        </div>
-                      ): (
-                        <div>
-                          <btn className="btn btn-danger" onClick={() => handleDeleteDeck(deck.id)}>
-                            {/* <i className="fas fa-circle-minus text-white" style={{ color: '#d20f0f' }}> Delete</i> */}
-                            DELETE
-                          </btn>
-                        </div>
-                      )}
-                    </GeneralCard>
-                  </div>
-                );
-              }
-            })}
-          </ContainerDiv>
-        ))}
+                  <GeneralCard title={deck.specialize} minWidth="15rem" minHeight="20rem" shadow="-lg" progress={myProgressList[deck.id]}>
+                    {deck.theme}
+                    {deleteMode ? (
+                      <div className="d-flex mt-3 justify-content-center">
+                        <button className="btn btn-danger" onClick={() => handleDeactivateDeck(deck.id)}>
+                          {deactivating ? 'Deactivating...' : 'Deactivate'}
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="d-flex mt-3">
+                        <Link to={`../../${username}/${deck.id}`} className={`btn card-btn-${colorMode} my-auto w-100 me-2`}>
+                          Go Game
+                        </Link>
+                        <Link to={`../../${username}/${deck.id}/review`} className={`btn card-btn-${colorMode} my-auto w-100`}>
+                          Review
+                        </Link>
+                      </div>
+                    )}
+                  </GeneralCard>
+                </div>
+              ))}
+            </ContainerDiv>
+          );
+        })}
       </ContainerDiv>
     </div>
   );
