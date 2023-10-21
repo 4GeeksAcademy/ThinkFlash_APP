@@ -51,7 +51,7 @@ console.log("tolearnlist", toLearnCardList)
 const colorMode = getPreferentColor();
 
 return (
-    <div className="vh-90 container">
+    <div className="h-auto container">
          <ContainerDiv title="To Learn Cards" overflow="y">
             {toLearnCardList.map((card, index) => {
                 return(
@@ -69,10 +69,10 @@ return (
         <ContainerDiv title="MidLearned Cards" overflow="y">
             {midLearnedCardList.map((card, index) => {
                 return(
-                    <GeneralCard key={index} title={"Card"} minWidth="15rem" minHeight="20rem" shadow={"-lg"}
+                    <GeneralCard key={index} title={card.concept} minWidth="15rem" minHeight="20rem" shadow={"-lg"}
                     className=""
                     img='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png'>
-                        hola
+                        {card.description}
                     </GeneralCard>
                 )
             })
@@ -83,9 +83,10 @@ return (
         <ContainerDiv title="Learned Cards" overflow="y">
             {learnedCardList.map((card, index) => {
                 return(
-                    <GeneralCard key={index} title={"Card"} minWidth="15rem" minHeight="20rem" shadow={"-lg"}
-                    className="">
-                        hola
+                    <GeneralCard key={index} title={card.concept} minWidth="15rem" minHeight="20rem" shadow={"-lg"}
+                    className=""
+                    img='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png'>
+                        {card.description}
                     </GeneralCard>
                 )
             })
