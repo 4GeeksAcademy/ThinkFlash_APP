@@ -56,11 +56,6 @@ export default function HomePage () {
 					</div>
 				</div>
 			</div>
-			<footer>
-				<div className={`text-center mt-3 p-4 bg-${colorMode}`}>
-    				© 2023 Think Flash 2023
-  				</div>
-			</footer>
 			</div>
 		</div>
 		

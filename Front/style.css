@@ -165,7 +165,8 @@ body::-webkit-scrollbar-thumb:hover,
 .body-bg-dark-mode {
   background-image: url(https://wallpapercave.com/wp/wp6418808.jpg);
   background-size: cover;
-  background-position: center;
+  background-repeat: no-repeat;
+  background-position: center center;
   background-attachment: fixed;
   height: auto;
   width: 100%;

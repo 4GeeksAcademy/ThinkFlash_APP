@@ -81,7 +81,7 @@ export default function AllDecksPage() {
 
   if (!Object.keys(decksByArea).length) {
     return (
-      <div className="vh-100 container">
+      <div className="h-auto container">
         <ContainerDiv title="All Decks" overflow="y" className="text-dark-mode justify-content-center align-items-center flex-direction-row">
         <div className="text-center g-0">
           <p className="pt-5 text-white">
@@ -97,7 +97,7 @@ export default function AllDecksPage() {
 
   return (
     
-    <div className="vh-100 container">
+    <div className="h-auto container">
       <ContainerDiv title="All Decks" overflow="y">
         {Object.entries(decksByArea).map(([area, decks]) => (
           <ContainerDiv key={area} subtitle={area} height="50" overflow="x">

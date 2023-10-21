@@ -68,7 +68,7 @@ export default function MyDecksPage() {
   }
 
   return (
-    <div className="vh-90 container">
+    <div className="h-auto container">
       <ContainerDiv title="My Decks" overflow="y">
         {getDecksAreas().map((area, index) => {
           return (
