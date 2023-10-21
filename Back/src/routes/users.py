@@ -130,3 +130,27 @@ def my_decks(user_id):
         return jsonify({'decks': decks})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+
+@users.route('/users/<int:user_id>/decks/<int:deck_id>/remove', methods=['PATCH'])
+def remove_deck(user_id, deck_id):
+    try:
+        user = User.query.get(user_id)
+        if user is None:
+            return jsonify({'message': 'User not found'}), 404
+
+        deck = Deck.query.get(deck_id)
+        if deck is None:
+            return jsonify({'message': 'Deck not found'}), 404
+
+        if deck in user.decks:
+            user.decks.remove(deck)
+            db.session.commit()
+            return jsonify({'message': 'Deck removed from user'}), 200
+        else:
+            return jsonify({'message': 'Deck not associated with this user'}), 400
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+
+
+

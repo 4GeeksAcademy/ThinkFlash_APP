@@ -28,11 +28,11 @@ export default function AllDecksPage() {
         setUserDecks(userDecksResponse.decks);
         const myDeckIds = userDecksResponse.decks.map((deck) => deck.id);
         setDecksToShow(allDecksResponse.decks.filter((deck) => !myDeckIds.includes(deck.id)).sort((a, b) => a.area.localeCompare(b.area)));
-        setIsLoading(false); // Set isLoading to false when data is ready
+        setIsLoading(false); 
       })
       .catch((error) => {
         console.error('Error fetching decks:', error);
-        setIsLoading(false); // Ensure isLoading is set to false even on error
+        setIsLoading(false); 
       });
   }, [userId]);
 
