@@ -97,6 +97,7 @@ class Card(db.Model):
     description = db.Column(db.String(250), unique=False, nullable=False)
     concept = db.Column(db.String(250), unique=False, nullable=False)
     area = db.Column(db.String(120), unique=False, nullable=False)
+    author = db.Column(db.Integer, db.ForeignKey('user.id'), nullable = True)
     fake_concepts= db.relationship('Fake_concept', backref= db.backref('cards', lazy=True))
     fake_descriptions= db.relationship('Fake_description', backref= db.backref('cards', lazy=True))
     score = db.relationship('Score_per_Card', backref='card', lazy=True)
@@ -109,7 +110,8 @@ class Card(db.Model):
             "id": self.id,
             "description": self.description,
             "concept": self.concept,
-            "area": self.area
+            "area": self.area,
+            "author": self.author
         }
     
 
