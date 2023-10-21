@@ -143,9 +143,9 @@ export default function DeckGamePage() {
     chekLogNavigate();
 
     return (
-        <div className="container vh-90">
+        <div className="container d-flex flex-column justify-content-center vh-90">
             <div className="row h-100">
-                <div className="mx-auto col-12  mb-0 mt-auto d-flex justify-content-center">
+                <div className="mx-auto col-12 d-flex justify-content-center">
                     <SwitchTransition mode="out-in">
                         <CSSTransition
                             key={activeButtonIndex}
