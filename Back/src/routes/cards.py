@@ -118,3 +118,30 @@ def change_card_score(user_id, deck_id, card_id):
     except Exception as e:
         return jsonify({"error": f"Error al cambiar el score: {str(e)}"}), 500
 
+@cards.route('/users/<int:user_id>/decks/<int:deck_id>/card_score/reset', methods=['PATCH'])
+def reset_card_score(user_id, deck_id):
+    try:
+        user = User.query.get(user_id)
+        deck = Deck.query.get(deck_id)
+
+        if user is None:
+            return jsonify({'error': f'User with ID {user_id} not found'}), 404
+
+        if deck is None:
+            return jsonify({'error': f'Deck with ID {deck_id} not found'}), 404
+
+        if deck not in user.decks:
+            return jsonify({'error': 'User does not have access to this deck'}), 403
+        
+        card_ids = [card.id for card in deck.cards]
+        for card_id in card_ids:
+            score_per_card = Score_per_Card.query.filter_by(user_id=user_id, card_id=card_id).first()
+            if score_per_card is not None:
+                score_per_card.score = 1
+
+        db.session.commit()
+
+        return jsonify({'message': f'Scores for cards in Deck ID {deck_id} reset to 1'})
+
+    except Exception as e:
+        return jsonify({"error": f"Error resetting scores: {str(e)}"}), 500

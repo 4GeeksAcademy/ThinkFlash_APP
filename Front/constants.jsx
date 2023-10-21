@@ -1,6 +1,6 @@
 export const DataBaseURL = import.meta.env.VITE_REACT_APP_API_URL
 
-// Develop data examples:
+
 
 export const allDecksData = [
     {
