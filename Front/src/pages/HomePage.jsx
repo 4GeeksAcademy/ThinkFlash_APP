@@ -26,7 +26,7 @@ export default function HomePage () {
 						</div>
 						<div className="col-md-6">
 							<div className="image-container mb-5 px-4">
-							<img src="https://i.ibb.co/rtBZyJW/8-Online-Learning-isolated.png" alt="" className="img-fluid"/>
+							<img src="https://static.wixstatic.com/media/5bac31_65de7c75fdd54cff838e56165e8b849a~mv2.gif" alt="" className="img-fluid"/>
 							</div>
 						</div>
 					</div>

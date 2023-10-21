@@ -67,7 +67,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="h-auto container">
+    <div className="vh-90 h-auto container">
       <ContainerDiv title="My Decks" height="50" link={`/${username}/mydecks`} overflow="x">
         {myDeckList.length ? (
           myDeckList.map((deck, index) => (

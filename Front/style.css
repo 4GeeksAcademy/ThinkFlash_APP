@@ -32,7 +32,10 @@
 }
 
 .vh-90 {
-  height: 90vh;
+  min-height: 90vh;
+}
+.vh-80 {
+  height: 81vh;
 }
 
 .min-h-100 {
