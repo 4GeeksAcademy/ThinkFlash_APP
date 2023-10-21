@@ -28,12 +28,11 @@ export default function AllDecksPage() {
         setUserDecks(userDecksResponse.decks);
         const myDeckIds = userDecksResponse.decks.map((deck) => deck.id);
         setDecksToShow(allDecksResponse.decks.filter((deck) => !myDeckIds.includes(deck.id)).sort((a, b) => a.area.localeCompare(b.area)));
+        setIsLoading(false); // Set isLoading to false when data is ready
       })
       .catch((error) => {
         console.error('Error fetching decks:', error);
-      })
-      .finally(() => {
-        setIsLoading(false);
+        setIsLoading(false); // Ensure isLoading is set to false even on error
       });
   }, [userId]);
 
@@ -65,26 +64,7 @@ export default function AllDecksPage() {
   if (isLoading) {
     return <LoadingPage />;
   }
-
-  if (decksToShow.length === 0) {
-    return (
-      <div className="h-auto container">
-        <ContainerDiv
-          title="All Decks"
-          overflow="y"
-          className="text-dark-mode justify-content-center align-items-center flex-direction-row"
-        >
-          <div className="text-center g-0">
-            <p className="pt-5 text-white">
-              You activated all the available decks!! 😊 <br /> Go to{' '}
-              <Link to={`../../${username}/mydecks`}>My decks</Link> to start learning
-            </p>
-          </div>
-        </ContainerDiv>
-      </div>
-    );
-  }
-
+  if (decksToShow.length){
   const decksByArea = decksToShow.reduce((acc, deck) => {
     if (!acc[deck.area]) {
       acc[deck.area] = [];
@@ -127,4 +107,25 @@ export default function AllDecksPage() {
       </ContainerDiv>
     </div>
   );
+}
+  if (!decksToShow.length) {
+    return (
+      <div className="h-auto container">
+        <ContainerDiv
+          title="All Decks"
+          overflow="y"
+          className="text-dark-mode justify-content-center align-items-center flex-direction-row"
+        >
+          <div className="text-center g-0">
+            <p className="pt-5 text-white">
+              You activated all the available decks!! 😊 <br /> Go to{' '}
+              <Link to={`../../${username}/mydecks`}>My decks</Link> to start learning
+            </p>
+          </div>
+        </ContainerDiv>
+      </div>
+    );
+  }
+
+
 }
