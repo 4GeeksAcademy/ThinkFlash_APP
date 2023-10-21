@@ -1,14 +1,13 @@
-import getDecks from "../services/decks/getDecks";
-import getDMyDecks from "../services/decks/getMyDecks";
-import chekLogNavigate from "../../utils/checkLogNavigate";
-import { useEffect, useState } from "react";
-import LoadingPage from "./LoadingPage";
+import React, { useEffect, useState } from 'react';
+import ContainerDiv from '../components/ContainerDiv';
+import GeneralCard from '../components/GeneralCard/GeneralCard';
+import getDecks from '../services/decks/getDecks';
+import getDMyDecks from '../services/decks/getMyDecks';
+import useAppContext from '../../context/AppContext';
+import { Link } from 'react-router-dom';
+import LoadingPage from './LoadingPage';
 import '../styles/allDecksActivation.css';
-import "../../style.css"
-import ContainerDiv from "../components/ContainerDiv";
-import GeneralCard from "../components/GeneralCard/GeneralCard";
-import { Link } from "react-router-dom";
-import useAppContext from "../../context/AppContext";
+import '../../style.css';
 
 const DataBaseURL = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -16,21 +15,19 @@ export default function AllDecksPage() {
   const [userId, setUserId] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [userDecks, setUserDecks] = useState([]);
-  const [allDecksData, setAllDecksData] = useState([]);
   const [decksToShow, setDecksToShow] = useState([]);
   const [activatedCards, setActivatedCards] = useState([]);
-  const {store} = useAppContext();
+  const { store } = useAppContext();
   const { username, id } = store;
 
   useEffect(() => {
-    setUserId(sessionStorage.getItem("user_id"));
+    setUserId(sessionStorage.getItem('user_id'));
 
     Promise.all([getDMyDecks(userId), getDecks()])
       .then(([userDecksResponse, allDecksResponse]) => {
         setUserDecks(userDecksResponse.decks);
-        setAllDecksData(allDecksResponse.decks);
         const myDeckIds = userDecksResponse.decks.map((deck) => deck.id);
-        setDecksToShow(allDecksResponse.decks.filter((deck) => !myDeckIds.includes(deck.id)));
+        setDecksToShow(allDecksResponse.decks.filter((deck) => !myDeckIds.includes(deck.id)).sort((a, b) => a.area.localeCompare(b.area)));
       })
       .catch((error) => {
         console.error('Error fetching decks:', error);
@@ -43,9 +40,9 @@ export default function AllDecksPage() {
   const handleClickActive = async (user_id, deck_id) => {
     try {
       const response = await fetch(`${DataBaseURL}/users/add_deck/${user_id}/${deck_id}`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
 
@@ -61,14 +58,31 @@ export default function AllDecksPage() {
         console.error(`Error activating deck ${deck_id}`);
       }
     } catch (error) {
-      console.error("Error activating deck:", error);
+      console.error('Error activating deck:', error);
     }
   };
 
-  chekLogNavigate();
-
   if (isLoading) {
-    return <LoadingPage/>
+    return <LoadingPage />;
+  }
+
+  if (decksToShow.length === 0) {
+    return (
+      <div className="h-auto container">
+        <ContainerDiv
+          title="All Decks"
+          overflow="y"
+          className="text-dark-mode justify-content-center align-items-center flex-direction-row"
+        >
+          <div className="text-center g-0">
+            <p className="pt-5 text-white">
+              You activated all the available decks!! 😊 <br /> Go to{' '}
+              <Link to={`../../${username}/mydecks`}>My decks</Link> to start learning
+            </p>
+          </div>
+        </ContainerDiv>
+      </div>
+    );
   }
 
   const decksByArea = decksToShow.reduce((acc, deck) => {
@@ -79,24 +93,7 @@ export default function AllDecksPage() {
     return acc;
   }, {});
 
-  if (!Object.keys(decksByArea).length) {
-    return (
-      <div className="h-auto container">
-        <ContainerDiv title="All Decks" overflow="y" className="text-dark-mode justify-content-center align-items-center flex-direction-row">
-        <div className="text-center g-0">
-          <p className="pt-5 text-white">
-          You activated all the available decks!! 😊 <br /> Go to <Link to={`../../${username}/mydecks`}>My decks</Link> to start learning
-          </p>
-          </div>
-        </ContainerDiv>
-      </div>
-    );
-  }
-  
-
-
   return (
-    
     <div className="h-auto container">
       <ContainerDiv title="All Decks" overflow="y">
         {Object.entries(decksByArea).map(([area, decks]) => (
@@ -110,20 +107,17 @@ export default function AllDecksPage() {
                     minWidth="16rem"
                     minHeight="300px"
                     shadow=""
-                    // review={activatedCards.includes(deck.id) ? 'Deck Activated!' : 'Activate'}
-                    img='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png'
-                    // progress={deck.specialize}
+                    img="https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png"
                     onClick={() => handleClickActive(userId, deck.id)}
-                    className = ""
                   >
-                      <div className="justify-content-center d-flex">
-                        <button
-                          className="btn btn-dark justify-content-center w-100"
-                          onClick={() => handleClickActive(userId, deck.id)}
-                        >
-                          {activatedCards.includes(deck.id) ? 'Deck Activated!' : 'Activate'}
-                        </button>
-                        </div>
+                    <div className="justify-content-center d-flex">
+                      <button
+                        className="btn btn-dark justify-content-center w-100"
+                        onClick={() => handleClickActive(userId, deck.id)}
+                      >
+                        {activatedCards.includes(deck.id) ? 'Deck Activated!' : 'Activate'}
+                      </button>
+                    </div>
                   </GeneralCard>
                 </div>
               ))}
