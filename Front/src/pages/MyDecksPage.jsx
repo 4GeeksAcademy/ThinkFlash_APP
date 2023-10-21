@@ -54,6 +54,22 @@ export default function MyDecksPage() {
     }
   }, [deckList, id]);
 
+
+
+    if (!deckList.length){
+      return (
+        <div className="h-auto container">
+          <ContainerDiv title="My Decks" overflow="y" className="text-dark-mode justify-content-center align-items-center flex-direction-row">
+          <div className="text-center g-0">
+            <p className="pt-5 text-white">
+            You activated all the available decks!! 😊 <br /> Go to <Link to={`../../${username}/alldecks`}>All decks</Link> to start learning
+            </p>
+            </div>
+          </ContainerDiv>
+        </div>
+      );
+    }
+
   const getDecksAreas = () => {
     const Areas = [...new Set(deckList.map(objeto => objeto.area))];
     return Areas;
