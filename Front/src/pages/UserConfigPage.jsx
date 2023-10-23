@@ -19,21 +19,29 @@ export default function UserConfigPage() {
         <div className={`container my-3 bg-${colorMode} rounded-3`}>
 
             <div className="row justify-content-center align-items-center">
-                <img className="rounded-circle col-3 img-fluid mt-4" src={avatar} alt={username}/>
-                <h1 className="col-8">{username}</h1>
+                <div className="col-7 col-md-3 mt-4">
+                    <img className="rounded-circle img-fluid" src={avatar} alt={username}/>
+                </div>
+                <div className="col-8 d-flex flex-column mt-4 text-center text-md-start">
+                    <h1>{username}</h1>
+                    <div className="fs-2">
+                        <i class="fas fa-medal fa-lg"></i> <i class="fas fa-medal fa-lg"></i> <i class="fas fa-medal fa-lg"></i> <i class="fas fa-medal fa-lg"></i>
+                    </div>
+                </div>
             </div>
-            <ul className={`nav nav-tabs mt-4`}>
+            <p className="mt-4 ms-3">Click to change:</p>
+            <ul className={`nav nav-tabs`}>
                 <li className="nav-item">
-                    <a className={`nav-link text-${colorMode}`} aria-current="page" href="#" onClick={()=>setActiveTab("avatar")}>Avatar</a>
+                    <a className={`nav-link text-${colorMode}`} aria-current="page" href="#ChangeAvatar" onClick={()=>setActiveTab("avatar")}>Avatar</a>
                 </li>
                 <li className="nav-item">
-                    <a className={`nav-link text-${colorMode}`} aria-current="page" href="#" onClick={()=>setActiveTab("username")}>Name</a>
+                    <a className={`nav-link text-${colorMode}`} aria-current="page" href="#ChangeName" onClick={()=>setActiveTab("username")}>Name</a>
                 </li>
                 <li className="nav-item">
-                    <a className={`nav-link text-${colorMode}`} aria-current="page" href="#" onClick={()=>setActiveTab("email")}>E-mail</a>
+                    <a className={`nav-link text-${colorMode}`} aria-current="page" href="#ChangeEmail" onClick={()=>setActiveTab("email")}>E-mail</a>
                 </li>
                 <li className="nav-item">
-                    <a className={`nav-link text-${colorMode}`} aria-current="page" href="#" onClick={()=>setActiveTab("password")}>Password</a>
+                    <a className={`nav-link text-${colorMode}`} aria-current="page" href="#ChangePassword" onClick={()=>setActiveTab("password")}>Password</a>
                 </li>
             </ul>
             <div>
