@@ -31,7 +31,7 @@ export default function DashboardPage() {
       })
       .catch((errors) => {
         console.error("Error fetching data:", errors);
-        setError(errors);
+        // setError(errors);
         setIsLoading(false); 
       });
   }, [id]);

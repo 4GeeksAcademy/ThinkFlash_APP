@@ -10,6 +10,7 @@ import '../styles/allDecksActivation.css';
 import '../../style.css';
 
 const DataBaseURL = import.meta.env.VITE_REACT_APP_API_URL;
+const token = sessionStorage.getItem("token")
 
 export default function AllDecksPage() {
   const [userId, setUserId] = useState([]);
@@ -41,6 +42,7 @@ export default function AllDecksPage() {
       const response = await fetch(`${DataBaseURL}/users/add_deck/${user_id}/${deck_id}`, {
         method: 'POST',
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       });

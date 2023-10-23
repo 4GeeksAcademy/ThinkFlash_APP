@@ -19,7 +19,7 @@ def send_email(to_email, user_uuid, username):
     password = "Mentayxocolate1"
     subject = "Welcome to ThinkFlash"
     body =  f"""
-    Hola {username}, gracias por registrarse.😊 Por favor, confirme su email en este enlace:
+    Hola {username}, gracias por registrarse.😊 Por favor, confirme su usuario en este enlace:
 
     {FRONT_URL}/user/{user_uuid}.
 
