@@ -1,5 +1,4 @@
 import getPreferentColor from "../../services/colors/getPreferentColor"
-// import '../Footer/footer.css'
 
 const colorMode = getPreferentColor();
 

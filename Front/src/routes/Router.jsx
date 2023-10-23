@@ -56,7 +56,6 @@ const Router = () => {
                         <Route path="/recoveryEmail" element={<RecoveryEmail />} />
                         <Route path="/recoveryPassword/:user_uuid" element={<RecoveryPassword />} />
                         <Route path="/:username/:deck_id/review" element={<ReviewPage/>}/>
-
                     </Routes>
                 </div>
                 <Footer/> 
