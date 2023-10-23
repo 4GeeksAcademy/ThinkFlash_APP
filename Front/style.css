@@ -1,0 +1,202 @@
+.check{
+  color: black;
+  margin-right: 5px;
+ 
+}
+
+.fs-7 {
+    font-size: 0.7rem;
+}
+
+.decks-container {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+  
+.deck {
+    flex: 0 0 auto;
+    margin-right: 20px;
+}
+
+.custom-spinner {
+  background-color: transparent;
+}
+
+.h-10 {
+  height: 10vh;
+}
+
+.h-80 {
+  height: 80%;
+}
+
+.vh-90 {
+  min-height: 90vh;
+}
+.vh-80 {
+  min-height: 81vh;
+}
+
+.min-h-100 {
+  min-height: 100%;
+}
+
+.min-w-100 {
+  min-width: 100%;
+}
+
+.titleUsername {
+  font-size:100%;
+}
+
+/* Estilos de las scrollbar */
+body::-webkit-scrollbar,
+.containerDiv::-webkit-scrollbar {
+  height: 8px;
+  width: 5px;
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb,
+.containerDiv::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #212529;
+}
+
+body::-webkit-scrollbar-thumb:hover,
+.containerDiv::-webkit-scrollbar-thumb:hover {
+  background: #212529;
+}
+
+
+
+/* Efectos de entrada de la card */
+.fade-enter{
+  opacity: 0;
+  transform: translateX(-100%);
+}
+.fade-exit{
+  opacity: 1;
+  transform: translateX(0%);
+}
+.fade-enter-active{
+  opacity: 1;
+  transform: translateX(0%);
+}
+.fade-exit-active{
+  opacity: 0;
+  transform: translateX(100%);
+}
+.fade-enter-active,
+.fade-exit-active{
+  transition: opacity 500ms;
+  transition: opacity 500ms, transform 500ms
+  
+}
+
+/* Light mode */
+
+.text-light-mode{
+  color:rgb(0, 0, 0)
+}
+
+.important-text-light-mode {
+  color: rgb(25, 0, 255);
+}
+
+.btn.btn-light-mode {
+  background-color: rgba(89, 122, 172, 0.507);
+}
+
+.btn.card-btn-light-mode {
+  background-color: rgba(89, 122, 172, 0.507);
+}
+
+.bg-light-mode {
+  background-color: rgba(89, 122, 172, 0.267);
+}
+
+.offcanvas.bg-light-mode {
+  background-color: rgba(255, 255, 255, 0.932);
+}
+
+.navbar.bg-light-mode{
+  background-color: rgba(89, 122, 172, 0.507);
+  color:white
+}
+
+.body-bg-light-mode {
+  background-image: url(https://static.vecteezy.com/system/resources/previews/001/966/612/non_2x/abstract-light-silver-background-vector.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: auto;
+  width: 100%;
+}
+
+/* Dark mode */
+
+.text-dark-mode{
+  color:white;
+}
+
+.important-text-dark-mode {
+  color: rgb(255, 196, 0);
+}
+
+.btn.card-btn-dark-mode {
+  background-color: rgba(0, 0, 0, 0.726);
+  color:white
+}
+
+.btn.btn-dark-mode {
+  background-color: rgba(150, 150, 150, 0.4);
+  color:white
+}
+
+.bg-dark-mode {
+  background-color: rgba(150, 150, 150, 0.4);
+  color:rgb(255, 255, 255);
+}
+
+.offcanvas.bg-dark-mode {
+  background-color: rgb(32, 32, 32)
+}
+
+.navbar.bg-dark-mode{
+  background-color: rgba(110, 110, 110, 0.4);
+  color:white
+}
+
+.body-bg-dark-mode {
+  background-image: url(https://wallpapercave.com/wp/wp6418808.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  height: auto;
+  width: 100%;
+}
+
+
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-2px, 0px) rotate(1deg); }
+  30% { transform: translate(2px, 1px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-2px, 1px) rotate(0deg); }
+  70% { transform: translate(2px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+
+.deck-card.shake {
+  animation: shake 1s infinite;
+}
+
