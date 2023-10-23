@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import { DataBaseURL } from "../constants";
+const DataBaseURL = import.meta.env.VITE_REACT_APP_API_URL
 
 export const handleClickLogin = async (email, password) => {
   const options = {

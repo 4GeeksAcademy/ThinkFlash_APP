@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 load_dotenv() 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('URL')#'sqlite:///project.sqlite'
 
 
 db.init_app(app)
