@@ -87,6 +87,13 @@ export default function MyDecksPage() {
       });
   };
 
+  const getDeleteModButton = () => {
+    return (<button className={`btn btn-${colorMode} float-end me-3 mb-1`} onClick={toggleDeleteMode}>
+      {deleteMode ? <i className="fa-solid fa-arrow-right-from-bracket"></i> : <i className="fas fa-edit"></i>}
+    </button>)
+    }
+  
+
   if (isLoading) {
     return <LoadingPage />;
   }
@@ -111,10 +118,10 @@ export default function MyDecksPage() {
 
   return (
     <div className="h-auto container">
-      <button className={`btn card-btn-${colorMode} float-end me-3`} onClick={toggleDeleteMode}>
-        {deleteMode ? <i className="fa-solid fa-arrow-right-from-bracket"></i> : <i className="fas fa-edit"></i>}
-      </button>
-      <ContainerDiv title="My Decks" overflow="y">
+      <ContainerDiv 
+      title={`My Decks`} 
+      titleButton={getDeleteModButton()}
+      overflow="y">
         {nonEmptyAreas.map((area, index) => {
           const areaDecks = deckList.filter((deck) => deck.area === area);
           return (
