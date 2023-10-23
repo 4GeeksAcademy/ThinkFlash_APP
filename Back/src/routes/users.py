@@ -3,6 +3,7 @@ from flask_cors import CORS
 from ..controllers import users_controllers
 from ..models import db, User, Deck
 import uuid
+from flask_jwt_extended import jwt_required
 
 users =Blueprint('users', __name__)
 CORS(users)
@@ -77,6 +78,7 @@ def recovery():
 
 
 @users.route('/users/add_deck/<int:user_id>/<int:deck_id>', methods=['POST'])
+@jwt_required()
 def add_deck_to_user(user_id, deck_id):
     try:
         user = User.query.get(user_id)
@@ -97,6 +99,7 @@ def add_deck_to_user(user_id, deck_id):
 
 
 @users.route('/users/<int:user_id>/decks', methods=['GET'])
+@jwt_required()
 def get_user_decks(user_id):
     user = User.query.get(user_id)
 
@@ -118,6 +121,7 @@ def get_user_decks(user_id):
     return jsonify({'decks': deck_list}), 200
 
 @users.route('/users/<int:user_id>', methods=['GET'])
+@jwt_required()
 def my_decks(user_id):
     try:
         user = User.query.get(user_id)
@@ -133,6 +137,7 @@ def my_decks(user_id):
 
 
 @users.route('/users/<int:user_id>/decks/<int:deck_id>/remove', methods=['PATCH'])
+@jwt_required()
 def remove_deck(user_id, deck_id):
     try:
         user = User.query.get(user_id)

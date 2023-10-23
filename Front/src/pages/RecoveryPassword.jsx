@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect } from "react";
 import { toast } from "react-toastify";
 import { DataBaseURL } from "../../constants";
+import getPreferentColor from '../services/colors/getPreferentColor';
 
 
 export default function RecoveryPassword() {
@@ -11,6 +12,8 @@ export default function RecoveryPassword() {
   const { password } = store;
   const { setPassword} = actions;
   const navigate = useNavigate();
+  const colorMode = getPreferentColor();
+
 
   const recoveryFetch = async () => {
     try {
@@ -47,13 +50,13 @@ export default function RecoveryPassword() {
 
   return (
     <div className="mt-5">
-      <h1 className="text-center">New password</h1>
+      <h1 className={`text-center text-${colorMode}`}>New password</h1>
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-6">
             <form onSubmit={handleFormSubmit}>
               <div className="form-group mt-2 text-left">
-                <label htmlFor="passwordInput">New password:</label>
+                <label className= {`text-center mb-2 text-${colorMode}`} htmlFor="passwordInput">New password:</label>
                 <input
                   id="passwordInput"
                   type="password"
@@ -66,7 +69,7 @@ export default function RecoveryPassword() {
               <div className="text-center">
                 <button
                   type="submit"
-                  className="btn btn-dark mt-3"
+                  className={`btn btn-${colorMode} mt-3` }
                 >
                   Send New Password
                 </button>
