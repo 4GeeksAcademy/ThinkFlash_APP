@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import getPreferentColor from "../../services/colors/getPreferentColor"
 
-export default function ContainerDiv({ children, height, title, link, overflow, subtitle }) {
+export default function ContainerDiv({ children, height, title, link, overflow, subtitle, titleButton }) {
     const generateOverflowXClass = () => {
         return("overflow-x-auto card-body h-75 d-flex containerDiv"
 )
@@ -32,6 +32,7 @@ export default function ContainerDiv({ children, height, title, link, overflow, 
             <div className="border border-0 h-25">
                 <div className={`w-100 border-bottom align-baseline d-flex justify-content-between align-items-end bg-transparent text-${colorMode}`}>
                     <h1 className="mb-0 mt-0">{title}</h1>
+                    {titleButton}
                     {link && <Link to={link} className={`ms-auto me-0 fs-7 text-${colorMode} text-end`}>View all</Link>}
                 </div>
             </div>
