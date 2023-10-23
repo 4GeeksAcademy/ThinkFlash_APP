@@ -56,10 +56,29 @@ const Router = () => {
                     <Route path="/recoveryEmail" element={<RecoveryEmail />} />
                     <Route path="/recoveryPassword/:user_uuid" element={<RecoveryPassword />} />
                     <Route path="/:username/:deck_id/review" element={<ReviewPage/>}/>
-                    <Route path="*" element={<NotFound/>} />
 
                 </Routes>
                 <Footer/>
+                <div className='vh-80'>
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/signup" element={<SignupPage />} />
+                        <Route path="/:username" element={<DashboardPage />} />
+                        <Route path="/:username/alldecks" element={<AllDecksPage />} />
+                        <Route path="/:username/mydecks" element={<MyDecksPage />} />
+                        <Route path="/:username/:deck_id" element={<DeckGamePage />} />
+                        <Route path="/:username/:deck_id/create_card" element={<CreateCardPage />} />
+                        <Route path="/user/:user_uuid" element={<ConfirmUser />} />
+                        <Route path="/infoSignup" element={<InfoSignUp />} />
+                        <Route path="/recoveryEmail" element={<RecoveryEmail />} />
+                        <Route path="/recoveryPassword/:user_uuid" element={<RecoveryPassword />} />
+                        <Route path="/:username/:deck_id/review" element={<ReviewPage/>}/>
+                        <Route path="*" element={<NotFound/>} />
+                    </Routes>
+                </div>
+                <Footer/> 
+                
                 </div>
             </AppContextProvider>
         </BrowserRouter>

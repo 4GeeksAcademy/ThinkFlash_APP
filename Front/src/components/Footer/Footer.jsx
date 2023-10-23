@@ -1,6 +1,5 @@
 import getPreferentColor from "../../services/colors/getPreferentColor"
 
-
 const colorMode = getPreferentColor();
 
 export default function Footer (){

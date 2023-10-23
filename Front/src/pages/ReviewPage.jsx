@@ -6,6 +6,7 @@ import useAppContext from "../../context/AppContext";
 import getDeckCards from "../services/cards/getDeckCards";
 import { useParams } from "react-router-dom";
 import LoadingPage from "./LoadingPage";
+import { useNavigate } from "react-router-dom";
 import "../../style.css";
 
 export default function ReviewPage() {
@@ -19,6 +20,9 @@ export default function ReviewPage() {
 
     const params = useParams();
     const deck_id = params.deck_id;
+    const username = params.username; 
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -47,12 +51,21 @@ console.log("learned list", learnedCardList)
 console.log("midlearnedList", midLearnedCardList)
 console.log("tolearnlist", toLearnCardList)
 
+const getToNewCardButton = () => {
+    return (<button className={`btn btn-${colorMode} float-end me-3 mb-1`} onClick={()=> navigate(`/${username}/${deck_id}/create_card`)}>
+      <i class="fas fa-plus me-1"></i> New Card
+    </button>)
+    }
+
 
 const colorMode = getPreferentColor();
 
 return (
     <div className="h-auto container">
-         <ContainerDiv title="To Learn Cards" overflow="y">
+         <ContainerDiv 
+         title="To Learn Cards" 
+         titleButton={getToNewCardButton()}
+         overflow="y">
             {toLearnCardList.map((card, index) => {
                 return(
                     <GeneralCard key={index} title={card.concept} minWidth="15rem" minHeight="20rem" shadow={"-lg"}
