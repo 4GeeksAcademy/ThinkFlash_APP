@@ -29,7 +29,7 @@ export default function UserConfigPage() {
                     </div>
                 </div>
             </div>
-            <p className="mt-4 ms-3">Click to change:</p>
+            <p className="mt-4 ms-3">Click to config:</p>
             <ul className={`nav nav-tabs`}>
                 <li className="nav-item">
                     <a className={`nav-link text-${colorMode}`} aria-current="page" href="#ChangeAvatar" onClick={()=>setActiveTab("avatar")}>Avatar</a>

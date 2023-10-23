@@ -69,7 +69,11 @@ export default function getShowPage (activeTab) {
                   </form>);
             break;
         default:
-            tabContent = <div>Change your User here</div>;
+            tabContent = (
+                <div className="d-flex justify-content-center align-items-center p-5">
+                    <h1 className="py-5">In this page you can configurate your account</h1>
+                </div>
+            );
     }
     return tabContent;
 }
