@@ -50,7 +50,7 @@ export default function Navbar() {
                     data-bs-toggle="offcanvas"
                     data-bs-target="#menuLateral"
                 >
-                    <img className="rounded-circle" src={avatar} alt={username + " avatar "} width="auto" height="60px" />
+                    <img className="rounded-circle" src={avatar} alt={username} width="auto" height="60px" />
                 </button>
 
                 <section
@@ -91,6 +91,11 @@ export default function Navbar() {
                                     <li className="nav-item px-3">
                                         <Link to={`/${username}/alldecks`} className={`nav-link text-${colorMode}`}>
                                             All decks
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item px-3">
+                                        <Link to={`/${username}/config`} className={`nav-link text-${colorMode}`}>
+                                            <i class="fas fa-user-cog"></i>
                                         </Link>
                                     </li>
                                     <li className="nav-item px-3 my-auto">

@@ -46,6 +46,10 @@
   min-width: 100%;
 }
 
+.titleUsername {
+  font-size:100%;
+}
+
 /* Estilos de las scrollbar */
 body::-webkit-scrollbar,
 .containerDiv::-webkit-scrollbar {
