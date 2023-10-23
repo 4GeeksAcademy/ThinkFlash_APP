@@ -7,6 +7,7 @@ import getDeckProgress from '../services/decks/getDeckProgress';
 import getPreferentColor from '../services/colors/getPreferentColor';
 import { Link } from 'react-router-dom';
 import LoadingPage from './LoadingPage';
+import chekLogNavigate from '../../utils/checkLogNavigate';
 import '../../style.css';
 import resetCardsScore from '../services/decks/resetCardsScore';
 import removeDeckFromUser from '../services/decks/removeDeckFromUser';
@@ -86,6 +87,8 @@ export default function MyDecksPage() {
         setDeactivating(false); 
       });
   };
+
+  chekLogNavigate()
 
   const getDeleteModButton = () => {
     return (<button className={`btn btn-${colorMode} float-end me-3 mb-1`} onClick={toggleDeleteMode}>
