@@ -19,6 +19,7 @@ import RecoveryEmail from '../pages/RecoveryEmail.jsx'
 import RecoveryPassword from '../pages/RecoveryPassword.jsx'
 import getPreferentColor from '../services/colors/getPreferentColor';
 import ReviewPage from '../pages/ReviewPage';
+import NotFound from '../pages/NotFound.jsx';
 
 const Router = () => {
     const colorMode=getPreferentColor()
@@ -55,6 +56,7 @@ const Router = () => {
                     <Route path="/recoveryEmail" element={<RecoveryEmail />} />
                     <Route path="/recoveryPassword/:user_uuid" element={<RecoveryPassword />} />
                     <Route path="/:username/:deck_id/review" element={<ReviewPage/>}/>
+                    <Route path="*" element={<NotFound/>} />
 
                 </Routes>
                 <Footer/>

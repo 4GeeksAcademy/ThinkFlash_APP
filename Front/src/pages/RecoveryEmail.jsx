@@ -3,11 +3,12 @@ import { toast } from 'react-toastify';
 import '../styles/confirmUser.css';
 import { DataBaseURL } from "../../constants";
 import { useNavigate } from 'react-router-dom';
-
+import getPreferentColor from '../services/colors/getPreferentColor';
 
 export default function RecoveryEmail() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
+    const colorMode = getPreferentColor();
     const sendRecoveryEmail = async () => {
         try {
             console.log("dsdfs", DataBaseURL)
@@ -37,7 +38,7 @@ export default function RecoveryEmail() {
     return (
         <div>
             <div className="container vh-90 d-flex flex-column justify-content-center align-items-center">
-                <h5 className='text-center mb-4 pulsating-heart'>Type your email here, so that we can send you a link to change your password...</h5>
+                <h5 className= {`text-center mb-4 pulsating-heart text-${colorMode}`}>Type your email here, so that we can send you a link to change your password...</h5>
                 <div className="mb-4">
                     <div className="form-group mt-2 text-left align-items-center justify-content-center ">
                         <label htmlFor="emailInput" className="mr-2 mt-2">Email:</label>
@@ -49,7 +50,7 @@ export default function RecoveryEmail() {
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         <div className='text-center'>
-                            <button className="btn btn-dark rounded-button mt-3" onClick={sendRecoveryEmail}>
+                            <button className={`btn btn-${colorMode} rounded-button mt-3`} onClick={sendRecoveryEmail}>
                                 Click to send email!
                             </button>
                         </div>
