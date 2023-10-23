@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from Back.src.routes.users import users
 from Back.src.routes.decks import decks
@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 load_dotenv() 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("URL") #'sqlite:///project.sqlite'
 
 
 db.init_app(app)
@@ -35,11 +35,16 @@ app.register_blueprint(decks)
 app.register_blueprint(cards)
 app.register_blueprint(sponsors)
 
-
+static = os.path.join(os.path.dirname(os.path.realpath(__file__)), "Front", "dist")
 
 @app.route('/')
-def index():
-    return "Hola Guapeton!"
+@app.route('/<path:path>')
+def index(path=""):
+    if not os.path.isfile(os.path.join(static, path)):
+        path = "index.html"
+    return send_from_directory(static, path)
 
 if __name__ == '__main__':
     app.run(debug=True, port=6969)
+
+
