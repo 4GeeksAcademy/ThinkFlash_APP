@@ -19,27 +19,31 @@ export const AppContextProvider = ({ children }) => {
     setToken(sessionStorage.getItem("token") || "")
     setUsername(sessionStorage.getItem("username") || "")
     setUserID(sessionStorage.getItem("user_id") || "")
+    setEmail(sessionStorage.getItem("email") || "")
   }, [])
 
   const handleClickLoginWrapper = async (email, password) => {
     try {
       const data = await handleClickLogin(email, password);
-      updateSessionStorage({ token: data.token, username: data.username, id: data.user_id });
+      updateSessionStorage({ token: data.token, username: data.username, id: data.user_id, email: data.email });
       setUsername(data.username)
       setAvatar(data.avatar)
       setUserID(data.user_id)
+      setEmail(data.email)
     } catch (error) {
       console.error("Error fetching login", error);
     }
   };
 
-  const updateSessionStorage = ({ token, username, id }) => {
+  const updateSessionStorage = ({ token, username, id, email }) => {
     setToken(token);
     sessionStorage.setItem("token", token);
     setUsername(username);
     sessionStorage.setItem("username", username)
     setUserID(id)
     sessionStorage.setItem("user_id", id)
+    setUserID(email)
+    sessionStorage.setItem("email", email)
   };
 
 
@@ -60,6 +64,7 @@ export const AppContextProvider = ({ children }) => {
     setUsername,
     setUser,
     setEmail,
+    setAvatar
   };
 
   return <AppContext.Provider value={{ store, actions }}>{children}</AppContext.Provider>;
