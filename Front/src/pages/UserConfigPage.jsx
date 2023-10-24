@@ -1,7 +1,7 @@
 import getPreferentColor from "../services/colors/getPreferentColor"
 import chekLogNavigate from "../../utils/checkLogNavigate"
 import useAppContext from "../../context/AppContext"
-import getShowPage from "../services/users/configuration/getShowPage"
+import getShowPage from "../components/Configuration/GetShowPage"
 import { useState } from "react"
 
 export default function UserConfigPage() {
@@ -9,10 +9,10 @@ export default function UserConfigPage() {
 
     const {store} = useAppContext();
     const username = store.username;
+    const email = store.email
     const avatar = store.avatar;
 
     const colorMode = getPreferentColor()
-    chekLogNavigate()
 
 
     return (
@@ -24,8 +24,9 @@ export default function UserConfigPage() {
                 </div>
                 <div className="col-8 d-flex flex-column mt-4 text-center text-md-start">
                     <h1>{username}</h1>
+                    <h3>{email}</h3>
                     <div className="fs-2">
-                        <i class="fas fa-medal fa-lg"></i> <i class="fas fa-medal fa-lg"></i> <i class="fas fa-medal fa-lg"></i> <i class="fas fa-medal fa-lg"></i>
+                        <i className="fas fa-medal fa-lg"></i> <i className="fas fa-medal fa-lg"></i> <i className="fas fa-medal fa-lg"></i> <i className="fas fa-medal fa-lg"></i>
                     </div>
                 </div>
             </div>

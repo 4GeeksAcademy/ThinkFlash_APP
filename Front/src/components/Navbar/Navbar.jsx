@@ -95,7 +95,7 @@ export default function Navbar() {
                                     </li>
                                     <li className="nav-item px-3">
                                         <Link to={`/${username}/config`} className={`nav-link text-${colorMode}`}>
-                                            <i class="fas fa-user-cog"></i>
+                                            <i className="fas fa-user-cog"></i>
                                         </Link>
                                     </li>
                                     <li className="nav-item px-3 my-auto">

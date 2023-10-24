@@ -4,6 +4,7 @@ from ..controllers import users_controllers
 from ..models import db, User, Deck
 import uuid
 from flask_jwt_extended import jwt_required
+from flask_bcrypt import Bcrypt 
 
 users =Blueprint('users', __name__)
 CORS(users)
@@ -158,4 +159,34 @@ def remove_deck(user_id, deck_id):
         return jsonify({'message': str(e)}), 500
 
 
+@users.route('/users/<int:user_id>/configuration', methods=['PATCH'])
+@jwt_required()
+def change_user_values(user_id):
+    bcrypt = Bcrypt()
+    try:
+        user = User.query.get(user_id)
+        data = request.json
+        password = data.get('password')
+        to_change = data.get('to_change')
+        new_value = data.get('new_value')
 
+        if user is None:
+            return jsonify({'message': 'User not found'}), 404
+
+        if not bcrypt.check_password_hash(user.password, password):
+            return jsonify({'message': 'Incorrect password'}, password, user.password), 401
+
+        if to_change == 'name':
+            user.username = new_value
+        elif to_change == 'email':
+            user.email = new_value
+        elif to_change == 'password':
+            user.password = bcrypt.generate_password_hash(new_value).decode('utf-8')
+        else:
+            return jsonify({'message': 'Invalid field to change'}), 400
+
+        db.session.commit()
+        return jsonify({'message': 'User information updated successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
