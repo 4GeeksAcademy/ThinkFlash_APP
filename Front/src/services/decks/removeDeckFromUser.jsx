@@ -11,7 +11,7 @@ export default async function removeDeckFromUser(user_id, deck_id) {
             },
         });
         if (!res.ok) {
-            throw Error('Error fetch!!!');
+            throw Error('Error fetch!!!', res);
         }
         const data = await res.json();
 
