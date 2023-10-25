@@ -98,7 +98,7 @@ body::-webkit-scrollbar-thumb:hover,
 /* Light mode */
 
 .text-light-mode{
-  color:rgb(0, 0, 0)
+  color:rgb(0, 0, 0);
 }
 
 .important-text-light-mode {
