@@ -5,6 +5,19 @@ from ..models import db, User, Deck
 import uuid
 from flask_jwt_extended import jwt_required
 from flask_bcrypt import Bcrypt 
+import cloudinary
+import cloudinary.uploader 
+import os
+
+
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET")
+)
+print("Cloudinary Cloud Name:", os.getenv("CLOUDINARY_CLOUD_NAME"))
+print("Cloudinary API Key:", os.getenv("CLOUDINARY_API_KEY"))
+print("Cloudinary API Secret:", os.getenv("CLOUDINARY_API_SECRET"))
 
 users =Blueprint('users', __name__)
 CORS(users)
@@ -17,9 +30,9 @@ def signup():
    
 @users.route('/login', methods=['POST', 'GET'])
 def login():
-   data = request.get_json(force=True)
-   result = users_controllers.login_user(data)
-   return result
+    data = request.get_json(force=True)
+    result = users_controllers.login_user(data)
+    return result
 
 @users.route('/users', methods=['GET'])
 def get_users():
@@ -190,3 +203,21 @@ def change_user_values(user_id):
 
     except Exception as e:
         return jsonify({'message': str(e)}), 500
+
+users.route('/users/<int:user_id>/upload_avatar', methods=['POST'])
+@jwt_required()
+def change_user_avatar(user_id):
+    try:
+        # user = User.query.get(user_id)
+        uploaded_file = request.files['avatar']
+        print("uploaded_file", uploaded_file)
+        upload_result = cloudinary.uploader.upload(uploaded_file)
+        image_url = upload_result['secure_url']
+
+        # user.avatar = image_url
+        # db.session.commit()
+        return jsonify({'message': 'User avatar updated successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500    
+

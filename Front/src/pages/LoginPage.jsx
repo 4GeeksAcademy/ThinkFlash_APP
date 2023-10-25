@@ -19,6 +19,7 @@ export default function LoginPage() {
     const tokenFromSessionStorage = sessionStorage.getItem("token");
     if (tokenFromSessionStorage != undefined && tokenFromSessionStorage != "" && username != null && username != "") {
       navigate(`/${username}`);
+      toast(`Welcome to ThinkFlash ${username}!! Enjoy learning!`)
     }
   }, [token, username]);
 
