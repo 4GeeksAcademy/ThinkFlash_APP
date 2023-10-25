@@ -1,20 +1,17 @@
 import os
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, Blueprint
 from flask_sqlalchemy import SQLAlchemy
-from Back.src.routes.users import users
-from Back.src.routes.decks import decks
-from Back.src.routes.cards import cards
-from Back.src.routes.sponsors import sponsors
 from flask_migrate import Migrate
 from Back.src.models import db, User, Deck, Card
 from flask_cors import CORS 
 from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
+from Back.src.routes.api import api
 
 load_dotenv() 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("URL") #'sqlite:///project.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("SQLALCHEMY_DATABASE_URI") #'sqlite:///project.sqlite'
 
 
 db.init_app(app)
@@ -29,11 +26,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS']
 MIGRATE = Migrate(app, db, compare_type=True)
 
 CORS(app)
-
-app.register_blueprint(users)
-app.register_blueprint(decks)
-app.register_blueprint(cards)
-app.register_blueprint(sponsors)
+app.register_blueprint(api, url_prefix="/api")
 
 static = os.path.join(os.path.dirname(os.path.realpath(__file__)), "Front", "dist")
 
@@ -45,6 +38,6 @@ def index(path=""):
     return send_from_directory(static, path)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
 
 
