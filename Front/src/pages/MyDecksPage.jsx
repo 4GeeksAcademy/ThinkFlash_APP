@@ -17,7 +17,7 @@ export default function MyDecksPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [myProgressList, setMyProgressList] = useState({});
   const [deleteMode, setDeleteMode] = useState(false);
-  const [deactivating, setDeactivating] = useState(false); 
+  const [deactivatingDeckId, setDeactivatingDeckId] = useState(null);
   const { store } = useAppContext();
   const { username, id } = store;
 
@@ -64,38 +64,41 @@ export default function MyDecksPage() {
   };
 
   const handleDeactivateDeck = (deckId) => {
-    
-    setDeactivating(true);
+
+    setDeactivatingDeckId(deckId);
 
     resetCardsScore(id, deckId)
       .then(() => {
         removeDeckFromUser(id, deckId)
           .then(() => {
-           
             setTimeout(() => {
               setDeckList((prevDeckList) => prevDeckList.filter((deck) => deck.id !== deckId));
-              setDeactivating(false); 
+
+              setDeactivatingDeckId(null);
             }, 2000);
           })
           .catch((error) => {
             console.error('Error removing deck from user:', error);
-            setDeactivating(false); 
+
+            setDeactivatingDeckId(null);
           });
       })
       .catch((error) => {
         console.error('Error deactivating deck:', error);
-        setDeactivating(false); 
+
+        setDeactivatingDeckId(null);
       });
   };
 
-  chekLogNavigate()
+  chekLogNavigate();
 
   const getDeleteModButton = () => {
-    return (<button className={`btn btn-${colorMode} float-end me-3 mb-1`} onClick={toggleDeleteMode}>
-      {deleteMode ? <i className="fa-solid fa-arrow-right-from-bracket"></i> : <i className="fas fa-edit"></i>}
-    </button>)
-    }
-  
+    return (
+      <button className={`btn btn-${colorMode} float-end me-3 mb-1`} onClick={toggleDeleteMode}>
+        {deleteMode ? <i className="fa-solid fa-arrow-right-from-bracket"></i> : <i className="fas fa-edit"></i>}
+      </button>
+    );
+  };
 
   if (isLoading) {
     return <LoadingPage />;
@@ -104,10 +107,15 @@ export default function MyDecksPage() {
   if (!deckList.length) {
     return (
       <div className="h-auto container">
-        <ContainerDiv title="My Decks" overflow="y" className="text-dark-mode justify-content-center align-items-center flex-direction-row">
+        <ContainerDiv
+          title="My Decks"
+          overflow="y"
+          className="text-dark-mode justify-content-center align-items-center flex-direction-row"
+        >
           <div className="text-center g-0">
             <p className="pt-5 text-white">
-              You don't have activated any decks!! 😊 <br /> Go to <Link to={`../../${username}/alldecks`}>All decks</Link> to activate the first one
+              You don't have activated any decks!! 😊 <br /> Go to{' '}
+              <Link to={`../../${username}/alldecks`}>All decks</Link> to activate the first one
             </p>
           </div>
         </ContainerDiv>
@@ -115,29 +123,30 @@ export default function MyDecksPage() {
     );
   }
 
-  
   const areas = getDecksAreas();
   const nonEmptyAreas = areas.filter((area) => deckList.some((deck) => deck.area === area));
 
   return (
     <div className="h-auto container">
-      <ContainerDiv 
-      title={`My Decks`} 
-      titleButton={getDeleteModButton()}
-      overflow="y">
+      <ContainerDiv title={`My Decks`} titleButton={getDeleteModButton()} overflow="y">
         {nonEmptyAreas.map((area, index) => {
           const areaDecks = deckList.filter((deck) => deck.area === area);
           return (
             <ContainerDiv key={index} subtitle={area} height="75" overflow="x">
               {areaDecks.map((deck, index) => (
-                <div key={index} className={`deck-card${deleteMode ? ' shake' : ''}`}>
-
-                  <GeneralCard title={deck.specialize} minWidth="15rem" minHeight="20rem" shadow="-lg" progress={myProgressList[deck.id]}>
+                <div key={index} className={`deck-card${deleteMode ? ' heartbeat' : ''}`}>
+                  <GeneralCard
+                    title={deck.specialize}
+                    minWidth="15rem"
+                    minHeight="20rem"
+                    shadow="-lg"
+                    progress={myProgressList[deck.id]}
+                  >
                     {deck.theme}
                     {deleteMode ? (
                       <div className="d-flex mt-3 justify-content-center">
                         <button className="btn btn-danger" onClick={() => handleDeactivateDeck(deck.id)}>
-                          {deactivating ? 'Deactivating...' : 'Deactivate'}
+                          {deactivatingDeckId === deck.id ? 'Deactivating...' : 'Deactivate'}
                         </button>
                       </div>
                     ) : (
@@ -145,7 +154,10 @@ export default function MyDecksPage() {
                         <Link to={`../../${username}/${deck.id}`} className={`btn card-btn-${colorMode} my-auto w-100 me-2`}>
                           Go Game
                         </Link>
-                        <Link to={`../../${username}/${deck.id}/review`} className={`btn card-btn-${colorMode} my-auto w-100`}>
+                        <Link
+                          to={`../../${username}/${deck.id}/review`}
+                          className={`btn card-btn-${colorMode} my-auto w-100`}
+                        >
                           Review
                         </Link>
                       </div>
