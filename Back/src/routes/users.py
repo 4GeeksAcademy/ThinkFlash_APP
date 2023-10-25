@@ -20,7 +20,7 @@ print("Cloudinary API Key:", os.getenv("CLOUDINARY_API_KEY"))
 print("Cloudinary API Secret:", os.getenv("CLOUDINARY_API_SECRET"))
 
 users =Blueprint('users', __name__)
-CORS(users)
+# CORS(users)
 
 @users.route('/signup', methods=['POST'])
 def signup():
@@ -204,18 +204,18 @@ def change_user_values(user_id):
     except Exception as e:
         return jsonify({'message': str(e)}), 500
 
-users.route('/users/<int:user_id>/upload_avatar', methods=['POST'])
+@users.route('/users/<int:user_id>/upload_avatar', methods=['POST'])
 @jwt_required()
 def change_user_avatar(user_id):
     try:
-        # user = User.query.get(user_id)
+        user = User.query.get(user_id)
         uploaded_file = request.files['avatar']
         print("uploaded_file", uploaded_file)
         upload_result = cloudinary.uploader.upload(uploaded_file)
         image_url = upload_result['secure_url']
 
-        # user.avatar = image_url
-        # db.session.commit()
+        user.avatar = image_url
+        db.session.commit()
         return jsonify({'message': 'User avatar updated successfully'}), 200
 
     except Exception as e:
