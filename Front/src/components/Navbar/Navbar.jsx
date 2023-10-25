@@ -40,7 +40,7 @@ export default function Navbar() {
             <div className="container-fluid">
                 <Link to={token == "" || !token ? "/" : `/${username}`} className="navbar-brand ps-3 h-100 d-flex">
                         <img src='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png' alt="Logo" width="auto" height="60px" /> 
-                    <p className={`h4 text-${colorMode} my-auto`}>Think Flash</p>
+                    <p className={` text-${colorMode} my-auto`}>Think Flash</p>
                 </Link>
 
 
