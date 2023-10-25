@@ -4,9 +4,20 @@ from ..controllers import users_controllers
 from ..models import db, User, Deck
 import uuid
 from flask_jwt_extended import jwt_required
+from flask_bcrypt import Bcrypt 
+import cloudinary
+import cloudinary.uploader 
+import os
+
+
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET")
+)
 
 users =Blueprint('users', __name__)
-CORS(users)
+# CORS(users)
 
 @users.route('/signup', methods=['POST'])
 def signup():
@@ -16,9 +27,9 @@ def signup():
    
 @users.route('/login', methods=['POST', 'GET'])
 def login():
-   data = request.get_json(force=True)
-   result = users_controllers.login_user(data)
-   return result
+    data = request.get_json(force=True)
+    result = users_controllers.login_user(data)
+    return result
 
 @users.route('/users', methods=['GET'])
 def get_users():
@@ -158,4 +169,52 @@ def remove_deck(user_id, deck_id):
         return jsonify({'message': str(e)}), 500
 
 
+@users.route('/users/<int:user_id>/configuration', methods=['PATCH'])
+@jwt_required()
+def change_user_values(user_id):
+    bcrypt = Bcrypt()
+    try:
+        user = User.query.get(user_id)
+        data = request.json
+        password = data.get('password')
+        to_change = data.get('to_change')
+        new_value = data.get('new_value')
+
+        if user is None:
+            return jsonify({'message': 'User not found'}), 404
+
+        if not bcrypt.check_password_hash(user.password, password):
+            return jsonify({'message': 'Incorrect password'}, password, user.password), 401
+
+        if to_change == 'name':
+            user.username = new_value
+        elif to_change == 'email':
+            user.email = new_value
+        elif to_change == 'password':
+            user.password = bcrypt.generate_password_hash(new_value).decode('utf-8')
+        else:
+            return jsonify({'message': 'Invalid field to change'}), 400
+
+        db.session.commit()
+        return jsonify({'message': 'User information updated successfully'}), 200
+
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500
+
+@users.route('/users/<int:user_id>/upload_avatar', methods=['POST'])
+@jwt_required()
+def change_user_avatar(user_id):
+    try:
+        user = User.query.get(user_id)
+        uploaded_file = request.files['avatar']
+        print("uploaded_file", uploaded_file)
+        upload_result = cloudinary.uploader.upload(uploaded_file)
+        image_url = upload_result['secure_url']
+
+        user.avatar = image_url
+        db.session.commit()
+        return jsonify({'message': 'User avatar updated successfully', 'avatar': image_url}), 200
+
+    except Exception as e:
+        return jsonify({'message': str(e)}), 500    
 

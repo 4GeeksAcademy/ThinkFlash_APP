@@ -15,6 +15,7 @@ export default function AllDecksPage() {
   const [userId, setUserId] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [userDecks, setUserDecks] = useState([]);
+  const [allDecks, setAllDecks] = useState([]);
   const [decksToShow, setDecksToShow] = useState([]);
   const [activatedCards, setActivatedCards] = useState([]);
   const { store } = useAppContext();
@@ -26,6 +27,7 @@ export default function AllDecksPage() {
     Promise.all([getDMyDecks(userId), getDecks()])
       .then(([userDecksResponse, allDecksResponse]) => {
         setUserDecks(userDecksResponse.decks);
+        setAllDecks(allDecksResponse.decks)
         const myDeckIds = userDecksResponse.decks.map((deck) => deck.id);
         setDecksToShow(allDecksResponse.decks.filter((deck) => !myDeckIds.includes(deck.id)).sort((a, b) => a.area.localeCompare(b.area)));
         setIsLoading(false);
@@ -63,9 +65,7 @@ export default function AllDecksPage() {
     }
   };
 
-  if (isLoading) {
-    return <LoadingPage />;
-  }
+
   if (decksToShow.length) {
     const decksByArea = decksToShow.reduce((acc, deck) => {
       if (!acc[deck.area]) {
@@ -75,6 +75,11 @@ export default function AllDecksPage() {
       return acc;
     }, {});
 
+
+    if (isLoading) {
+      return <LoadingPage />;
+    }
+    console.log(decksToShow)
     return (
       <div className="h-auto container">
         <ContainerDiv title="All Decks" overflow="y">
@@ -110,7 +115,20 @@ export default function AllDecksPage() {
       </div>
     );
   }
-  if (!decksToShow.length) {
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+  
+  if (allDecks) {
+    if (allDecks.length === 0) {
+      return <LoadingPage />;
+    }
+  }
+  
+  // if (!isLoading && decksToShow.length === 0 && activatedCards.length != 0 ) {
+    if (!isLoading && allDecks && userDecks) {
+      if (allDecks.length === userDecks.length && allDecks.length !=0) {
+    // if (allDecks.length === userDecks.length && userDecks.length != 0 && !isLoading) {
     return (
       <div className="h-auto container">
         <ContainerDiv
@@ -128,6 +146,6 @@ export default function AllDecksPage() {
       </div>
     );
   }
-
+  }
 
 }

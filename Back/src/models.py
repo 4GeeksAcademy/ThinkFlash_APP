@@ -51,7 +51,7 @@ class User(db.Model):
             "username": self.username,
             "avatar": self.avatar,
             "confirmed": self.confirmed,
-            "decks": [deck.serialize() for deck in self.decks]
+            "decks": [deck.serialize() for deck in self.decks],
         }
     
 class Sponsor(db.Model):

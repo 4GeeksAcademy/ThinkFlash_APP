@@ -4,11 +4,14 @@ import { toast } from 'react-toastify';
 import '../styles/confirmUser.css';
 import { DataBaseURL } from "../../constants";
 import { useNavigate } from 'react-router-dom';
+import getPreferentColor from "../services/colors/getPreferentColor.js";
+
 
 
 export default function ConfirmUser() {
     const { user_uuid } = useParams();
     const navigate  = useNavigate();
+    const colorMode = getPreferentColor();
 
     const confirmUser = async () => {
         try {
@@ -39,7 +42,7 @@ export default function ConfirmUser() {
         <div>
             <div className="container h-90 d-flex flex-column justify-content-center align-items-center">
                 <div className="d-flex justify-content-center align-items-center">
-                    <button className="rounded-button" onClick={confirmUser}>
+                    <button className={`rounded-button bg-${colorMode}`} onClick={confirmUser}>
                         Click to confirm user!
                     </button>
                 </div>
