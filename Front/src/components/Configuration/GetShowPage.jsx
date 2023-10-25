@@ -29,8 +29,14 @@ export default function getShowPage(activeTab) {
     changeAvatar({ token, imageSelected, userId })
       .then((data) => {
         console.log(data.message);
-        alert("Avatar changed successfully");
+        const avatar = data.avatar;
+        console.log("avatar", avatar)
+        sessionStorage.setItem("avatar", avatar)
+        alert("Avatar changed successfully")
+        // toast("Avatar changed successfully")
+       
       })
+      .then( () => window.location.reload() )
       .catch((error) => {
         console.error("Error occurred:", error);
       });
@@ -75,12 +81,7 @@ export default function getShowPage(activeTab) {
                 SetImageSelected(e.target.files[0]);
               }}
             />
-
           </div>
-          {/* <div className="mb-3 col-12 col-md-6">
-                <label htmlFor="password" className="form-label">Password</label>
-                <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} id="password"/>
-              </div> */}
           <button type="submit" className={`mb-3 col-6 col-md-3 ms-auto me-auto btn card-btn-${colorMode}`}
           >Change Avatar</button>
         </form>);

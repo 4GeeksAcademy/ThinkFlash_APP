@@ -10,7 +10,7 @@ export default function UserConfigPage() {
     const {store} = useAppContext();
     const username = store.username;
     const email = store.email
-    const avatar = store.avatar;
+    const avatar = sessionStorage.getItem("avatar")
 
     const colorMode = getPreferentColor()
 
@@ -20,7 +20,9 @@ export default function UserConfigPage() {
 
             <div className="row justify-content-center align-items-center">
                 <div className="col-7 col-md-3 mt-4">
-                    <img className="rounded-circle img-fluid" src={avatar} alt={username}/>
+                    <div className="ratio ratio-1x1">
+                        <img className="rounded-circle object-fit-cover" src={avatar} alt={username}/>
+                    </div>
                 </div>
                 <div className="col-8 d-flex flex-column mt-4 text-center text-md-start">
                     <h1>{username}</h1>

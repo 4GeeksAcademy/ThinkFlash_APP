@@ -53,8 +53,9 @@ def create_user_and_send_email(data):
     
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
     user_uuid = str(uuid.uuid4())  
+    avatar="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded_nologo/36243334/36243334-1672676117894-fb369f088856b.jpg"
 
-    new_user = User(email=email, password=hashed_password, username=username, user_uuid=user_uuid)
+    new_user = User(email=email, password=hashed_password, username=username, user_uuid=user_uuid, avatar=avatar)
     db.session.add(new_user)
     db.session.commit()
 
@@ -78,7 +79,8 @@ def login_user(data):
         "token": access_token,
         "email": user.email,
         "user_id": user.id,
-        "username": user.username
+        "username": user.username,
+        "avatar": user.avatar
     })
 
 def send_recovery_email(to_email, user_uuid, username):

@@ -8,7 +8,7 @@ export const AppContextProvider = ({ children }) => {
   const [username, setUsername] = useState("");
   const [id, setUserID] = useState("");
   const [email, setEmail] = useState("");
-  const [avatar, setAvatar] = useState("https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded_nologo/36243334/36243334-1672676117894-fb369f088856b.jpg")
+  const [avatar, setAvatar] = useState("")
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -25,7 +25,7 @@ export const AppContextProvider = ({ children }) => {
   const handleClickLoginWrapper = async (email, password) => {
     try {
       const data = await handleClickLogin(email, password);
-      updateSessionStorage({ token: data.token, username: data.username, id: data.user_id, email: data.email });
+      updateSessionStorage({ token: data.token, username: data.username, id: data.user_id, email: data.email, avatar: data.avatar });
       setUsername(data.username)
       setAvatar(data.avatar)
       setUserID(data.user_id)
@@ -35,7 +35,7 @@ export const AppContextProvider = ({ children }) => {
     }
   };
 
-  const updateSessionStorage = ({ token, username, id, email }) => {
+  const updateSessionStorage = ({ token, username, id, email, avatar }) => {
     setToken(token);
     sessionStorage.setItem("token", token);
     setUsername(username);
@@ -44,6 +44,8 @@ export const AppContextProvider = ({ children }) => {
     sessionStorage.setItem("user_id", id)
     setUserID(email)
     sessionStorage.setItem("email", email)
+    setAvatar(avatar)
+    sessionStorage.setItem("avatar", avatar)
   };
 
 

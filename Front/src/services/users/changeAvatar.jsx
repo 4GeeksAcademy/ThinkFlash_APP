@@ -22,7 +22,7 @@ const changeAvatar = async ({ token, imageSelected, userId }) => {
         if (response.ok) {
             alert("Data change success");
             const data = await response.json();
-            console.log(data.message);
+            return data
         } else {
             const err = await response.json();
             console.log("Error in handleChangeAvatar", err);

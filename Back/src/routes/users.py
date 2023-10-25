@@ -15,9 +15,6 @@ cloudinary.config(
     api_key=os.getenv("CLOUDINARY_API_KEY"),
     api_secret=os.getenv("CLOUDINARY_API_SECRET")
 )
-print("Cloudinary Cloud Name:", os.getenv("CLOUDINARY_CLOUD_NAME"))
-print("Cloudinary API Key:", os.getenv("CLOUDINARY_API_KEY"))
-print("Cloudinary API Secret:", os.getenv("CLOUDINARY_API_SECRET"))
 
 users =Blueprint('users', __name__)
 # CORS(users)
@@ -216,7 +213,7 @@ def change_user_avatar(user_id):
 
         user.avatar = image_url
         db.session.commit()
-        return jsonify({'message': 'User avatar updated successfully'}), 200
+        return jsonify({'message': 'User avatar updated successfully', 'avatar': image_url}), 200
 
     except Exception as e:
         return jsonify({'message': str(e)}), 500    
