@@ -33,6 +33,7 @@ CORS(app)
 app.register_blueprint(users)
 app.register_blueprint(decks)
 app.register_blueprint(cards)
+
 # app.register_blueprint(sponsors)
 
 static = os.path.join(os.path.dirname(os.path.realpath(__file__)), "Front", "dist")

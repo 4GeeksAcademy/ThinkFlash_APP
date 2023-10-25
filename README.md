@@ -25,4 +25,4 @@ VARIABLES DE ENTORNO:
     EMAIL=
     PASSWORD=
 
-PARA EL DEPLOY: pipenv install && pipenv run start && cd Front && npm install && npm run dev
+PARA EL DEPLOY: pipenv install && pipenv run start && cd Front && npm install && npm run build
