@@ -12,7 +12,7 @@ export default function Navbar() {
     const { store } = useAppContext();
     const { token } = store;
     const { username } = store;
-    const { avatar } = store;
+    const avatar = sessionStorage.getItem("avatar")
 
     let conditionalLinks = null;
     const colorMode = getPreferentColor()
@@ -39,7 +39,7 @@ export default function Navbar() {
         <nav className={`navbar navbar-expand-md bg-${colorMode}`}>
             <div className="container-fluid">
                 <Link to={token == "" || !token ? "/" : `/${username}`} className="navbar-brand ps-3 h-100 d-flex">
-                    <img src='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png' alt="Logo" width="auto" height="60px" />
+                        <img src='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png' alt="Logo" width="auto" height="60px" /> 
                     <p className={`h4 text-${colorMode} my-auto`}>Think Flash</p>
                 </Link>
 
@@ -50,7 +50,9 @@ export default function Navbar() {
                     data-bs-toggle="offcanvas"
                     data-bs-target="#menuLateral"
                 >
-                    <img className="rounded-circle" src={avatar} alt={username} width="auto" height="60px" />
+                     <div className="">
+                        <img className="rounded-circle object-fit-cover" width="60px" height="60px" src={avatar} alt={username} />
+                    </div>
                 </button>
 
                 <section
@@ -62,12 +64,12 @@ export default function Navbar() {
                         {token == "" || !token ?
                             <img src='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png' alt="Logo" width="auto" height="60px" />
                             :
-                            <li className="px-3">
+                            <div className="px-3">
                                 <Link to={`/${username}`} className="p-0 h-100 d-flex text-decoration-none">
-                                    <img className="rounded-circle" src={avatar} alt={username + " avatar "} width="auto" height="60px" />
+                                    <img className="rounded-circle object-fit-cover" src={avatar} alt={username + " avatar "} width="60px" height="60px" />
                                     <p className={`text-${colorMode} fw-bold px-3 my-auto`}>{username}</p>
                                 </Link>
-                            </li>
+                            </div>
                         }
                         <button
                             className={`btn-close mt-3 text-${colorMode}`}

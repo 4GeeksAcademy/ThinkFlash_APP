@@ -11,12 +11,15 @@ import uuid
 
 bcrypt = Bcrypt()
 FRONT_URL = config('FRONT_URL')
+EMAIL = config('EMAIL')
+PASSWORD = config('PASSWORD')
+
 
 def send_email(to_email, user_uuid, username):
 
-    from_email = "think_flash@outlook.com"
+    from_email = EMAIL
 
-    password = "Mentayxocolate1"
+    password = PASSWORD
     subject = "Welcome to ThinkFlash"
     body =  f"""
     Hola {username}, gracias por registrarse.😊 Por favor, confirme su usuario en este enlace:
@@ -85,8 +88,8 @@ def login_user(data):
 
 def send_recovery_email(to_email, user_uuid, username):
 
-    from_email = "think_flash@outlook.com"
-    password = "Mentayxocolate1"
+    from_email = EMAIL
+    password = PASSWORD
     subject = "Recovery ThinkFlash Password"
     body =  f"""
     Hola {username}, puede cambiar su contraseña aquí.😊 Por favor, siga este enlace:
