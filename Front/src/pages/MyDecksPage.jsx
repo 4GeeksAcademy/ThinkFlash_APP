@@ -80,7 +80,7 @@ export default function MyDecksPage() {
           .catch((error) => {
             console.error('Error removing deck from user:', error);
 
-            setDeactivatingDeckId(null);
+            setDeactivatingDeckId(null);      
           });
       })
       .catch((error) => {
