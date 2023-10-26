@@ -76,7 +76,7 @@ export default function CreateCardPage() {
     const area = myDeck.area;
     const theme = myDeck.theme
 
-    const colorMode = getPreferentColor()
+    const colorMode = getPreferentColor(localStorage.getItem("opposite_color"))
 
     chekLogNavigate();
 

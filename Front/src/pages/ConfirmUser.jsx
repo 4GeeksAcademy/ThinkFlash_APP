@@ -11,7 +11,7 @@ import getPreferentColor from "../services/colors/getPreferentColor.js";
 export default function ConfirmUser() {
     const { user_uuid } = useParams();
     const navigate  = useNavigate();
-    const colorMode = getPreferentColor();
+    const colorMode = getPreferentColor(localStorage.getItem("opposite_color"));
 
     const confirmUser = async () => {
         try {

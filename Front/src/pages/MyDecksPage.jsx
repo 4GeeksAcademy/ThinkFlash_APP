@@ -57,7 +57,7 @@ export default function MyDecksPage() {
     return areas;
   };
 
-  const colorMode = getPreferentColor();
+  const colorMode = getPreferentColor(localStorage.getItem("opposite_color"));
 
   const toggleDeleteMode = () => {
     setDeleteMode(!deleteMode);

@@ -12,7 +12,7 @@ export default function RecoveryPassword() {
   const { password } = store;
   const { setPassword} = actions;
   const navigate = useNavigate();
-  const colorMode = getPreferentColor();
+  const colorMode = getPreferentColor(localStorage.getItem("opposite_color"));
 
 
   const recoveryFetch = async () => {

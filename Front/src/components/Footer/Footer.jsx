@@ -1,6 +1,6 @@
 import getPreferentColor from "../../services/colors/getPreferentColor"
 
-const colorMode = getPreferentColor();
+const colorMode = getPreferentColor(localStorage.getItem("opposite_color"));
 
 export default function Footer (){
     return(

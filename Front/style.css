@@ -113,8 +113,22 @@ body::-webkit-scrollbar-thumb:hover,
   background-color: rgba(89, 122, 172, 0.507);
 }
 
+.important-btn-light-mode {
+  background-color: rgba(71, 121, 141, 0.514);
+  color:rgb(0, 0, 0)
+}
+.important-btn-light-mode:hover{
+  background-color: rgb(71, 121, 141);
+  color:rgb(0, 0, 0)
+}
+
 .bg-light-mode {
   background-color: rgba(89, 122, 172, 0.267);
+}
+
+.modal-content.bg-light-mode {
+  background-color: rgb(255, 255, 255);
+  color:rgb(0, 0, 0);
 }
 
 .offcanvas.bg-light-mode {
@@ -154,9 +168,22 @@ body::-webkit-scrollbar-thumb:hover,
   background-color: rgba(150, 150, 150, 0.4);
   color:white
 }
+.important-btn-dark-mode {
+  background-color: rgb(255, 174, 0);
+  color:rgb(0, 0, 0)
+}
+.important-btn-dark-mode:hover{
+  background-color: rgba(255, 174, 0, 0.514);
+  color:rgb(0, 0, 0)
+}
 
 .bg-dark-mode {
   background-color: rgba(150, 150, 150, 0.4);
+  color:rgb(255, 255, 255);
+}
+
+.modal-content.bg-dark-mode {
+  background-color: rgb(32, 32, 32);
   color:rgb(255, 255, 255);
 }
 

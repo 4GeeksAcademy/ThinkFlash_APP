@@ -8,14 +8,30 @@ import getPreferentColor from "../../services/colors/getPreferentColor";
 
 
 export default function Navbar() {
+
     const logout = useLogout()
     const { store } = useAppContext();
     const { token } = store;
     const { username } = store;
     const avatar = sessionStorage.getItem("avatar")
 
+    const colorMode = getPreferentColor(localStorage.getItem("opposite_color"))
+
+    const handleClickChangeThemeColor = (e) => {
+        e.preventDefault()
+
+        if (localStorage.getItem("opposite_color") == "false") {
+            localStorage.setItem("opposite_color", true)
+            window.location.reload();
+        } else {
+            localStorage.setItem("opposite_color", false)
+            window.location.reload();
+        }
+
+    }
+
     let conditionalLinks = null;
-    const colorMode = getPreferentColor()
+
 
     if (token == "" || !token) {
         conditionalLinks = (
@@ -39,7 +55,7 @@ export default function Navbar() {
         <nav className={`navbar navbar-expand-md bg-${colorMode}`}>
             <div className="container-fluid">
                 <Link to={token == "" || !token ? "/" : `/${username}`} className="navbar-brand ps-3 h-100 d-flex">
-                        <img src='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png' alt="Logo" width="auto" height="60px" /> 
+                    <img src='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png' alt="Logo" width="auto" height="60px" />
                     <p className={`h4 text-${colorMode} my-auto`}>Think Flash</p>
                 </Link>
 
@@ -50,10 +66,10 @@ export default function Navbar() {
                     data-bs-toggle="offcanvas"
                     data-bs-target="#menuLateral"
                 >
-                     <div className="">
-                    {avatar ?
-                        <img className="rounded-circle object-fit-cover" width="60px" height="60px" src={avatar} alt={username} /> :
-                        <i className= {`fa-solid fa-bars ${colorMode}`}></i>
+                    <div className="">
+                        {avatar ?
+                            <img className="rounded-circle object-fit-cover" width="60px" height="60px" src={avatar} alt={username} /> :
+                            <i className={`fa-solid fa-bars ${colorMode}`}></i>
                         }
                     </div>
                 </button>
@@ -103,18 +119,39 @@ export default function Navbar() {
                                             <i className="fas fa-user-cog"></i>
                                         </Link>
                                     </li>
-                                    <li className="nav-item px-3 my-auto">
+                                    <li className="nav-item ps-3 my-auto">
                                         <button className={`nav-link important-text-${colorMode}`} onClick={logout}>
                                             Logout
                                         </button>
                                     </li>
+                                    <li className="nav-item ps-2 my-auto">
+                                        <button type="button" className={`nav-link text-${colorMode}`} data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            <i className="fas fa-adjust"></i>
+                                        </button>
+                                    </li>
+                                    <div className={`modal fade`} id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div className="modal-dialog">
+                                            <div className={`modal-content bg-${colorMode}`}>
+                                                <div className="modal-header">
+                                                    <h5 className="modal-title">Change color Theme!!</h5>
+                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div className="modal-body">
+                                                    <p>You have changed the color of the theme, you have to reset to update</p>
+                                                </div>
+                                                <div className="modal-footer">
+                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" className={`btn important-btn-${colorMode}`} onClick={(e) => handleClickChangeThemeColor(e)}>Save Changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </>
                             )
                             }
                         </ul>
                     </div>
                 </section>
-
             </div>
         </nav>
 
