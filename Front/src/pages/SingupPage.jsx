@@ -22,15 +22,15 @@ export default function SignupPage() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (user.username.trim() === '' || user.email.trim() === '' || user.password.trim() === '') {
-      toast("🥺Por favor, complete todos los campos.");
+      toast("🥺Please, don't leave empty inputs...")
       return;
     }
     if (user.password.length < 8) {
-      toast("😒La contraseña debe tener al menos 8 caracteres.");
+      toast("😒Password must have at least 8 characters...");
       return;
     }
     if (!isChecked) {
-      toast("😊Por favor, acepta los términos y condiciones.");
+      toast("😊Please accept terms and conditions!!");
       return;
     }
     setIsLoading(true);

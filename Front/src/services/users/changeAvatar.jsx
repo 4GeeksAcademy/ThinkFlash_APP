@@ -20,7 +20,6 @@ const changeAvatar = async ({ token, imageSelected, userId }) => {
         });
 
         if (response.ok) {
-            alert("Data change success");
             const data = await response.json();
             return data
         } else {

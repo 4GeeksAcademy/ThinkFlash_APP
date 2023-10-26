@@ -11,7 +11,7 @@ from Back.src.routes.api import api
 load_dotenv() 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("SQLALCHEMY_DATABASE_URI") #'sqlite:///project.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("SQLALCHEMY_DATABASE_URI")  #'sqlite:///project.sqlite' 
 
 
 db.init_app(app)

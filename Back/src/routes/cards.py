@@ -72,7 +72,8 @@ def manage_deck_cards(user_id, deck_id):
                     'area': card.area,
                     'fake_descriptions': fake_descriptions,
                     'fake_concepts': fake_concepts,
-                    'score': score_per_card.score
+                    'score': score_per_card.score,
+                    'author': card.author
                 })
             else:
                 try:

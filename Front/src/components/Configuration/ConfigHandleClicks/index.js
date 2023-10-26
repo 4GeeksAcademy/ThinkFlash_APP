@@ -10,17 +10,8 @@ const handleChangeValue = ({ userId, newValue, toChange, token, password }) => {
             }
         })
         .then(response => {
-            if (response.ok) {
-                alert("Data change success")
-                return response.json();
-            } else {
-                return response.json().then(err => {
-                    console.log("Error in handleChangeValue", err)
-                });
-            }
-        })
-        .then(data => {
-            console.log(data.message);
+            console.log(response, "response")
+            return response
         })
         .catch(error => {
             console.error('Error occurred:', error);

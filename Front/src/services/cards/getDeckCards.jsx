@@ -16,7 +16,19 @@ export default function getDeckCards(user_id, deck_id) {
       return res.json();
     })
     .then((data) => {
-      return data;
+      let userCards = [];
+
+      data.cards.map((card)=>{
+        if (card.author == user_id || !card.author){
+          userCards.push(card)
+        }
+      })
+      console.log("userCards",userCards)
+      return userCards;
+
+    })
+    .then((data) => {
+      return data
     })
     .catch((err) => console.log(err));
 }

@@ -187,8 +187,14 @@ def change_user_values(user_id):
             return jsonify({'message': 'Incorrect password'}, password, user.password), 401
 
         if to_change == 'name':
+            existing_user = User.query.filter_by(username=new_value).first()
+            if existing_user:
+                return jsonify({'message': 'Username already exists'}), 400
             user.username = new_value
         elif to_change == 'email':
+            existing_user = User.query.filter_by(email=new_value).first()
+            if existing_user:
+                return jsonify({'message': 'Email already exists'}), 400
             user.email = new_value
         elif to_change == 'password':
             user.password = bcrypt.generate_password_hash(new_value).decode('utf-8')
