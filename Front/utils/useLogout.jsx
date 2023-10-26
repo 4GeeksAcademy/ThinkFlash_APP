@@ -10,6 +10,11 @@ export default function useLogout () {
         actions.setUsername(null)
         sessionStorage.removeItem('token')
         sessionStorage.removeItem('username')
+        sessionStorage.removeItem('avatar')
+        sessionStorage.removeItem('email')
+        sessionStorage.removeItem('user_id')
+
+
     }
     return deleteSesionStorage
 }

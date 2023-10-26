@@ -51,7 +51,10 @@ export default function Navbar() {
                     data-bs-target="#menuLateral"
                 >
                      <div className="">
-                        <img className="rounded-circle object-fit-cover" width="60px" height="60px" src={avatar} alt={username} />
+                    {avatar ?
+                        <img className="rounded-circle object-fit-cover" width="60px" height="60px" src={avatar} alt={username} /> :
+                        <i className= {`fa-solid fa-bars ${colorMode}`}></i>
+                        }
                     </div>
                 </button>
 
