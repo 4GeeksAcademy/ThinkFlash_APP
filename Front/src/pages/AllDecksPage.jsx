@@ -19,7 +19,7 @@ export default function AllDecksPage() {
   const [decksToShow, setDecksToShow] = useState([]);
   const [activatedCards, setActivatedCards] = useState([]);
   const { store } = useAppContext();
-  const { username, id } = store;
+  const { username } = store;
 
   useEffect(() => {
     setUserId(sessionStorage.getItem('user_id'));

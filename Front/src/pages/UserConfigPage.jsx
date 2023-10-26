@@ -2,15 +2,15 @@ import getPreferentColor from "../services/colors/getPreferentColor"
 import chekLogNavigate from "../../utils/checkLogNavigate"
 import useAppContext from "../../context/AppContext"
 import getShowPage from "../components/Configuration/GetShowPage"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function UserConfigPage() {
     const [activeTab, setActiveTab] = useState()
-
     const {store} = useAppContext();
     const username = store.username;
     const email = store.email
     const avatar = sessionStorage.getItem("avatar")
+
 
     const colorMode = getPreferentColor()
 

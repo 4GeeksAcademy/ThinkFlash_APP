@@ -4,6 +4,8 @@ import useAppContext from "../../../context/AppContext";
 import { useRouteLoaderData } from "react-router-dom";
 import changeAvatar from "../../services/users/changeAvatar.jsx";
 import handleChangeValue from "./ConfigHandleClicks";
+import { toast } from "react-toastify";
+
 
 export default function getShowPage(activeTab) {
   const [name, setName] = useState("");
@@ -11,10 +13,9 @@ export default function getShowPage(activeTab) {
   const [newPassword, setNewPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [checkEmail, setCheckEmail] = useState("");
-  const [toChange, setToChange] = useState("");
   const [password, setPassword] = useState("");
   const [imageSelected, SetImageSelected] = useState("");
-
+  const [loading, setLoading] = useState(false);
 
   const userId = sessionStorage.getItem("user_id");
   const token = sessionStorage.getItem("token");
@@ -25,44 +26,61 @@ export default function getShowPage(activeTab) {
       console.error("No image selected");
       return;
     }
-
+    setLoading(true);
     changeAvatar({ token, imageSelected, userId })
       .then((data) => {
         console.log(data.message);
         const avatar = data.avatar;
-        console.log("avatar", avatar)
-        sessionStorage.setItem("avatar", avatar)
-        alert("Avatar changed successfully")
-        // toast("Avatar changed successfully")
-       
+        console.log("avatar", avatar);
+        sessionStorage.setItem("avatar", avatar);
       })
-      .then( () => window.location.reload() )
+      .then(() => window.location.reload())
       .catch((error) => {
         console.error("Error occurred:", error);
+      }).finally(() => {
+        setLoading(false);
       });
   };
 
-  const handleClickChangeValue = ({ value, toChange }) => {
+  const handleClickChangeValue = (e, { value, toChange }) => {
+    e.preventDefault();
 
-    toChange == "name" && sessionStorage.setItem("username", name)
-    toChange == "email" && sessionStorage.setItem("email", email)
+    if (toChange == "password" && value.length < 8) {
+      toast("😒Password must have at least 8 characters...")
+      return;
+    } else if (toChange == "name" && value.trim() === '') {
+      toast("🥺Please, don't leave empty inputs...")
+      return;
+    } else {
+      handleChangeValue({
+        userId: userId,
+        toChange: toChange,
+        newValue: value,
+        token: token,
 
-    handleChangeValue({
-      userId: userId,
-      toChange: toChange,
-      newValue: value,
-      token: token,
-      
-      password: password,
-    })
-      .then(() => {
-        window.location.reload();
+        password: password,
       })
-      .catch((error) => {
-        console.error("Error occurred:", error);
-      });
-
+        .then(response => {
+          if (response.ok) {
+            console.log("value", value)
+            toChange == "name" && sessionStorage.setItem("username", value)
+            toChange == "email" && sessionStorage.setItem("email", value)
+            toast("Data change success!!");
+          } else {
+            toast("algo va mal!")
+            throw new Error
+          }
+        }).then(() => {
+          window.location.reload();
+        }
+        )
+        .catch((error) => {
+          console.error("Error occurred:", error);
+          toast("Trouble... Try later...");
+        });
+    }
   };
+
 
   const colorMode = getPreferentColor();
   let tabContent;
@@ -83,7 +101,7 @@ export default function getShowPage(activeTab) {
             />
           </div>
           <button type="submit" className={`mb-3 col-6 col-md-3 ms-auto me-auto btn card-btn-${colorMode}`}
-          >Change Avatar</button>
+          > {loading ? "Changing Avatar..." : "Change Avatar"}</button>
         </form>);
       break;
     case "username":
@@ -97,7 +115,7 @@ export default function getShowPage(activeTab) {
             <label htmlFor="password" className="form-label">Password</label>
             <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} id="password" />
           </div>
-          <button type="submit" onClick={() => handleClickChangeValue({ value: name, toChange: "name" })} className={`mb-3 col-6 col-md-3 ms-auto me-auto btn card-btn-${colorMode}`}>Change Name</button>
+          <button onClick={(e) => handleClickChangeValue(e, { value: name, toChange: "name" })} className={`mb-3 col-6 col-md-3 ms-auto me-auto btn card-btn-${colorMode}`}>Change Name</button>
         </form>);
       break;
     case "email":
@@ -115,7 +133,13 @@ export default function getShowPage(activeTab) {
             <label htmlFor="password" className="form-label">Password</label>
             <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} id="password" />
           </div>
-          <button type="submit" onClick={() => handleClickChangeValue({ value: email, toChange: "email" })} className={`mb-3 col-6 col-md-3 ms-auto me-auto btn card-btn-${colorMode}`}>Change E-mail</button>
+          <button onClick={(e) => {
+            if (email != checkEmail) {
+              toast("Both emails must be equal💩")
+            } else {
+              handleClickChangeValue(e, { value: email, toChange: "email" })
+            }
+          }} className={`mb-3 col-6 col-md-3 ms-auto me-auto btn card-btn-${colorMode}`}>Change E-mail</button>
         </form>);
       break;
     case "password":
@@ -133,13 +157,19 @@ export default function getShowPage(activeTab) {
             <label htmlFor="password" className="form-label">Actual Password</label>
             <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} id="password" />
           </div>
-          <button type="submit" onClick={() => handleClickChangeValue({ value: newPassword, toChange: "password" })} className={`mb-3 col-6 col-md-3 ms-auto me-auto btn card-btn-${colorMode}`}>Change Password</button>
+          <button onClick={(e) => {
+            if (newPassword != checkPassword) {
+              toast("Both passwords must be equal💩")
+            } else {
+              handleClickChangeValue(e,{ value: newPassword, toChange: "password" })
+            }
+          }} className={`mb-3 col-6 col-md-3 ms-auto me-auto btn card-btn-${colorMode}`}>Change Password</button>
         </form>);
       break;
     default:
       tabContent = (
         <div className="d-flex justify-content-center align-items-center p-5">
-          <h1 className="py-5">In this page you can configurate your account</h1>
+          <h1 className="py-5 text-center">In this page you can configurate your account</h1>
         </div>
       );
   }
