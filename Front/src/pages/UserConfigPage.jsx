@@ -6,7 +6,8 @@ import { useState, useEffect } from "react"
 
 export default function UserConfigPage() {
     const [activeTab, setActiveTab] = useState()
-    const {store} = useAppContext();
+
+    const { store } = useAppContext();
     const username = store.username;
     const email = store.email
     const avatar = sessionStorage.getItem("avatar")
@@ -21,7 +22,7 @@ export default function UserConfigPage() {
             <div className="row justify-content-center align-items-center">
                 <div className="col-7 col-md-3 mt-4">
                     <div className="ratio ratio-1x1">
-                        <img className="rounded-circle object-fit-cover" src={avatar} alt={username}/>
+                        <img className="rounded-circle object-fit-cover" src={avatar} alt={username} />
                     </div>
                 </div>
                 <div className="col-8 d-flex flex-column mt-4 text-center text-md-start">
@@ -32,21 +33,22 @@ export default function UserConfigPage() {
                     </div>
                 </div>
             </div>
-            <p className="mt-4 ms-3">Click to config:</p>
-            <ul className={`nav nav-tabs`}>
-                <li className="nav-item">
-                    <a className={`nav-link text-${colorMode}`} aria-current="page" href="#ChangeAvatar" onClick={()=>setActiveTab("avatar")}>Avatar</a>
-                </li>
-                <li className="nav-item">
-                    <a className={`nav-link text-${colorMode}`} aria-current="page" href="#ChangeName" onClick={()=>setActiveTab("username")}>Name</a>
-                </li>
-                <li className="nav-item">
-                    <a className={`nav-link text-${colorMode}`} aria-current="page" href="#ChangeEmail" onClick={()=>setActiveTab("email")}>E-mail</a>
-                </li>
-                <li className="nav-item">
-                    <a className={`nav-link text-${colorMode}`} aria-current="page" href="#ChangePassword" onClick={()=>setActiveTab("password")}>Password</a>
-                </li>
-            </ul>
+            <div className="mt-4">
+                <ul className={`nav nav-tabs`}>
+                    <li className="nav-item">
+                        <a className={`nav-link px-2  text-${colorMode}`} aria-current="page" href="#ChangeAvatar" onClick={() => setActiveTab("avatar")}>Avatar</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className={`nav-link px-2  text-${colorMode}`} aria-current="page" href="#ChangeName" onClick={() => setActiveTab("username")}>Name</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className={`nav-link px-2  text-${colorMode}`} aria-current="page" href="#ChangeEmail" onClick={() => setActiveTab("email")}>E-mail</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className={`nav-link px-2  text-${colorMode}`} aria-current="page" href="#ChangePassword" onClick={() => setActiveTab("password")}>Password</a>
+                    </li>
+                </ul>
+            </div>
             <div>
                 {getShowPage(activeTab)}
             </div>

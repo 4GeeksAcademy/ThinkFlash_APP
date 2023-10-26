@@ -27,26 +27,24 @@ export default function DeckGamePage() {
     const deck_id = params.deck_id;
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setIsLoading(true);
-                const res = await getDeckCards(id, deck_id);
-                setCardList(res.cards);
-                setIsLoading(false);
-            } catch (error) {
-                console.error('Error fetching decks:', error);
-                setIsLoading(false);
-            }
-        };
-
-        fetchData();
+        getDeckCards(id, deck_id)
+            .then((res) => {
+                console.log("esta funcionando", res)
+                setCardList(res)
+                return res
+            })
+            .then((res)=>{
+                setToLearnCardList(res.filter(card => card.score === 1));
+                setMidLearnedCardList(res.filter(card => card.score > 1 && card.score < 4));
+                setLearnedCardList(res.filter(card => card.score === 4));
+            })
+            .then(() => {
+                setIsLoading(false)
+            })
+            .catch((err) => {
+                console.log("Error fetch in review page", err)
+            })
     }, [deck_id, id]);
-
-    useEffect(() => {
-        setToLearnCardList(cardList.filter(card => card.score === 1));
-        setMidLearnedCardList(cardList.filter(card => card.score > 1 && card.score < 4));
-        setLearnedCardList(cardList.filter(card => card.score === 4));
-    }, [cardList]);
 
     const colorMode = getPreferentColor();
 
