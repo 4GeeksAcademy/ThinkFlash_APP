@@ -47,7 +47,7 @@ export default function DeckGamePage() {
             })
     }, [deck_id, id]);
 
-    const colorMode = getPreferentColor();
+    const colorMode = getPreferentColor(localStorage.getItem("opposite_color"));
 
     const getRandomInt = (max) => {
         return Math.floor(Math.random() * max);

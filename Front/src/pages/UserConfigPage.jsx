@@ -13,7 +13,7 @@ export default function UserConfigPage() {
     const avatar = sessionStorage.getItem("avatar")
 
 
-    const colorMode = getPreferentColor()
+    const colorMode = getPreferentColor(localStorage.getItem("opposite_color"))
 
 
     return (

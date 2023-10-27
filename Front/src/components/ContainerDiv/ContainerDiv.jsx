@@ -10,7 +10,7 @@ export default function ContainerDiv({ children, height, title, link, overflow, 
         return("card-body d-flex flex-wrap containerDiv justify-content-center")
     }
 
-    const colorMode = getPreferentColor()
+    const colorMode = getPreferentColor(localStorage.getItem("opposite_color"))
 
     if(subtitle){
         return (

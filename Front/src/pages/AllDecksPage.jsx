@@ -3,6 +3,7 @@ import ContainerDiv from '../components/ContainerDiv';
 import GeneralCard from '../components/GeneralCard/GeneralCard';
 import getDecks from '../services/decks/getDecks';
 import getDMyDecks from '../services/decks/getMyDecks';
+import getPreferentColor from '../services/colors/getPreferentColor';
 import useAppContext from '../../context/AppContext';
 import { Link } from 'react-router-dom';
 import LoadingPage from './LoadingPage';
@@ -20,6 +21,8 @@ export default function AllDecksPage() {
   const [activatedCards, setActivatedCards] = useState([]);
   const { store } = useAppContext();
   const { username } = store;
+
+  const colorMode = getPreferentColor(localStorage.getItem("opposite_color"))
 
   useEffect(() => {
     setUserId(sessionStorage.getItem('user_id'));
@@ -99,7 +102,7 @@ export default function AllDecksPage() {
                     >
                       <div className="justify-content-center d-flex">
                         <button
-                          className="btn btn-dark justify-content-center w-100"
+                          className={`btn btn-${colorMode} justify-content-center w-100`}
                           onClick={() => handleClickActive(userId, deck.id)}
                         >
                           {activatedCards.includes(deck.id) ? 'Deck Activated!' : 'Activate'}

@@ -22,7 +22,7 @@ import ReviewPage from '../pages/ReviewPage';
 import NotFound from '../pages/NotFound.jsx';
 
 const Router = () => {
-    const colorMode=getPreferentColor()
+    const colorMode=getPreferentColor(localStorage.getItem("opposite_color"))
     return (
 
         <BrowserRouter basename=''>
@@ -62,7 +62,6 @@ const Router = () => {
                     </Routes>
                 </div>
                 <Footer/> 
-                
                 </div>
             </AppContextProvider>
         </BrowserRouter>

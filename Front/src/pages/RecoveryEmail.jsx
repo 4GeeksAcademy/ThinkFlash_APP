@@ -8,7 +8,7 @@ import getPreferentColor from '../services/colors/getPreferentColor';
 export default function RecoveryEmail() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
-    const colorMode = getPreferentColor();
+    const colorMode = getPreferentColor(localStorage.getItem("opposite_color"));
     const sendRecoveryEmail = async () => {
         try {
             console.log("dsdfs", DataBaseURL)
