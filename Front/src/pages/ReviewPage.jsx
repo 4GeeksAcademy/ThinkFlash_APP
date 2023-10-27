@@ -56,7 +56,7 @@ export default function ReviewPage() {
     }
 
 
-    const colorMode = getPreferentColor();
+    const colorMode = getPreferentColor(localStorage.getItem("opposite_color"));
 
     return (
         <div className="h-auto container">

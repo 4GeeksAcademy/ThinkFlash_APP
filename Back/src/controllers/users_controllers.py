@@ -7,6 +7,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from decouple import config
 from flask_bcrypt import Bcrypt
+from datetime import timedelta
 import uuid 
 
 bcrypt = Bcrypt()
@@ -64,7 +65,7 @@ def create_user_and_send_email(data):
 
     send_email(email, user_uuid, username)
 
-    access_token = create_access_token(identity=new_user.id)
+    access_token = create_access_token(identity=new_user.id, expires_delta=timedelta(hours=1))
 
     return jsonify({"message": "Usuario creado exitosamente", "username": username,"token": access_token, "user_id": new_user.id}), 201
 
@@ -77,7 +78,7 @@ def login_user(data):
     if user is None or not bcrypt.check_password_hash(user.password, password) or not user.confirmed:
         return jsonify({"error": "Credenciales inválidas"}), 401
 
-    access_token = create_access_token(identity=user.id)
+    access_token = create_access_token(identity=user.id, expires_delta=timedelta(hours=1))
     return jsonify({
         "token": access_token,
         "email": user.email,

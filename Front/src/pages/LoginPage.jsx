@@ -31,7 +31,7 @@ export default function LoginPage() {
     handleClickLoginWrapper(email, password);
   };
 
-  const colorMode = getPreferentColor()
+  const colorMode = getPreferentColor(localStorage.getItem("opposite_color"))
 
   return (
     <div className="mt-5 vh-90">

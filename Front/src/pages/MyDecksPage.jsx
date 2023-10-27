@@ -57,7 +57,7 @@ export default function MyDecksPage() {
     return areas;
   };
 
-  const colorMode = getPreferentColor();
+  const colorMode = getPreferentColor(localStorage.getItem("opposite_color"));
 
   const toggleDeleteMode = () => {
     setDeleteMode(!deleteMode);
@@ -80,7 +80,7 @@ export default function MyDecksPage() {
           .catch((error) => {
             console.error('Error removing deck from user:', error);
 
-            setDeactivatingDeckId(null);
+            setDeactivatingDeckId(null);      
           });
       })
       .catch((error) => {

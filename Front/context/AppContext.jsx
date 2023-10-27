@@ -26,6 +26,8 @@ export const AppContextProvider = ({ children }) => {
     try {
       const data = await handleClickLogin(email, password);
       updateSessionStorage({ token: data.token, username: data.username, id: data.user_id, email: data.email, avatar: data.avatar });
+      !localStorage.getItem("opposite_color") && localStorage.setItem("opposite_color", false)
+      localStorage.getItem("opposite_color") == true && localStorage.setItem("opposite_color", true) 
       setUsername(data.username)
       setAvatar(data.avatar)
       setUserID(data.user_id)

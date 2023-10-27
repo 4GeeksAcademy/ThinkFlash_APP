@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 export default function HomePage () {
 
-	const colorMode = getPreferentColor()
+	const colorMode = getPreferentColor(localStorage.getItem("opposite_color"))
 
     return(
 		<div>

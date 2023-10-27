@@ -82,7 +82,7 @@ export default function getShowPage(activeTab) {
   };
 
 
-  const colorMode = getPreferentColor();
+  const colorMode = getPreferentColor(localStorage.getItem("opposite_color"));
   let tabContent;
   switch (activeTab) {
     case "avatar":

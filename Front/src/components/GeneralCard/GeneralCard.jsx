@@ -4,7 +4,7 @@ import React from 'react';
 import getPreferentColor from '../../services/colors/getPreferentColor';
 
 export default function GeneralCard({ children, title, shadow, minWidth, minHeight, img, progress }) {
-    const colorMode = getPreferentColor();
+    const colorMode = getPreferentColor(localStorage.getItem("opposite_color"));
 
     return (
         <div className={`m-2 d-flex justify-content-center align-items-center`} style={{ minHeight: minHeight, minWidth: minWidth, maxHeight: minHeight, maxWidth: minWidth }}>
