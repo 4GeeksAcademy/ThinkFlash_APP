@@ -123,15 +123,9 @@ export default function DeckGamePage() {
     const putNextButton = () => {
         if (activeButtonIndex !== null) {
             return (
-                <div>
                     <button type="button" className={`btn card-btn-${colorMode} border border-0`} onClick={getRandomDescriptionOrConcept}>
                         Next Card!
                     </button>
-                    <button type="button" className={`btn card-btn-${colorMode} ms-2 text-danger border border-0`} onClick={handleClickGoToMyDecks}>
-                       Exit Game!
-                    </button>
-                </div>
-
             );
         }
         return null;
@@ -164,7 +158,12 @@ export default function DeckGamePage() {
                         >
                             <GeneralCard minWidth="16rem" minHeight="21rem" shadow="-lg">
                                 <p className="fs-2 my-auto">{bodyCard || "Loading..."}</p>
-                                {putNextButton()}
+                                <div>
+                                    {putNextButton()}   
+                                    <button type="button" className={`btn card-btn-${colorMode} ms-2 text-danger border border-0`} onClick={handleClickGoToMyDecks}>
+                                        Exit Game!
+                                    </button>
+                                </div>
                             </GeneralCard>
                         </CSSTransition>
                     </SwitchTransition>
@@ -177,9 +176,9 @@ export default function DeckGamePage() {
                                     key={index}
                                     type="button"
                                     className={`btn card-btn-${colorMode} m-2 flip-button ${activeButtonIndex === index ? solution === correctSolution
-                                            ? "active border-2 border-success"
-                                            : "active border-2 border-danger"
-                                            : ""
+                                        ? "active border-2 border-success"
+                                        : "active border-2 border-danger"
+                                        : ""
                                         } ${activeButtonIndex !== null && activeButtonIndex !== index
                                             ? solution === correctSolution
                                                 ? "border-2 border-success"
