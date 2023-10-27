@@ -5,7 +5,7 @@ import changeCardScore from "../services/cards/changeCardScore";
 import useAppContext from "../../context/AppContext";
 import chekLogNavigate from "../../utils/checkLogNavigate";
 import getDeckCards from "../services/cards/getDeckCards";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { SwitchTransition, CSSTransition } from "react-transition-group";
 import "../../style.css";
 
@@ -21,7 +21,8 @@ export default function DeckGamePage() {
     const [isLoading, setIsLoading] = useState(true);
     const [activeButtonIndex, setActiveButtonIndex] = useState(null);
     const { store } = useAppContext();
-    const { id } = store;
+    const { id, username } = store;
+    const navigate = useNavigate();
 
     const params = useParams();
     const deck_id = params.deck_id;
@@ -33,7 +34,7 @@ export default function DeckGamePage() {
                 setCardList(res)
                 return res
             })
-            .then((res)=>{
+            .then((res) => {
                 setToLearnCardList(res.filter(card => card.score === 1));
                 setMidLearnedCardList(res.filter(card => card.score > 1 && card.score < 4));
                 setLearnedCardList(res.filter(card => card.score === 4));
@@ -105,15 +106,15 @@ export default function DeckGamePage() {
         setSolutions(randomizedSolutions);
     };
 
-    const handleButtonClick = ({index, card_id}) => {
+    const handleButtonClick = ({ index, card_id }) => {
         if (activeButtonIndex === null) {
             setActiveButtonIndex(index);
             const selectedSolution = solutions[index];
             if (selectedSolution === correctSolution) {
-                changeCardScore({user_id:id, deck_id:deck_id, card_id:card_id, operation:"sum"})
+                changeCardScore({ user_id: id, deck_id: deck_id, card_id: card_id, operation: "sum" })
                 setCardList(cardList)
             } else {
-                changeCardScore({user_id:id, deck_id:deck_id, card_id:card_id, operation:"subs"})
+                changeCardScore({ user_id: id, deck_id: deck_id, card_id: card_id, operation: "subs" })
                 setCardList(cardList)
             }
         }
@@ -122,13 +123,24 @@ export default function DeckGamePage() {
     const putNextButton = () => {
         if (activeButtonIndex !== null) {
             return (
-                <button type="button" className={`btn card-btn-${colorMode} border border-0`} onClick={getRandomDescriptionOrConcept}>
-                    Next Card!
-                </button>
+                <div>
+                    <button type="button" className={`btn card-btn-${colorMode} border border-0`} onClick={getRandomDescriptionOrConcept}>
+                        Next Card!
+                    </button>
+                    <button type="button" className={`btn card-btn-${colorMode} ms-2 text-danger border border-0`} onClick={handleClickGoToMyDecks}>
+                       Exit Game!
+                    </button>
+                </div>
+
             );
         }
         return null;
     };
+
+    const handleClickGoToMyDecks = () => {
+        navigate(`/${username}/mydecks`)
+
+    }
 
     useEffect(() => {
         getRandomDescriptionOrConcept();
@@ -164,19 +176,17 @@ export default function DeckGamePage() {
                                 <button
                                     key={index}
                                     type="button"
-                                    className={`btn card-btn-${colorMode} m-2 flip-button ${
-                                        activeButtonIndex === index ? solution === correctSolution
-                                        ? "active border-2 border-success"
-                                        : "active border-2 border-danger"
-                                    : ""
-                                    } ${
-                                        activeButtonIndex !== null && activeButtonIndex !== index
+                                    className={`btn card-btn-${colorMode} m-2 flip-button ${activeButtonIndex === index ? solution === correctSolution
+                                            ? "active border-2 border-success"
+                                            : "active border-2 border-danger"
+                                            : ""
+                                        } ${activeButtonIndex !== null && activeButtonIndex !== index
                                             ? solution === correctSolution
                                                 ? "border-2 border-success"
                                                 : ""
                                             : ""
-                                    }`}
-                                    onClick={() => handleButtonClick({index:index, card_id:cardId})}
+                                        }`}
+                                    onClick={() => handleButtonClick({ index: index, card_id: cardId })}
                                 >
                                     {solution}
                                 </button>
