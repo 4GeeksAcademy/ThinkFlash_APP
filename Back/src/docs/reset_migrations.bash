@@ -1,10 +1,10 @@
+
 # Eliminar directorios
 rm -R -f ./migrations
 rm -R -f ./instance
 
 # Inicializar migraciones
 pipenv run flask db init
-
 # Operaciones relacionadas con la base de datos
 {
   # Intentar eliminar y crear la base de datos

@@ -7,37 +7,58 @@ def create_initial_data():
     with app.app_context():
         # Crea algunos usuarios
         bcrypt = Bcrypt()
-        dummy_password = bcrypt.generate_password_hash("test").decode('utf-8')
-        users = []
-        user1 = User(email="user1@example.com", username="user1", password=dummy_password, confirmed=True)
-        user2 = User(email="user2@example.com", username="user2", password=dummy_password, confirmed=True)
-        user3 = User(email="user3@example.com", username="user3", password=dummy_password, confirmed=True)
-        db.session.add_all([user1, user2, user3])
-        users.extend([user1, user2, user3])
+        dummy_password = bcrypt.generate_password_hash("password123").decode('utf-8')
+
+        users = [
+                    User(email="alice.jones@example.com", username="alicej", password=dummy_password, confirmed=True),
+                    User(email="bob.smith@datasciencelab.com", username="dataguru", password=dummy_password, confirmed=True),
+                    User(email="carol.white@mathworld.org", username="mathwiz", password=dummy_password, confirmed=True),
+                ]
+        db.session.add(users)
         db.session.commit()
 
         # Crea algunos patrocinadores
-        sponsor1 = Sponsor(name="Sponsor 1", logo="sponsor1.png", user_id=user1.id)
-        sponsor2 = Sponsor(name="Sponsor 2", logo="sponsor2.png", user_id=user2.id)
-        db.session.add(sponsor1)
-        db.session.add(sponsor2)
+        sponsors = [
+            Sponsor(name="CodeAcademy", logo="sponsor1.png", user_id=users[0].id),
+            Sponsor(name="HistoryChannel", logo="sponsor1.png", user_id=users[1].id),
+            Sponsor(name="BiologyHub", logo="sponsor1.png", user_id=users[2].id),
+        ]
+        db.session.add(sponsors)
         db.session.commit()
 
-        # Genera 20 mazos con áreas no únicas
+       # Define the areas, specializations, and themes
+        educational_structure = {
+            "Science": {
+                "Biology": ["Genetics", "Ecology", "Microbiology"],
+                "Physics": ["Quantum Mechanics", "Relativity", "Thermodynamics"],
+                "Chemistry": ["Organic Chemistry", "Physical Chemistry", "Analytical Chemistry"],
+            },
+            "Humanities": {
+                "History": ["Ancient Civilizations", "Medieval Europe", "Modern History"],
+                "Philosophy": ["Ethics", "Metaphysics", "Political Philosophy"],
+                "Literature": ["American Literature", "World Literature", "Literary Criticism"],
+            },
+            "Technology": {
+                "Computer Science": ["Algorithms", "Machine Learning", "Computer Networks"],
+                "Data Science": ["Data Analysis", "Statistical Modeling", "Big Data Technologies"],
+                "Cybersecurity": ["Network Security", "Cryptography", "Ethical Hacking"],
+            }
+        }
+
+        # Create decks for each theme within each specialization and area
         decks = []
-        for i in range(1, 21):
-            try:
-                area = f"Area-{i % 5 + 1}"
-                deck = Deck(theme=f"Theme {i}", specialize=f"Specialize {i}", area=area, sponsor_id=sponsor1.id)
-                decks.append(deck)
-                db.session.add(deck)
-                db.session.commit()
-            except Exception as e:
-                print("No se han podido crear las decks")
+        for area, specializations in educational_structure.items():
+            for specialization, themes in specializations.items():
+                for theme in themes:
+                    decks.append(Deck(theme=theme, specialize=specialization, area=area, sponsor_id=sponsors[0].id))
+
+        # Add decks to the session
+        db.session.bulk_save_objects(decks)
+        db.session.commit()
 
         # Genera relaciones usuarios-mazos
         user_decks = {}
-        for _ in range(1, 11):
+        for _ in range(10):  # Adjust the range if you want more or fewer associations
             user = random.choice(users)
             deck = random.choice(decks)
             user_deck_association = user_deck.insert().values(user_id=user.id, deck_id=deck.id)
@@ -52,28 +73,24 @@ def create_initial_data():
         # Genera 200 cartas (10 para cada uno de los 20 mazos)
         cards = []
         for deck in decks:
-            for i in range(1, 11):
-                try:
-                    description = f"Card Description {i} for Deck {deck.id}"
-                    concept = f"Card Concept {i} for Deck {deck.id}"
-                    area = deck.area
-                    card = Card(description=description, concept=concept, area=area)
-                    cards.append(card)
-                    db.session.add(card)
-                    db.session.commit()
-                except Exception as e:
-                    print("No se ha podido crear las cards", e)
+            for i in range(1, 11):  # Create 10 cards per deck
+                description = f"Study {deck.theme}: Lesson {i}"
+                concept = f"{deck.theme} Concept {i}"
+                card = Card(description=description, concept=concept, area=deck.area)
+                cards.append(card)
+                db.session.add(card)
 
+                # Associate card with the deck
                 card_deck_association = card_deck.insert().values(card_id=card.id, deck_id=deck.id)
                 db.session.execute(card_deck_association)
 
-        db.session.commit()
+            db.session.commit()
 
         # Crea algunos conceptos y descripciones falsas para las cartas
         for card in cards:
-            for i in range (1, 4):
-                fake_concept = Fake_concept(concept=f"Fake Concept {i} for {card.id}", card_id=card.id)
-                fake_description = Fake_description(description=f"Fake Description {i} for {card.id}", card_id=card.id)
+            for i in range(1, 4):
+                fake_concept = Fake_concept(concept=f"Common Misunderstanding {i} in {card.concept}", card_id=card.id)
+                fake_description = Fake_description(description=f"Popular but incorrect view about {card.description}", card_id=card.id)
                 db.session.add(fake_concept)
                 db.session.add(fake_description)
         db.session.commit()
