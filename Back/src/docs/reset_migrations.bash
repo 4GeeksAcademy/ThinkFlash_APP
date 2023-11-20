@@ -8,11 +8,11 @@ pipenv run flask db init
 # Operaciones relacionadas con la base de datos
 {
   # Intentar eliminar y crear la base de datos
-  dropdb -h dpg-cko3d9m1101c73dhabcg-a.frankfurt-postgres.render.com -U database_o5dp_user database_o5dp || true
-  createdb -h dpg-cko3d9m1101c73dhabcg-a.frankfurt-postgres.render.com -U database_o5dp_user database_o5dp || true
+  dropdb -h dpg-cldr6mghgaic73bmjl9g-a.frankfurt-postgres.render.com -U thinkflash thinkflashdatabase || true
+  createdb -h dpg-cldr6mghgaic73bmjl9g-a.frankfurt-postgres.render.com -U thinkflash thinkflashdatabase || true
 
   # Crear extensión unaccent si no existe
-  psql -h dpg-cko3d9m1101c73dhabcg-a.frankfurt-postgres.render.com database_o5dp -U database_o5dp_user -c 'CREATE EXTENSION IF NOT EXISTS unaccent;' || true
+  psql -h dpg-cldr6mghgaic73bmjl9g-a.frankfurt-postgres.render.com thinkflashdatabase -U thinkflash -c 'CREATE EXTENSION IF NOT EXISTS unaccent;' || true
 } || {
   echo "Error en las operaciones de la base de datos"
   exit 1
