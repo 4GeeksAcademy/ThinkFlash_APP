@@ -53,7 +53,7 @@
 /* Estilos de las scrollbar */
 *::-webkit-scrollbar,
 .containerDiv::-webkit-scrollbar {
-  height: 8px;
+  height: 5px;
   width: 5px;
   background: transparent;
 }

@@ -98,14 +98,15 @@ export default function AllDecksPage() {
                       minHeight="300px"
                       shadow=""
                       img="https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png"
+                      overflow={true}
                       onClick={() => handleClickActive(userId, deck.id)}
                     >
-                      <div className='overflow-y-scroll bg-transparent'>
+                      <div className=''>
                         {deck.theme}
                       </div>
-                      <div className="justify-content-center d-flex pt-2">
+                      <div className="justify-content-center d-flex">
                         <button
-                          className={`btn btn-${colorMode} justify-content-center w-100`}
+                          className={`btn btn-${colorMode} justify-content-center w-100 mt-1`}
                           onClick={() => handleClickActive(userId, deck.id)}
                         >
                           {activatedCards.includes(deck.id) ? 'Deck Activated!' : 'Activate'}

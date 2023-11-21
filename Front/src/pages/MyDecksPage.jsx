@@ -142,9 +142,9 @@ export default function MyDecksPage() {
                     shadow="-lg"
                     progress={myProgressList[deck.id]}
                   >
-                    <div className='overflow-auto'>
-                      {deck.theme}
-                    </div>
+                      <div className=''>
+                        {deck.theme}
+                      </div>
                     {deleteMode ? (
                       <div className="d-flex mt-3 justify-content-center">
                         <button className="btn btn-danger" onClick={() => handleDeactivateDeck(deck.id)}>

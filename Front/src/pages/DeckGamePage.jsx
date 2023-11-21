@@ -157,7 +157,7 @@ export default function DeckGamePage() {
                             classNames="fade"
                         >
                             <GeneralCard minWidth="16rem" minHeight="21rem" shadow="-lg">
-                                <p className="fs-2 my-auto">{bodyCard || "Loading..."}</p>
+                                <p className="fs-2 my-auto overflow-auto">{bodyCard || "Loading..."}</p>
                                 <div>
                                     {putNextButton()}   
                                     <button type="button" className={`btn card-btn-${colorMode} ms-2 text-danger border border-0`} onClick={handleClickGoToMyDecks}>
