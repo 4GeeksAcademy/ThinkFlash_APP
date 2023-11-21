@@ -5,7 +5,7 @@ rm -R -f ./instance
 # Inicializar migraciones
 pipenv run flask db init
 
-# Variables de entorno para las credenciales
+# Variables de entorno para las credenciales del nuevo postgress
 export DB_HOST="dpg-cldr6mghgaic73bmjl9g-a.frankfurt-postgres.render.com"
 export DB_USER="thinkflash"
 export DB_PASSWORD="4KAa5C7iifA7FhhRdQSa6ZzBbanvtp7g"
@@ -15,7 +15,7 @@ export DB_NAME="thinkflashdatabase"
 # {
 #   # Intentar eliminar y crear la base de datos
 #   dropdb -h $DB_HOST -U $DB_USER -e $DB_NAME || true
-#   createdb -h $DB_HOST -U $DB_USER -e $DB_NAME || true
+  # createdb -h $DB_HOST -U $DB_USER -e $DB_NAME || true
 
 #   # Crear extensión unaccent si no existe
 #   PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -e -c 'CREATE EXTENSION IF NOT EXISTS unaccent;' || true
