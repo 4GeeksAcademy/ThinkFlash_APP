@@ -100,7 +100,8 @@ export default function AllDecksPage() {
                       img="https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png"
                       onClick={() => handleClickActive(userId, deck.id)}
                     >
-                      <div className="justify-content-center d-flex">
+                      {deck.theme}
+                      <div className="justify-content-center d-flex pt-2">
                         <button
                           className={`btn btn-${colorMode} justify-content-center w-100`}
                           onClick={() => handleClickActive(userId, deck.id)}
