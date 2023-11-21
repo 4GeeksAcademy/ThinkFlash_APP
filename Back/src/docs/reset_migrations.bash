@@ -6,10 +6,10 @@ rm -R -f ./instance
 pipenv run flask db init
 
 # Variables de entorno para las credenciales del nuevo postgress
-export DB_HOST="dpg-cldr6mghgaic73bmjl9g-a.frankfurt-postgres.render.com"
-export DB_USER="thinkflash"
-export DB_PASSWORD="4KAa5C7iifA7FhhRdQSa6ZzBbanvtp7g"
-export DB_NAME="thinkflashdatabase"
+# export DB_HOST="dpg-cldr6mghgaic73bmjl9g-a.frankfurt-postgres.render.com"
+# export DB_USER="thinkflash"
+# export DB_PASSWORD="4KAa5C7iifA7FhhRdQSa6ZzBbanvtp7g"
+# export DB_NAME="thinkflashdatabase"
 
 # # Operaciones relacionadas con la base de datos
 # {
