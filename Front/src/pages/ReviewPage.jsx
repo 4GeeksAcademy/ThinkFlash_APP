@@ -69,7 +69,9 @@ export default function ReviewPage() {
                         <GeneralCard key={index} title={card.concept} minWidth="15rem" minHeight="20rem" shadow={"-lg"}
                             className=""
                             img='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png'>
-                            {card.description}
+                                <div className="mh-50 overflow-auto">
+                                    {card.description}
+                                </div>
                         </GeneralCard>
                     )
                 })
@@ -83,7 +85,9 @@ export default function ReviewPage() {
                         <GeneralCard key={index} title={card.concept} minWidth="15rem" minHeight="20rem" shadow={"-lg"}
                             className=""
                             img='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png'>
-                            {card.description}
+                                <div className="overflow-auto">
+                                    {card.description}
+                                </div>
                         </GeneralCard>
                     )
                 })
@@ -97,7 +101,9 @@ export default function ReviewPage() {
                         <GeneralCard key={index} title={card.concept} minWidth="15rem" minHeight="20rem" shadow={"-lg"}
                             className=""
                             img='https://i.ibb.co/Phs1CSV/Logo-2-removebg-preview.png'>
-                            {card.description}
+                                <div className="overflow-auto">
+                                   {card.description}
+                                </div>
                         </GeneralCard>
                     )
                 })
