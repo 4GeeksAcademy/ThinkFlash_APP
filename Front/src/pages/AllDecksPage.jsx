@@ -101,10 +101,8 @@ export default function AllDecksPage() {
                       overflow={true}
                       onClick={() => handleClickActive(userId, deck.id)}
                     >
-                      <div className=''>
-                        {deck.theme}
-                      </div>
-                      <div className="justify-content-center d-flex">
+                      {deck.theme}
+                      <div className="justify-content-center d-flex pt-2">
                         <button
                           className={`btn btn-${colorMode} justify-content-center w-100 mt-1`}
                           onClick={() => handleClickActive(userId, deck.id)}
