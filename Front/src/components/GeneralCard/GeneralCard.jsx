@@ -16,13 +16,13 @@ export default function GeneralCard({ children, title, shadow, minWidth, minHeig
                         {img && GetImage(img)}
                         {progress && GetProgress({ progress: progress })}
                     </div>
-                    <h5 className="card-title m-2 text-center">{title}</h5>
+                    <h5 className="card-title mx-2 my-1 text-center">{title}</h5>
                     {
                         overflow ? (<div className="card-body" style={{ maxHeight: 100 }}>
                             <div className="mh-100 d-flex flex-column justify-content-center align-item-center text-center">{children}</div>
                         </div>) :
-                            (<div className="card-body">
-                                <div className="mh-100 d-flex flex-column justify-content-center align-item-center text-center">{children}</div>
+                            (<div className="card-body px-1 p-0 d-flex flex-column justify-content-center align-item-end text-center">
+                                <div className="mh-100 d-flex flex-column justify-content-center align-item-end text-center">{children}</div>
                             </div>)
                     }
                 </div>

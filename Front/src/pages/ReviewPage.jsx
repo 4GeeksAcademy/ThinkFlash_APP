@@ -113,7 +113,6 @@ export default function ReviewPage() {
                         </GeneralCard>
                     )
                 })
-
                 }
 
             </ContainerDiv>
