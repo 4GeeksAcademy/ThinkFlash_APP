@@ -51,20 +51,20 @@
 }
 
 /* Estilos de las scrollbar */
-body::-webkit-scrollbar,
+*::-webkit-scrollbar,
 .containerDiv::-webkit-scrollbar {
-  height: 8px;
+  height: 5px;
   width: 5px;
   background: transparent;
 }
 
-body::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb,
 .containerDiv::-webkit-scrollbar-thumb {
   border-radius: 5px;
   background: #212529;
 }
 
-body::-webkit-scrollbar-thumb:hover,
+*::-webkit-scrollbar-thumb:hover,
 .containerDiv::-webkit-scrollbar-thumb:hover {
   background: #212529;
 }
@@ -205,8 +205,6 @@ body::-webkit-scrollbar-thumb:hover,
   height: auto;
   width: 100%;
 }
-
-
 
 /* @keyframes heartbeat {
   0% {
