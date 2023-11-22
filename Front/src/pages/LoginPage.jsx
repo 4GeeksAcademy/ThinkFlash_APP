@@ -26,7 +26,7 @@ export default function LoginPage() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (email.trim() === '' || password.trim() === '') {
-      toast("🥺Por favor, complete todos los campos.");
+      toast("🥺Please complete all fields.");
       return;}
     handleClickLoginWrapper(email, password);
   };

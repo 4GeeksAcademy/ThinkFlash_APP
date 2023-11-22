@@ -21,13 +21,13 @@ export const handleClickLogin = async (email, password) => {
     if (response.ok) {
       return data;
     } else if (response.status === 401) {
-      toast.error("🙅‍♀️🙅‍♀️🤦‍♂️🤯 Credenciales inválidas o email no confirmado. Por favor, verifica tu correo electrónico y contraseña");
+      toast.error("🙅‍♀️🙅‍♀️🤦‍♂️🤯 Invalid credentials or unconfirmed email. Please verify your email and password.");
       return null; 
     } else {
       throw new Error(`Error in handleClickLogin: ${response.status}`);
     }
   } catch (error) {
-    toast.error("Error al iniciar sesión. Por favor, inténtalo de nuevo más tarde.");
+    toast.error("Error logging in. Please try again later.");
     console.error(`Error fetching login: ${error.message}`);
     throw new Error("Error fetching login", error);
   }

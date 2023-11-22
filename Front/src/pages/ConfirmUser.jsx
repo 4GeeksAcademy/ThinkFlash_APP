@@ -25,15 +25,15 @@ export default function ConfirmUser() {
 
 
             if (response.ok) {
-                toast('✅😊😁 Usuario confirmado, puede hacer Login y empezar a aprender!!!');
-                console.log('Usuario confirmado correctamente');
+                toast('✅😊😁 User confirmed, you can login and start learning!!!!');
+                console.log('User successfully confirmed');
                 navigate("/login")
             } else {
-                toast('🥺Error al confirmar el usuario!');
+                toast('🥺Error while confirming the user!');
                 console.error('Error al confirmar usuario');
             }
         } catch (error) {
-            toast('Intentelo mas tarde... tenemos algun problemilla por aqui...🥴');
+            toast('Try again later... we have a little problem here...🥴');
             console.error('Error en la solicitud PATCH:', error);
         }
     };

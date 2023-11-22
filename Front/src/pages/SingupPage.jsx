@@ -40,12 +40,12 @@ export default function SignupPage() {
       if (result === "OK") {
         navigate("/infoSignup");
       } else {
-        toast("❌❌Error al crear el usuario. Por favor, inténtelo de nuevo más tarde.");
+        toast("❌❌Error creating the user. Please try again later.");
       }
     } catch (error) {
       setIsLoading(false);
       console.error(error);
-      toast("❌❌Error al crear el usuario. Por favor, inténtelo de nuevo más tarde.");
+      toast("❌❌Error creating the user. Please try again later.");
     }
   };
 
@@ -66,7 +66,7 @@ export default function SignupPage() {
                   type="username"
                   className="form-control"
                   id="username"
-                  placeholder="Ingrese su nombre de usuario"
+                  placeholder="Enter your username"
                   onChange={(e) => setUser({ ...user, username: e.target.value })}
                 />
               </div>
@@ -77,7 +77,7 @@ export default function SignupPage() {
                   id="emailInput"
                   type="email"
                   className="form-control"
-                  placeholder="Ingrese su email"
+                  placeholder="Enter your email"
                   onChange={(e) => setUser({ ...user, email: e.target.value })}
                 />
               </div>
@@ -89,19 +89,19 @@ export default function SignupPage() {
                   type="password"
                   className="form-control"
                   id="password"
-                  placeholder="Ingrese su contraseña"
+                  placeholder="Enter your password"
                   onChange={(e) => setUser({ ...user, password: e.target.value })}
                 />
               </div>
               <div className={`form-group mt-2 text-${colorMode}`}>
                 <label>
                   <input className="check" type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
-                  Acepto los <a href="https://www.recetasgratis.net/receta-de-arepas-venezolanas-52618.html" target="_blank" rel="noopener noreferrer">términos y condiciones</a>
+                  I agree <a href="https://www.recetasgratis.net/receta-de-arepas-venezolanas-52618.html" target="_blank" rel="noopener noreferrer">to the terms & conditions and privacy policy</a>
                 </label>
               </div>
               <div className="text-center">
                 <button type="submit" className={`btn btn-${colorMode} mt-3`} disabled={isLoading}>
-                  {isLoading ? "Registrando..." : "Sign Up"}
+                  {isLoading ? "Registering..." : "Sign Up"}
                 </button>
               </div>
 

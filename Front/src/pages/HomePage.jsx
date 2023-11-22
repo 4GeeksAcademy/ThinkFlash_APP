@@ -12,15 +12,15 @@ export default function HomePage () {
 					<div className="row">
 						<div className="col-md-6">
 							<div className={`text-container text-${colorMode} p-4 d-flex flex-column justify-content-center h-100 mb-5`}>
-								<h1 className="display-5 fw-semibold text-start">Aprende. Progresa. Triunfa.</h1>
+								<h1 className="display-5 fw-semibold text-start">Learn. Progress. Succeed.</h1>
 								<p className={`lead text-${colorMode} mt-3 text-sm-start`}>
-								Think Flash es la app perfecta para el aprendizaje dinámico y efectivo. Diseñada para personas en procesos de capacitación, 
-								ofrece barajas temáticas que abarcan diversas áreas de conocimiento.<br /></p>
-								<p className={`lead text-${colorMode} mt-3 text-sm-start`}>Además de medir tu progreso con precisión, puedes 
-								personalizar tu experiencia seleccionando tus barajas favoritas o creando las tuyas propias. Think Flash combina la seriedad 
-								del estudio con la flexibilidad necesaria para adaptarse a tus necesidades educativas desde todos tus dispositivos.</p>
+								Think Flash is the perfect app for dynamic and effective learning. Designed for people in training processes, 
+								offers thematic decks that cover diverse areas of knowledge.<br /></p>
+								<p className={`lead text-${colorMode} mt-3 text-sm-start`}>In addition to accurately measuring your progress, you can 
+								customize your experience by selecting your favorite decks or creating your own. Think Flash combines the seriousness 
+								of study with the flexibility to adapt to your educational needs from all your devices.</p>
 								<div className="container text-center mt-3">
-								<Link to="/signup" className={`btn btn-${colorMode} btn-lg fw-bold col-lg-5`}>¡Comienza ahora!</Link>
+								<Link to="/signup" className={`btn btn-${colorMode} btn-lg fw-bold col-lg-5`}>Start now!</Link>
 								</div>
 							</div>
 						</div>
@@ -37,21 +37,21 @@ export default function HomePage () {
 			<div className="container-xl ">
 				<div className="row p-4 g-5 py-5">
 					<div className="col-md-4">
-						<h5 className={`font-weight-normal rounded-3 p-2 text-center bg-${colorMode} mb-4`}>Aprendizaje Personalizado 🧠</h5>
+						<h5 className={`font-weight-normal rounded-3 p-2 text-center bg-${colorMode} mb-4`}>Customized Learning 🧠</h5>
 						<p className={`text-${colorMode} text-center`}>
-						Adapta tu experiencia de estudio según tus necesidades. Personaliza tus barajas, elige tus temas favoritos y dirige tu camino hacia el conocimiento, convirtiendo cada sesión de estudio en una experiencia única y efectiva.
+						Adjust your study experience according to your needs. Customize your decks, choose your favorite themes and lead your path to knowledge, making each study session a unique and effective experience.
 						</p>
 					</div>
 					<div className="col-md-4">
-						<h5 className={`font-weight-normal rounded-3 p-2 text-center bg-${colorMode} mb-4`}> Medición Precisa de Progreso 📈</h5>
+						<h5 className={`font-weight-normal rounded-3 p-2 text-center bg-${colorMode} mb-4`}> Accurate Progress Measurement 📈</h5>
 						<p className={`text-${colorMode} text-center`}>
-						Mide tu progreso de manera precisa con cada carta acertada. Observa cómo tu conocimiento se expande y aprovecha la retroalimentación instantánea para perfeccionar tus habilidades.
+						Accurately measure your progress with each successful card. Watch your knowledge expand and take advantage of instant feedback to hone your skills.
 						</p>
 					</div>
 					<div className="col-md-4">
-						<h5 className={`font-weight-normal rounded-3 p-2 text-center bg-${colorMode} mb-4`}>Flexibilidad en el Aprendizaje 🚀</h5>
+						<h5 className={`font-weight-normal rounded-3 p-2 text-center bg-${colorMode} mb-4`}>Learning Flexibility 🚀</h5>
 						<p className={`text-${colorMode} text-center`}>
-						Desde oposiciones públicas hasta idiomas, Think Flash abarca un amplio espectro de temas. Cambia entre barajas y temáticas, adaptándote a tus objetivos educativos.
+						From state examinations to coding, Think Flash covers a wide range of subjects. Switch between decks and themes, adapting to your educational goals.
 						</p>
 					</div>
 				</div>
