@@ -4,6 +4,7 @@ import getPreferentColor from "../services/colors/getPreferentColor";
 import changeCardScore from "../services/cards/changeCardScore";
 import useAppContext from "../../context/AppContext";
 import chekLogNavigate from "../../utils/checkLogNavigate";
+import JSConfetti from 'js-confetti'
 import getDeckCards from "../services/cards/getDeckCards";
 import { useNavigate, useParams } from "react-router-dom";
 import { SwitchTransition, CSSTransition } from "react-transition-group";
@@ -25,6 +26,7 @@ export default function DeckGamePage() {
     const navigate = useNavigate();
 
     const params = useParams();
+    const jsConfetti = new JSConfetti()
     const deck_id = params.deck_id;
 
     useEffect(() => {
@@ -64,7 +66,7 @@ export default function DeckGamePage() {
                 } else {
                     selectedCard = midLearnedCardList[getRandomInt(midLearnedCardList.length)];
                 }
-                setBodyCard(`${selectedCard.description} score: ${selectedCard.score}`);
+                setBodyCard(`${selectedCard.description}`);
                 setSolutions([
                     selectedCard.concept,
                     selectedCard.fake_concepts[0],
@@ -81,7 +83,7 @@ export default function DeckGamePage() {
                 } else {
                     selectedCard = midLearnedCardList[getRandomInt(midLearnedCardList.length)];
                 }
-                setBodyCard(`${selectedCard.concept} score: ${selectedCard.score}`);
+                setBodyCard(`${selectedCard.concept}`);
                 setSolutions([
                     selectedCard.description,
                     selectedCard.fake_descriptions[0],
@@ -113,6 +115,7 @@ export default function DeckGamePage() {
             if (selectedSolution === correctSolution) {
                 changeCardScore({ user_id: id, deck_id: deck_id, card_id: card_id, operation: "sum" })
                 setCardList(cardList)
+                jsConfetti.addConfetti()
             } else {
                 changeCardScore({ user_id: id, deck_id: deck_id, card_id: card_id, operation: "subs" })
                 setCardList(cardList)
@@ -148,52 +151,52 @@ export default function DeckGamePage() {
 
     return (
         <div className="container d-flex flex-column justify-content-center vh-90">
-            <div className="row h-100">
-                <div className="mx-auto col-12 d-flex justify-content-center">
-                    <SwitchTransition mode="out-in">
-                        <CSSTransition
-                            key={activeButtonIndex}
-                            addEndListener={(node, done) => node.addEventListener("transitionend", done, false)}
-                            classNames="fade"
-                        >
-                            <GeneralCard minWidth="16rem" minHeight="21rem" shadow="-lg">
-                                <p className="fs-2 my-auto">{bodyCard || "Loading..."}</p>
-                                <div>
-                                    {putNextButton()}   
-                                    <button type="button" className={`btn card-btn-${colorMode} ms-2 text-danger border border-0`} onClick={handleClickGoToMyDecks}>
-                                        Exit Game!
-                                    </button>
-                                </div>
-                            </GeneralCard>
-                        </CSSTransition>
-                    </SwitchTransition>
-                </div>
-                <div className="col-12 col-sm-8 col-lg-6 mb-auto mx-auto">
-                    <div className="text-container d-flex flex-column justify-content-center text-center">
-                        <div className={`list-group shadow-lg bg-${colorMode}`}>
-                            {solutions.map((solution, index) => (
-                                <button
-                                    key={index}
-                                    type="button"
-                                    className={`btn card-btn-${colorMode} m-2 flip-button ${activeButtonIndex === index ? solution === correctSolution
-                                        ? "active border-2 border-success"
-                                        : "active border-2 border-danger"
-                                        : ""
-                                        } ${activeButtonIndex !== null && activeButtonIndex !== index
-                                            ? solution === correctSolution
-                                                ? "border-2 border-success"
-                                                : ""
-                                            : ""
-                                        }`}
-                                    onClick={() => handleButtonClick({ index: index, card_id: cardId })}
-                                >
-                                    {solution}
-                                </button>
-                            ))}
-                        </div>
+          <div className="row h-100">
+            <div className="mx-auto col-12 d-flex justify-content-center">
+              <SwitchTransition mode="out-in">
+                <CSSTransition
+                  key={activeButtonIndex}
+                  addEndListener={(node, done) => node.addEventListener("transitionend", done, false)}
+                  classNames="fade"
+                >
+                  <GeneralCard minWidth="16rem" minHeight="21rem" shadow="-lg" overflow="game">
+                    <p className="fs-2 my-auto overflow-auto">{bodyCard || "Loading..."}</p>
+                    <div className="mt-auto">
+                      {putNextButton()}
+                      <button type="button" className={`btn card-btn-${colorMode} ms-2 text-danger border border-0`} onClick={handleClickGoToMyDecks}>
+                        Exit Game!
+                      </button>
                     </div>
-                </div>
+                  </GeneralCard>
+                </CSSTransition>
+              </SwitchTransition>
             </div>
+            <div className="col-12 col-sm-8 col-lg-6 mb-auto mx-auto">
+              <div className="text-container d-flex flex-column justify-content-center text-center">
+                <div className={`list-group shadow-lg bg-${colorMode}`}>
+                  {solutions.map((solution, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      className={`btn card-btn-${colorMode} m-2 flip-button ${activeButtonIndex === index ? solution === correctSolution
+                        ? "active border-2 border-success"
+                        : "active border-2 border-danger"
+                        : ""
+                        } ${activeButtonIndex !== null && activeButtonIndex !== index
+                          ? solution === correctSolution
+                            ? "border-2 border-success"
+                            : ""
+                          : ""
+                        }`}
+                      onClick={() => handleButtonClick({ index: index, card_id: cardId })}
+                    >
+                      {solution}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    );
+      );
 }
